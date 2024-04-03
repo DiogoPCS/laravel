@@ -13,8 +13,17 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', [App\Http\Controllers\PrincipalController::class, 'principal']);
+Route::get('/', [App\Http\Controllers\PrincipalController::class, 'principal'])->name('site.principal');
 
-Route::get('/contato', [App\Http\Controllers\ContatoController::class, 'contato']);
+Route::get('/contato', [App\Http\Controllers\ContatoController::class, 'contato'])->name('site.contato');
 
-Route::get('/sobre-nos', [App\Http\Controllers\SobreNosController::class, 'sobreNos']);
+Route::get('/sobrenos', [App\Http\Controllers\SobreNosController::class, 'sobreNos'])->name('site.sobrenos');
+
+Route::get('/login', [App\Http\Controllers\SobreNosController::class, 'login'])->name('site.login');
+
+Route::prefix('app')->group(function(){
+    Route::get('/fornecedores', [App\Http\Controllers\SobreNosController::class, 'fornecedores'])->name('app.fornecedores');
+    Route::get('/clientes', [App\Http\Controllers\SobreNosController::class, 'clientes'])->name('app.clientes');
+    Route::get('/produtos', [App\Http\Controllers\SobreNosController::class, 'produtos'])->name('app.produtos');
+});
+
