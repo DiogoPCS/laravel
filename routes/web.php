@@ -22,8 +22,8 @@ Route::get('/sobrenos', [App\Http\Controllers\SobreNosController::class, 'sobreN
 Route::get('/login', [App\Http\Controllers\SobreNosController::class, 'login'])->name('site.login');
 
 Route::prefix('app')->group(function(){
-    Route::get('/fornecedores', [App\Http\Controllers\SobreNosController::class, 'fornecedores'])->name('app.fornecedores');
-    Route::get('/clientes', [App\Http\Controllers\SobreNosController::class, 'clientes'])->name('app.clientes');
-    Route::get('/produtos', [App\Http\Controllers\SobreNosController::class, 'produtos'])->name('app.produtos');
+    Route::get('/fornecedores', [App\Http\Controllers\FornecedoresController::class, 'fornecedores'])->name('app.fornecedores');
+    Route::get('/clientes', [App\Http\Controllers\ClientesController::class, 'clientes'])->name('app.clientes');
+    Route::get('/produtos', [App\Http\Controllers\ProdutosController::class, 'produtos'])->name('app.produtos');
 });
 
