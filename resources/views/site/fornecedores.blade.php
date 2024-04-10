@@ -3,7 +3,7 @@
     <a href="{{ route('site.principal') }}">VOltar</a>
 
     @php
-        echo var_dump($fornecedor)
+        echo var_dump($fornecedores)
 
 
 </div>
