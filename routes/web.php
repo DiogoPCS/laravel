@@ -13,16 +13,26 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', [App\Http\Controllers\PrincipalController::class, 'principal']);
+Route::get('/', [App\Http\Controllers\PrincipalController::class, 'principal'])->name('site.principal');
 
-Route::get('/contato', [App\Http\Controllers\ContatoController::class, 'contato']);
+Route::get('/contato', [App\Http\Controllers\ContatoController::class, 'contato'])->name('site.contato');
 
-Route::get('/sobre-nos', [App\Http\Controllers\SobreNosController::class, 'sobreNos']);
+Route::get('/sobre-nos', [App\Http\Controllers\SobreNosController::class, 'sobreNos'])->name('site.sobre-nos');
 
-Route::get('/login', [App\Http\Controllers\LoginController::class, 'login']);
+Route::get('/login', [App\Http\Controllers\LoginController::class, 'login'])->name('site.login');
 
-Route::get('/clientes', [App\Http\Controllers\ClientesController::class, 'clientes']);
+Route::prefix('app')->group(function() {
 
-Route::get('/produtos', [App\Http\Controllers\ProdutosController::class, 'produtos']);
+    Route::get('/clientes', [App\Http\Controllers\ClientesController::class, 'clientes'])->name('app.clientes');
 
-Route::get('/fornecedores', [App\Http\Controllers\FornecedoresController::class, 'fornecedores']);
+    Route::get('/produtos', [App\Http\Controllers\ProdutosController::class, 'produtos'])->name('app.produtos');
+
+    Route::get('/fornecedores', [App\Http\Controllers\FornecedoresController::class, 'fornecedores'])->name('app.fornecedores');
+
+});
+
+Route::fallback(function(){
+    echo 'A rota acessada não existe. CLique para <a href="'.route('site.principal').'">Voltar</a>';
+});
+
+Route::get('/teste/{p1}/{p2}', [App\Http\Controllers\TesteController::class, 'teste']);
