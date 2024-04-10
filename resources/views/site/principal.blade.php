@@ -1,14 +1,12 @@
-<!DOCTYPE html>
-<html lang="pt-br">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Principal</title>
-    <link rel="stylesheet" href="{{ asset('css/style.css') }}">
-</head>
-<body>
-    <ul>
+{{-- Por padrão extends aponta para a pasta View --}}
+@extends('site.layouts.basico')
+
+{{-- Definição de um parãmetro --}}
+@section('titulo', $pagina . 'Principal')
+
+{{-- Definição de um bloco de HTML --}}
+@section('conteudo')
+    {{-- <ul>
         <li>
             <a href="{{ route('site.principal') }}">Principal</a>
         </li>
@@ -30,7 +28,6 @@
         <li>
             <a href="{{ route('site.login') }}">Login</a>
         </li>
-    </ul>
-    
-</body>
-</html>
+    </ul> --}}
+    <h1>Página Principal </h1>
+@endsection
