@@ -27,3 +27,11 @@ Route::prefix('app')->group(function(){
     Route::get('/produtos', [App\Http\Controllers\ProdutosController::class, 'produtos'])->name('app.produtos');
 });
 
+Route::fallback(function() {
+    echo 'A rota acessada não existe. <a href="'.route('site.principal').'">Clique para Voltar</a>';
+});
+
+Route::get(
+    'teste/{p1}/{p2}', 
+    [App\Http\Controllers\TesteController::class, 'teste']
+);
