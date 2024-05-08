@@ -4,5 +4,16 @@
 @section('titulo', $pagina . 'Contato')
 
 @section('conteudo')
-    <h1>Contato</h1>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-6">
+
+                @component('site.layouts._components.form_contato')
+                @endcomponent
+
+            </div>
+        </div>
+    </div>
+
 @endsection
