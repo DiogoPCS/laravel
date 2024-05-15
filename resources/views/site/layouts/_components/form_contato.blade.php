@@ -1,4 +1,6 @@
-<form action={{ route('site.contato') }} method="post">
+{{ $slot }}
+
+<form action={{ route('site.contato') }} method="post" class="{{ $dark}}">
     @csrf
     <div class="mb-3">
         <label for="email" class="form-label">E-mail</label>
