@@ -11,7 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('contato_controllers', function (Blueprint $table) {
+        Schema::create('site_contatos', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
             $table->string('nome', 50);
@@ -27,6 +27,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('contato_controllers');
+        Schema::dropIfExists('site_contatos');
     }
 };
