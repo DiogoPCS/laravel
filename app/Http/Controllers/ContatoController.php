@@ -35,15 +35,15 @@ class ContatoController extends Controller
 
     public function salvar(Request $request) {
 
-        //Validar os campos antes de inserir
-        $request->validate([
+        $regras = [
             'nome' => 'required|min:3|max:40',
             'telefone' => 'required|min:9|max:20',
             'email' => 'email',
             'motivo_contato' => 'required',
             'mensagem' => 'required|max:2000'
-        ],
-        [
+        ];
+
+        $feedback = [
             'nome.required' => 'O campo nome precisa ser preenchido',
             'nome.min' => 'O campo nome precisa ter no mínimo 3 caracteres',
             'nome.max' => 'O campo nome precisa ter no máximo 40 caracteres',
@@ -54,8 +54,10 @@ class ContatoController extends Controller
             'motivo_contato.required' => 'O campo motivo de contato precisa ser preenchido',
             'mensagem.required' => 'O campo mensagem precisa ser preenchido',
             'mensagem.max' => 'O campo mensagem precisa ter no máximo 2000 caracteres'
-        ]
-    );
+        ];
+
+        //Validar os campos antes de inserir
+        $request->validate($regras, $feedback);
 
         //Inserir os campos se for validado
         Contato::create($request->all());   
