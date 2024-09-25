@@ -1,3 +1,36 @@
 a {
-    font-size: 40px;
+    font-size: 80px;
+}
+
+.navbar {
+    background: rgb(2,0,36);
+    background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(93,9,121,1) 35%, rgba(0,212,255,1) 100%);
+    color: white;
+}
+
+
+.nav-item {
+    border-radius: 8px;
+    transition: all 0.2s;
+}
+
+.nav-item a {
+    color: white;
+}
+
+.nav-item:hover {
+    background: lightgray;
+    transition: all 0.2s;
+}
+
+.card-header {
+    background: rgba(93,9,121,1);
+    color: white;
+}
+
+.btn-primary {
+    background: rgba(93,9,121,1);
+    color: white;
+    outline: none;
+    border: none;
 }
