@@ -39,7 +39,7 @@
             </a>
           </li>
           <li class="nav-item text-center pt-2">
-            <a class="nav-link" href="{{ route('app.fornecedores') }}">
+            <a class="nav-link" href="{{ route('app.fornecedor') }}">
                 <img src="https://cdn4.iconfinder.com/data/icons/business-pack-7/64/team-building-effort-intention-advantage-teamwork-512.png" width="30" height="30">
                 Fornecedores
             </a>
