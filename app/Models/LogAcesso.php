@@ -4,12 +4,10 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Fornecedor extends Model
+class LogAcesso extends Model
 {
-    use SoftDeletes;
-    
-    protected $table = 'fornecedores';
     use HasFactory;
+
+    protected $fillable = ['log'];
 }
