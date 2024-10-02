@@ -34,3 +34,12 @@ a {
     outline: none;
     border: none;
 }
+
+a {
+    font-size: 1rem;
+    color: rgb(46, 45, 45);
+}
+
+svg {
+    width: 25px;
+}

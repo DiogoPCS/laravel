@@ -11,7 +11,7 @@
         <div class="row d-flex justify-content-center mb-3">
             <div class="col-12 col-lg-6">
                 <a type="submit" class="btn btn-primary" href={{ route('app.fornecedor.adicionar') }}>Cadastrar</a>
-                <a type="submit" class="btn btn-primary" href={{ route('app.fornecedor.listar') }}>Pesquisar</a>
+                <a type="submit" class="btn btn-primary" href={{ route('app.fornecedor') }}>Pesquisar</a>
             </div>
         </div>
 
@@ -23,7 +23,7 @@
                         Fornecedor
                     </div>
                     <div class="card-body">
-                        <form action={{ route('app.fornecedor.listar') }} method="GET">
+                        <form action={{ route('app.fornecedor.listar') }} method="POST">
                             @csrf
                             <label for="nome">Nome</label>
                             <input type="text" name="nome" id="nome" placeholder="Nome do Fornecedor" class="form-control" value={{ old('nome') }}>
@@ -42,7 +42,7 @@
                             <h5>{{ $errors->has('email') ? $errors->first('email') : '' }}</h5>
                     
                     
-                            <button type="submit" class="btn btn-primary">Cadastrar</button>
+                            <button type="submit" class="btn btn-primary">Consultar</button>
         
                             <h5>
                                 {{ isset($erro) && $erro != '' ? $erro : '' }}

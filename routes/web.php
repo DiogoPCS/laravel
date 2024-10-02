@@ -27,8 +27,11 @@ Route::prefix('app')->group(function(){
     
     Route::get('/fornecedor', [App\Http\Controllers\FornecedoresController::class, 'index'])->name('app.fornecedor');
     Route::get('/fornecedor/listar', [App\Http\Controllers\FornecedoresController::class, 'listar'])->name('app.fornecedor.listar');
+    Route::post('/fornecedor/listar', [App\Http\Controllers\FornecedoresController::class, 'listar'])->name('app.fornecedor.listar');
     Route::get('/fornecedor/adicionar', [App\Http\Controllers\FornecedoresController::class, 'adicionar'])->name('app.fornecedor.adicionar');
-
+    Route::post('/fornecedor/adicionar', [App\Http\Controllers\FornecedoresController::class, 'adicionar'])->name('app.fornecedor.adicionar');
+    Route::get('/fornecedor/editar/{id}', [App\Http\Controllers\FornecedoresController::class, 'editar'])->name('app.fornecedor.editar');
+    
     Route::get('/clientes', [App\Http\Controllers\ClientesController::class, 'clientes'])->name('app.clientes');
     Route::get('/produtos', [App\Http\Controllers\ProdutosController::class, 'produtos'])->name('app.produtos');
 });
