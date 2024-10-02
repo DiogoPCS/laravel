@@ -7,9 +7,6 @@ use \App\Models\Contato;
 
 class ContatoController extends Controller
 {
-<<<<<<< HEAD
-    public function contato() {
-=======
     public function contato(Request $request) {
 
         //dd($request->all());
@@ -33,7 +30,6 @@ class ContatoController extends Controller
         // $contato = new Contato();
         // $contato->create($request->all());
 
->>>>>>> montagem-conteudo
         return View('site.contato', ['pagina' => 'Página de ']);
     }
 
