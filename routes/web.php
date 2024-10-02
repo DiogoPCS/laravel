@@ -26,7 +26,7 @@ Route::post('/login', [App\Http\Controllers\LoginController::class, 'autenticar'
 Route::prefix('app')->group(function(){
     
     Route::get('/fornecedor', [App\Http\Controllers\FornecedoresController::class, 'index'])->name('app.fornecedor');
-    Route::get('/fornec 'edor/listar', [App\Http\Controllers\FornecedoresController::class, 'listar'])->name('app.fornecedor.listar');
+    Route::get('/fornecedor/listar', [App\Http\Controllers\FornecedoresController::class, 'listar'])->name('app.fornecedor.listar');
     Route::get('/fornecedor/adicionar', [App\Http\Controllers\FornecedoresController::class, 'adicionar'])->name('app.fornecedor.adicionar');
 
     Route::get('/clientes', [App\Http\Controllers\ClientesController::class, 'clientes'])->name('app.clientes');
