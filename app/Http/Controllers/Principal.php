@@ -9,4 +9,7 @@ class Principal extends Controller
     function principal(){
         echo 'Página Principal';
     }
+    function dizerOla(){
+        echo 'Olá, como vai?';
+    }
 }
