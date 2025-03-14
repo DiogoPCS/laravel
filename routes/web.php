@@ -14,7 +14,6 @@ use App\Http\Middleware\LogAcessoMiddleware;
 */
 
 Route::get('/', [App\Http\Controllers\Principal::class, 'principal']);
-Route::get('/dizer-ola', [App\Http\Controllers\Principal::class, 'dizerOla']);
-Route::get('/conectar', [App\Http\Controllers\Usuario::class, 'conectar']);
-Route::get('/desconectar', [App\Http\Controllers\Usuario::class, 'desconectar']);
-
+Route::get('/registrar', [App\Http\Controllers\Registrar::class, 'registrar']);
+Route::get('/adocao', [App\Http\Controllers\Adocao::class, 'adocao']);
+Route::get('/cadastro-animal', [App\Http\Controllers\CadastroAnimal::class, 'cadastroAnimal']);
