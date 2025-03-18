@@ -13,8 +13,10 @@ use App\Http\Middleware\LogAcessoMiddleware;
 |
 */
 
-Route::get('/', [App\Http\Controllers\Principal::class, 'principal']);
-Route::get('/dizer-ola', [App\Http\Controllers\Principal::class, 'dizerOla']); 
-Route::get('/conectar', [App\Http\Controllers\Usuario::class, 'conectar']); 
-Route::get('/desconectar', [App\Http\Controllers\Usuario::class, 'desconectar']);
+Route::get('/', [App\Http\Controllers\Principal::class, 'principal'])->name('principal');
+Route::get('/adocao', [App\Http\Controllers\Adocao::class, 'adocao'])->name('adocao'); 
+Route::get('/cadastrar-animal', [App\Http\Controllers\CadastrarAnimal::class, 'cadastarAnimal'])->name('cadastrar-animal'); 
+Route::get('/registrar', [App\Http\Controllers\Registrar::class, 'registrar'])->name('registrar');
+Route::get('/usuario', [App\Http\Controllers\Usuario::class, 'usuario'])->name('usuario');
+Route::get('/login', [App\Http\Controllers\Login::class, 'login'])->name('login');
 
