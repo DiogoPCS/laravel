@@ -1,0 +1,91 @@
+
+      body {
+        background-color: #f8f9fa; /* Fundo claro para contraste */
+        color: #333;
+      }
+      .navbar {
+        background-color: #6341E5; /* Roxo escuro */
+      }
+      .navbar-brand, .nav-link {
+        color: #fff !important; /* Texto branco na navbar */
+      }
+      .btn-primary {
+        background-color: #9C47E6; /* Roxo médio */
+        border-color: #9C47E6;
+        color: #fff;
+      }
+      .btn-primary:hover {
+        background-color: #7B2CBF; /* Roxo mais escuro ao passar o mouse */
+        border-color: #7B2CBF;
+      }
+      .jumbotron {
+        padding: 2rem 1rem;
+        margin-bottom: 2rem;
+        border-radius: 0.3rem;
+        color: #333; /* Texto escuro para contraste */
+      }
+      .footer {
+        background-color: #6341E5; /* Roxo escuro */
+        padding: 1rem 0;
+        margin-top: 2rem;
+        text-align: center;
+        color: #fff; /* Texto branco no rodapé */
+      }
+      .card {
+        border: none;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      }
+      .card-title {
+        color: #6341E5; /* Roxo escuro para títulos */
+      }
+ 
+      body {
+        background-color: #f8f9fa; /* Fundo claro para contraste */
+        color: #333;
+      }
+      .navbar {
+        background-color: #6341E5; /* Roxo escuro */
+      }
+      .navbar-brand, .nav-link {
+        color: #fff !important; /* Texto branco na navbar */
+      }
+      .btn-primary {
+        background-color: #9C47E6; /* Roxo médio */
+        border-color: #9C47E6;
+        color: #fff;
+      }
+      .btn-primary:hover {
+        background-color: #7B2CBF; /* Roxo mais escuro ao passar o mouse */
+        border-color: #7B2CBF;
+      }
+      .animal-details-container {
+        background-color: #fff;
+        padding: 2rem;
+        border-radius: 0.5rem;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        max-width: 800px;
+        margin: 5rem auto;
+      }
+      .animal-details-container h2 {
+        color: #6341E5; /* Roxo escuro para o título */
+        margin-bottom: 1.5rem;
+      }
+      .animal-details-container img {
+        border-radius: 0.5rem;
+        margin-bottom: 1.5rem;
+      }
+      .animal-details-container ul {
+        list-style-type: none;
+        padding: 0;
+      }
+      .animal-details-container ul li {
+        margin-bottom: 0.5rem;
+      }
+      .footer {
+        background-color: #6341E5; /* Roxo escuro */
+        padding: 1rem 0;
+        margin-top: 2rem;
+        text-align: center;
+        color: #fff; /* Texto branco no rodapé */
+      }
+    
