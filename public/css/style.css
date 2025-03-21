@@ -1,0 +1,24 @@
+.bg-custom-primary { background-color: #402F25; }
+.bg-custom-secondary { background-color: #8C796D; }
+.text-custom-primary { color: #6FD904; }
+.btn-custom-primary { background-color: #6FD904; color: #fff; }
+.btn-custom-primary:hover { background-color: #5cb200; }
+
+/* Pagina detalhes animal */
+.bg-custom-primary { background-color: #402F25; }
+.bg-custom-secondary { background-color: #8C796D; }
+.text-custom-primary { color: #6FD904; }
+.btn-custom-primary { background-color: #6FD904; color: #fff; }
+.btn-custom-primary:hover { background-color: #5cb200; }
+.animal-details-container {
+max-width: 800px;
+margin: auto;
+padding: 20px;
+border: 1px solid #ddd;
+border-radius: 10px;
+background-color: #fff;
+margin-top: 50px;
+}
+.animal-details-container img {
+border-radius: 10px;
+}
