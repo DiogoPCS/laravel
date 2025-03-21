@@ -13,5 +13,8 @@ use App\Http\Middleware\LogAcessoMiddleware;
 |
 */
 
-Route::get('/', [App\Http\Controllers\Principal::class, 'principal']);
+Route::get('/', [App\Http\Controllers\Principal::class, 'principal'])->neme('view-principal');
+Route::get('/registrar', [App\Http\Controllers\Registrar::class, 'registrar'])->name('view-registrar');
+Route::get('/adocao', [App\Http\Controllers\Adocao::class, 'adocao'])->name('view-adocao');
+Route::get('/cadastro-animal', [App\Http\Controllers\CadastroAnimal::class, 'cadastroanimal']);
 
