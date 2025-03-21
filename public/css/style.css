@@ -1,0 +1,37 @@
+body {
+    background-color: #E5E5E5;
+    color: #404040;
+  }
+  .navbar {
+    background-color: #FF1D00 !important;
+  }
+  .navbar-brand, .nav-link, .dropdown-item {
+    color: #E5E5E5 !important;
+  }
+  .nav-link:hover, .dropdown-item:hover {
+    color: #BFBFBF !important;
+  }
+  .btn-outline-success {
+    color: #E5E5E5;
+    border-color: #E5E5E5;
+  }
+  .btn-outline-success:hover {
+    background-color: #FF1D00;
+    border-color: #FF1D00;
+  }
+  .card {
+    background-color: #BFBFBF;
+    border: none;
+  }
+  .card-title {
+    color: #404040;
+  }
+  .card-text {
+    color: #7F7F7F;
+  }
+  .footer {
+    background-color: #FF1D00;
+    color: #E5E5E5;
+    padding: 20px 0;
+    text-align: center;
+  }
