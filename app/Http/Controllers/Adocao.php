@@ -9,6 +9,6 @@ class Adocao extends Controller
 {
     //camelCame = minusculo
     function Adocao(){
-    return view('adocao.blade.php');      
+    return view('adocao');      
     }
 }

@@ -1,67 +1,7 @@
-<!doctype html>
-<html lang="pt-BR">
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Adoção de Animais</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-    <style>
-      body {
-        background-color: #0FC2C0;
-        color: #015958;
-      }
-      .navbar {
-        background-color: #015958 !important;
-      }
-      .navbar-brand, .nav-link {
-        color: #0FC2C0 !important;
-      }
-      .nav-link:hover {
-        color: #D94F04 !important;
-      }
-      .btn-primary {
-        background-color: #D94F04;
-        border-color: #D94F04;
-      }
-      .btn-primary:hover {
-        background-color: #015958;
-        border-color: #015958;
-      }
-      .card {
-        background-color: #015958;
-        color: #0FC2C0;
-        margin-bottom: 20px;
-      }
-      .card img {
-        border-bottom: 2px solid #D94F04;
-      }
-      .card-title {
-        color: #D94F04;
-      }
-    </style>
-  </head>
-  <body>
-    <nav class="navbar navbar-expand-lg navbar-dark">
-      <div class="container-fluid">
-        <a class="navbar-brand" href="#">Adoção de Animais</a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-            <li class="nav-item">
-              <a class="nav-link active" aria-current="page" href="#">Início</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="{{route('login')}}">Registrar</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="{{route('login')}}">Login</a>
-            </li>
-          </ul>
-        </div>
-      </div>
-    </nav>
+@extends(_partials/body)
+
+@section('conteudo')
+
 
     <div class="container mt-5">
       <h1 class="text-center mb-4">Encontre seu novo amigo!</h1>
@@ -99,6 +39,5 @@
       </div>
     </div>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
-  </body>
-</html>
+   
+    @endsection
