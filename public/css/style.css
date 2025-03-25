@@ -1,0 +1,28 @@
+body {
+    background-color: #E5E5E5;
+    color: #000;
+  }
+  .navbar {
+    background-color: #404040;
+  }
+  .navbar-brand, .nav-link {
+    color: #E5E5E5 !important;
+  }
+  .btn-primary {
+    background-color: #FF1D00;
+    border-color: #FF1D00;
+  }
+  .btn-primary:hover {
+    background-color: #7F7F7F;
+    border-color: #7F7F7F;
+  }
+  .card {
+    background-color: #fff;
+    border: 1px solid #7F7F7F;
+  }
+  .footer {
+    background-color: #404040;
+    color: #E5E5E5;
+    padding: 20px 0;
+    text-align: center;
+  }
