@@ -8,6 +8,8 @@
     <link rel="stylesheet" href="{{ asset('css/style.css') }}">
   </head>
   <body>
+    
+    @include('_partials/menu')
 
     @yield('conteudo')
 
