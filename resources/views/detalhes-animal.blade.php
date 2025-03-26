@@ -1,26 +1,7 @@
 @extends('_partials/main')
 
 @section('conteudo')
-  <!-- Navbar -->
-  <nav class="navbar navbar-expand-lg navbar-dark bg-custom-primary">
-    <div class="container-fluid">
-      <a class="navbar-brand text-custom-primary" href="#">Adote um Amigo</a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarNav">
-        <ul class="navbar-nav ms-auto">
-          <li class="nav-item">
-            <a class="nav-link" href="#">Voltar para o Início</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">Animais para Adoção</a>
-          </li>
-        </ul>
-      </div>
-    </div>
-  </nav>
-
+ 
   <!-- Animal Details Section -->
   <section class="py-5">
     <div class="animal-details-container">
