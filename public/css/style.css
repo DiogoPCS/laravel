@@ -88,4 +88,83 @@
         text-align: center;
         color: #fff; /* Texto branco no rodapé */
       }
-    
+      .navbar {
+        background-color: #6341E5; /* Roxo escuro */
+      }
+      .navbar-brand, .nav-link {
+        color: #fff !important; /* Texto branco na navbar */
+      }
+      .btn-primary {
+        background-color: #9C47E6; /* Roxo médio */
+        border-color: #9C47E6;
+        color: #fff;
+      }
+      .btn-primary:hover {
+        background-color: #7B2CBF; /* Roxo mais escuro ao passar o mouse */
+        border-color: #7B2CBF;
+      }
+      .register-container {
+        background-color: #fff;
+        padding: 2rem;
+        border-radius: 0.5rem;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        max-width: 400px;
+        margin: 5rem auto;
+      }
+      .register-container h2 {
+        color: #6341E5; /* Roxo escuro para o título */
+        margin-bottom: 1.5rem;
+      }
+      .form-control:focus {
+        border-color: #9C47E6; /* Roxo médio para o foco dos inputs */
+        box-shadow: 0 0 0 0.2rem rgba(156, 71, 230, 0.25);
+      }
+      .footer {
+        background-color: #6341E5; /* Roxo escuro */
+        padding: 1rem 0;
+        margin-top: 2rem;
+        text-align: center;
+        color: #fff; /* Texto branco no rodapé */
+      }
+      body {
+        background-color: #f8f9fa; /* Fundo claro para contraste */
+        color: #333;
+      }
+      .navbar {
+        background-color: #6341E5; /* Roxo escuro */
+      }
+      .navbar-brand, .nav-link {
+        color: #fff !important; /* Texto branco na navbar */
+      }
+      .btn-primary {
+        background-color: #9C47E6; /* Roxo médio */
+        border-color: #9C47E6;
+        color: #fff;
+      }
+      .btn-primary:hover {
+        background-color: #7B2CBF; /* Roxo mais escuro ao passar o mouse */
+        border-color: #7B2CBF;
+      }
+      .login-container {
+        background-color: #fff;
+        padding: 2rem;
+        border-radius: 0.5rem;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        max-width: 400px;
+        margin: 5rem auto;
+      }
+      .login-container h2 {
+        color: #6341E5; /* Roxo escuro para o título */
+        margin-bottom: 1.5rem;
+      }
+      .form-control:focus {
+        border-color: #9C47E6; /* Roxo médio para o foco dos inputs */
+        box-shadow: 0 0 0 0.2rem rgba(156, 71, 230, 0.25);
+      }
+      .footer {
+        background-color: #6341E5; /* Roxo escuro */
+        padding: 1rem 0;
+        margin-top: 2rem;
+        text-align: center;
+        color: #fff; /* Texto branco no rodapé */
+      }

@@ -1,59 +1,7 @@
-<!doctype html>
-<html lang="pt-br">
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Animais para Adoção</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-    <style>
-      body {
-        background-color: #f8f9fa; /* Fundo claro para contraste */
-        color: #333;
-      }
-      .navbar {
-        background-color: #6341E5; /* Roxo escuro */
-      }
-      .navbar-brand, .nav-link {
-        color: #fff !important; /* Texto branco na navbar */
-      }
-      .btn-primary {
-        background-color: #9C47E6; /* Roxo médio */
-        border-color: #9C47E6;
-        color: #fff;
-      }
-      .btn-primary:hover {
-        background-color: #7B2CBF; /* Roxo mais escuro ao passar o mouse */
-        border-color: #7B2CBF;
-      }
-      .animal-card {
-        background-color: #fff;
-        border: none;
-        border-radius: 0.5rem;
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-        margin-bottom: 1.5rem;
-      }
-      .animal-card img {
-        border-top-left-radius: 0.5rem;
-        border-top-right-radius: 0.5rem;
-      }
-      .animal-card .card-body {
-        padding: 1.5rem;
-      }
-      .animal-card .card-title {
-        color: #6341E5; /* Roxo escuro para títulos */
-      }
-      .footer {
-        background-color: #6341E5; /* Roxo escuro */
-        padding: 1rem 0;
-        margin-top: 2rem;
-        text-align: center;
-        color: #fff; /* Texto branco no rodapé */
-      }
-    </style>
-  </head>
-  <body>
-    <!-- Navbar -->
-    <nav class="navbar navbar-expand-lg navbar-dark">
+@extends('_partials/main')
+@section('conteudo')
+ <!-- Navbar -->
+ <nav class="navbar navbar-expand-lg navbar-dark">
       <div class="container-fluid">
         <a class="navbar-brand" href="#">Adoção de Animais</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -133,12 +81,63 @@
       </div>
     </div>
 
-    <!-- Footer -->
-    <footer class="footer">
-      <div class="container">
-        <span>© 2023 Adoção de Animais. Todos os direitos reservados.</span>
-      </div>
-    </footer>
+    @endsection
+<!doctype html>
+<html lang="pt-br">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Animais para Adoção</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <style>
+      body {
+        background-color: #f8f9fa; /* Fundo claro para contraste */
+        color: #333;
+      }
+      .navbar {
+        background-color: #6341E5; /* Roxo escuro */
+      }
+      .navbar-brand, .nav-link {
+        color: #fff !important; /* Texto branco na navbar */
+      }
+      .btn-primary {
+        background-color: #9C47E6; /* Roxo médio */
+        border-color: #9C47E6;
+        color: #fff;
+      }
+      .btn-primary:hover {
+        background-color: #7B2CBF; /* Roxo mais escuro ao passar o mouse */
+        border-color: #7B2CBF;
+      }
+      .animal-card {
+        background-color: #fff;
+        border: none;
+        border-radius: 0.5rem;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        margin-bottom: 1.5rem;
+      }
+      .animal-card img {
+        border-top-left-radius: 0.5rem;
+        border-top-right-radius: 0.5rem;
+      }
+      .animal-card .card-body {
+        padding: 1.5rem;
+      }
+      .animal-card .card-title {
+        color: #6341E5; /* Roxo escuro para títulos */
+      }
+      .footer {
+        background-color: #6341E5; /* Roxo escuro */
+        padding: 1rem 0;
+        margin-top: 2rem;
+        text-align: center;
+        color: #fff; /* Texto branco no rodapé */
+      }
+    </style>
+  </head>
+  <body>
+
+
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
   </body>
