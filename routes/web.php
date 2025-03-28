@@ -14,6 +14,8 @@ use App\Http\Middleware\LogAcessoMiddleware;
 */
 
 Route::get('/', [App\Http\Controllers\Principal::class, 'principal'])->name('view-principal');
-Route::get('/registrar', [App\Http\Controllers\Registrar::class, 'registrar'])->name('view-registrar');
 Route::get('/adocao', [App\Http\Controllers\Adocao::class, 'adocao']);
 Route::get('/cadastro-animal', [App\Http\Controllers\CadastroAnimal::class, 'cadastroAnimal']);
+Route::get('/registrar', [App\Http\Controllers\Registrar::class, 'registrar'])->name('view-registrar');
+
+Route::post('/registrar', [App\Http\Controllers\Registrar::class, 'criarConta'])->name('criar-conta');

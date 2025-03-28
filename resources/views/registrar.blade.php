@@ -9,11 +9,11 @@
                     <h3 class="card-title text-center">Cadastro de Usuário</h3>
                 </div>
                 <div class="card-body">
-                    <form  method="POST">
+                    <form action={{ route('criar-conta') }}  method="POST">
                         @csrf
                         <div class="mb-3">
                             <label for="name" class="form-label">Nome Completo</label>
-                            <input type="text" class="form-control" id="name" name="name" required>
+                            <input type="text" class="form-control" id="name" name="nome_completo" required>
                         </div>
                         <div class="mb-3">
                             <label for="email" class="form-label">E-mail</label>
@@ -21,11 +21,11 @@
                         </div>
                         <div class="mb-3">
                             <label for="password" class="form-label">Senha</label>
-                            <input type="password" class="form-control" id="password" name="password" required>
+                            <input type="password" class="form-control" id="password" name="senha" required>
                         </div>
                         <div class="mb-3">
                             <label for="password_confirmation" class="form-label">Confirmar Senha</label>
-                            <input type="password" class="form-control" id="password_confirmation" name="password_confirmation" required>
+                            <input type="password" class="form-control" id="password_confirmation" name="confirmar_senha" required>
                         </div>
                         <div class="d-grid">
                             <button type="submit" class="btn btn-primary" style="background-color: #FF1D00; border-color: #FF1D00;">Cadastrar</button>
