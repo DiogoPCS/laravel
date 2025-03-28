@@ -1,0 +1,35 @@
+
+body {
+    background-color: #fff;
+    color: #363432;
+  }
+  .navbar {
+    background-color: #196774 !important;
+  }
+  .navbar-brand, .nav-link {
+    color: #fff !important;
+  }
+  .btn-primary {
+    background-color: #F0941F;
+    border-color: #F0941F;
+  }
+  .btn-primary:hover {
+    background-color: #EF6024;
+    border-color: #EF6024;
+  }
+  .card {
+    background-color: #90A19D;
+    border: none;
+  }
+  .card-title {
+    color: #363432;
+  }
+  .card-text {
+    color: #fff;
+  }
+  footer {
+    background-color: #196774;
+    color: #fff;
+    padding: 20px 0;
+    margin-top: 40px;
+  }
