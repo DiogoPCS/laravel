@@ -6,7 +6,7 @@
       <div class="row">
         <div class="col-md-4">
           <div class="card">
-            <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjSm3viT9lJAO8p-Ay7tEoy2iMMy5ejwWwkeFVKzSigJuNjOhcDcC2EH_rGwT6HIcIjUPegLOtrKR3FopEweaBxfrai9EajNAPA4yPtvypP0sMnCwRl-KrEo1U0i8iw1L5_uZR10AAjoIo/s1600/cachorro+dancarino.gif" class="card-img-top" alt="Cachorro">
+            <img src="https://i.gifer.com/2g.gif" class="card-img-top" alt="Cachorro">
             <div class="card-body">
               <h5 class="card-title">Cachorro</h5>
               <p class="card-text">Adote um cachorro e ganhe um amigo para toda a vida.</p>

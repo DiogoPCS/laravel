@@ -17,3 +17,5 @@ Route::get('/', [App\Http\Controllers\Principal::class, 'principal'])->name('vie
 Route::get('/registrar', [App\Http\Controllers\Registrar::class, 'registrar'])->name('view-registrar');
 Route::get('/adocao', [App\Http\Controllers\Adocao::class, 'adocao']);
 Route::get('/cadastro-animal', [App\Http\Controllers\CadastroAnimal::class, 'cadastroAnimal']);
+
+Route::post('/registrar', [App\Http\Controllers\Registrar::class, 'criarConta'])->name('criar-conta');

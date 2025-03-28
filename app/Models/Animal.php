@@ -5,9 +5,10 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class LogAcesso extends Model
+class Animal extends Model
 {
     use HasFactory;
-
-    protected $fillable = ['log'];
+    protected$table = 'animal';
+    protected$fillabel = ['nome', 'cor', 'peso', 'idade', 'especie', 'raca',];
 }
+
