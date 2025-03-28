@@ -16,7 +16,7 @@
         </div>
         <div class="col-md-4">
           <div class="card">
-            <img src="https://i.gifer.com/2ull.gif" class="card-img-top" alt="Gato">
+            <img src="https://i.pinimg.com/originals/e1/43/92/e14392b3bb9f745025a5cf6a9abe11be.gif" class="card-img-top" alt="Gato">
             <div class="card-body">
               <h5 class="card-title">Gato</h5>
               <p class="card-text">Adote um gato e tenha um companheiro cheio de personalidade.</p>

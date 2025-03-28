@@ -18,4 +18,4 @@ Route::get('/registrar', [App\Http\Controllers\Registrar::class, 'registrar']) -
 Route::get('/doacao', [App\Http\Controllers\Doacao::class, 'doacao']);
 Route::get('/cadastroAnimal', [App\Http\Controllers\cadastroAnimal::class, 'CadastroAnimal']);
 
-
+Route::post('/registrar', [App\Http\Controllers\Registrar::class, 'criarConta']) ->name('criar-conta');
