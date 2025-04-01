@@ -1,8 +1,5 @@
 @extends('_partials/body')
 
-@section("conteudo")
-@extends('_partials.body')
-
 @section('conteudo')
 
 <div class="container mt-5">
@@ -106,7 +103,5 @@
         </div>
     </div>
 </div>
-
-@endsection
 
 @endsection
