@@ -121,7 +121,7 @@
     <div class="row">
         <div class="col-md-4 mb-4">
             <div class="card h-100">
-                <img src="https://i.pinimg.com/originals/1e/3e/2e/1e3e2e5c27a8a7c8c7b8b5b5e5b5b5e5.jpg" 
+                <img src="https://upload.wikimedia.org/wikipedia/commons/2/26/YellowLabradorLooking_new.jpg" 
                      class="card-img-top" alt="Cachorro para adoção">
                 <div class="card-body">
                     <h5 class="card-title">Rex</h5>
@@ -141,7 +141,7 @@
         
         <div class="col-md-4 mb-4">
             <div class="card h-100">
-                <img src="https://www.petz.com.br/blog/wp-content/uploads/2022/05/gato-branco-de-olho-azul.jpg" 
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/81/Persialainen.jpg/200px-Persialainen.jpg" 
                      class="card-img-top" alt="Gato para adoção">
                 <div class="card-body">
                     <h5 class="card-title">Snow</h5>
@@ -161,7 +161,7 @@
         
         <div class="col-md-4 mb-4">
             <div class="card h-100">
-                <img src="https://www.petlove.com.br/images/breeds/193436/profile/original/porquinho_da_india-p.jpg?1532539109" 
+                <img src="https://i.ytimg.com/vi/58xsiTeMLGs/hqdefault.jpg" 
                      class="card-img-top" alt="Porquinho da Índia para adoção">
                 <div class="card-body">
                     <h5 class="card-title">Pipoca</h5>

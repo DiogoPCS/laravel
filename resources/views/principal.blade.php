@@ -9,7 +9,7 @@
             <div class="card-body">
               <h5 class="card-title">Cachorro</h5>
               <p class="card-text">Um amigo leal esperando por você.</p>
-              <a href="#" class="btn btn-primary">Adotar</a>
+              <a href="" class="btn btn-primary">Adotar</a>
             </div>
           </div>
         </div>
