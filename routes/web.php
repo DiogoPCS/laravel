@@ -19,5 +19,7 @@ Route::get('/detalhes-animal', [App\Http\Controllers\DetalhesAnimal::class, 'det
 Route::get('/listar-animais', [App\Http\Controllers\ListarAnimais::class, 'listarAnimais'])->name('listar-animais');
 Route::get('/login', [App\Http\Controllers\Login::class, 'login'])->name('login');
 Route::get('/registro', [App\Http\Controllers\Registro::class, 'registro'])->name('registro');
+Route::get('/animal', [App\Http\Controllers\Animais::class, 'animal'])->name('animal');
 
 Route::post('/registro', [App\Http\Controllers\Registro::class, 'criarConta'])->name('registro');
+Route::post('/add-animal', [App\Http\Controllers\Animais::class, 'addAnimal'])->name('add-animal');
