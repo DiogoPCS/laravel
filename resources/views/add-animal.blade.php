@@ -4,7 +4,7 @@
 
     <!-- Register Container -->
     <div class="register-container">
-      <h2 class="text-center">Registro</h2>
+      <h2 class="text-center">Adicionar Animal</h2>
       <form action="{{ route('registro') }}" method="POST">
         @csrf
         <div class="mb-3">
@@ -25,7 +25,7 @@
         </div>
         <button type="submit" class="btn btn-primary w-100">Registrar</button>
         <div class="text-center mt-3">
-          <span>Já tem uma conta? <a href="#" style="color: #9C47E6;">Faça login</a></span>
+         
         </div>
       </form>
     </div>  
