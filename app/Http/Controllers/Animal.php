@@ -10,4 +10,5 @@ class Animal extends Controller
     function animal(){
         return view('animal');
     }
+    
 }
