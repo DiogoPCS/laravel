@@ -11,5 +11,6 @@ class Animal extends Model
 
     protected $table = 'animal';
     protected $fillable = ['nome', 'cor', 'peso', 'idade', 'especie', 'raca'];
+    
 }
 

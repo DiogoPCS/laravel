@@ -4,31 +4,37 @@
 @section('conteudo')
 <!-- Registration Form -->
 <div class="register-container">
-  <h2 class="text-center mb-4">Registro</h2>
+  <h2 class="text-center mb-4">Registro Animal</h2>
   <form action="{{ route('add-animal') }}" method="POST">
     @csrf
     <div class="mb-3">
       <label for="name" class="form-label">Nome Completo</label>
-      <input type="text" class="form-control" id="name" name="nome" placeholder="Digite seu nome completo" required>
+      <input type="text" class="form-control" id="name" name="nome" placeholder="Digite o nome" required>
     </div>
     <div class="mb-3">
       <label for="cor" class="form-label">Cor</label>
-      <input type="cor" class="form-control" id="cor" name="cor" placeholder="Digite cor" required>
+      <input type="text" class="form-control" id="cor" name="cor" placeholder="Digite a cor" required>
     </div>
     <div class="mb-3">
-      <label for="password" class="form-label">Senha</label>
-      <input type="password" class="form-control" id="password" name="senha" placeholder="Digite sua senha" required>
+      <label for="peso" class="form-label">Peso</label>
+      <input type="text" class="form-control" id="peso" name="peso" placeholder="Digite o peso" required>
     </div>
     <div class="mb-3">
-      <label for="confirm-password" class="form-label">Confirme sua Senha</label>
-      <input type="password" class="form-control" id="confirm-password" name="confirmar_senha" placeholder="Confirme sua senha" required>
+      <label for="idade" class="form-label">Idade</label>
+      <input type="text" class="form-control" id="idade" name="idade" placeholder="Digite a idade" required>
+    </div>
+    <div class="mb-3">
+      <label for="especie" class="form-label">Espécie</label>
+      <input type="text" class="form-control" id="especie" name="especie" placeholder="Digite a espécie" required>
+    </div>
+    <div class="mb-3">
+      <label for="raca" class="form-label">Raça</label>
+      <input type="text" class="form-control" id="raca" name="raca" placeholder="Digite a raça" required>
     </div>
     <div class="d-grid">
       <button type="submit" class="btn btn-custom-primary">Registrar</button>
     </div>
-    <div class="text-center mt-3">
-      <p>Já tem uma conta? <a href="#" class="text-custom-primary">Faça login</a></p>
-    </div>
+    
   </form>
 </div>
 @endsection
