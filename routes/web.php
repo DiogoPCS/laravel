@@ -5,7 +5,7 @@ use App\Http\Middleware\LogAcessoMiddleware;
 
 use Illuminate\Support\Facades\Mail;
 use App\Http\Controllers\PrincipalController;
-use App\Http\Controllers\VotacaoController;
+use App\Http\Controllers\VotoController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -28,7 +28,7 @@ Route::get('/email-teste', function () {
     return 'E-mail enviado!';
 });
 
-Route::get('/votar', [VotacaoController::class, 'form'])->name('votar.form');
-Route::post('/votar', [VotacaoController::class, 'enviarVoto'])->name('votar');
+Route::get('/votar', [VotoController::class, 'form'])->name('votar.form');
+Route::post('/votar', [VotoController::class, 'enviarVoto'])->name('votar');
 
-Route::get('/confirmar/{code}', [VotacaoController::class, 'confirmar'])->name('votar.confirmar');
+Route::get('/confirmar/{code}', [VotoController::class, 'confirmar'])->name('votar.confirmar');

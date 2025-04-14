@@ -4,9 +4,11 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
+use App\Models\Votos;
+use Illuminate\Support\Str;
 
 
-class VotacaoController extends Controller
+class VotoController extends Controller
 {
     public function form()
     {
@@ -20,10 +22,18 @@ class VotacaoController extends Controller
             'chapa' => 'required',
         ]);
 
+        $code = Str::random(40);
+
         // Aqui você pode salvar o voto em um banco de dados
+        $voto = new Votos();
+        $voto->email = $request->email;
+        $voto->chapa = $request->chapa;
+        $voto->code = $code;
+        $voto->confirmed = false;
+        $voto->save();
 
         // Enviar e-mail de confirmação
-        Mail::raw("Sua solicitação de voto para {$request->chapa} está aguardando. Para que o voto seja efetivado, acesse o link:", function ($message) use ($request) {
+        Mail::raw("Sua solicitação de voto para {$request->chapa} está aguardando. Para que o voto seja efetivado, acesse o link: <a href='http://127.0.0.1:8000/confirmar/{$code}' target='_blank'>Clique para Confirmar seu Voto<a>", function ($message) use ($request) {
             $message->to($request->email)
                     ->subject('Confirmação de voto – Grêmio Estudantil');
         });
@@ -32,7 +42,16 @@ class VotacaoController extends Controller
     }
 
     public function confirmar(string $code) {
-        dd($code);
+        // $voto = Votos::where('code', '=', $code)->first();
+        Votos::whereIn('code', [$code])->update(['confirmed' => 1]);
+
+        // if ($voto) {
+        //     echo 'Encontrou';
+        // } else {
+        //     echo 'Não encontrou';
+        // }
+        
+        
         return view('confirmar');
     }
 }
