@@ -1,0 +1,1 @@
+<h1>Voto confirmado</h1>

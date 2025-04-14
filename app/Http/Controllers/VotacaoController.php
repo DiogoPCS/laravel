@@ -23,15 +23,16 @@ class VotacaoController extends Controller
         // Aqui você pode salvar o voto em um banco de dados
 
         // Enviar e-mail de confirmação
-        // Mail::raw("Seu voto para {$request->chapa} foi registrado com sucesso.", function ($message) use ($request) {
-        //     $message->to($request->email)
-        //             ->subject('Confirmação de voto – Grêmio Estudantil');
-        // });
-        Mail::raw('Este é um e-mail de teste via Brevo!', function ($message) {
-            $message->to('diogo.paulino.santos@hotmail.com')
-                    ->subject('Teste Brevo');
+        Mail::raw("Sua solicitação de voto para {$request->chapa} está aguardando. Para que o voto seja efetivado, acesse o link:", function ($message) use ($request) {
+            $message->to($request->email)
+                    ->subject('Confirmação de voto – Grêmio Estudantil');
         });
+        
+        return redirect()->route('votar.form')->with('success', 'Intenção de voto registrada! Verifique seu e-mail para confirmação. Lembre-se ainda, de verificar a caixa de spam.');
+    }
 
-        return redirect()->route('votar.form')->with('success', 'Voto enviado com sucesso! Verifique seu e-mail para confirmação.');
+    public function confirmar(string $code) {
+        dd($code);
+        return view('confirmar');
     }
 }

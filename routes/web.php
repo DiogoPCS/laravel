@@ -30,3 +30,5 @@ Route::get('/email-teste', function () {
 
 Route::get('/votar', [VotacaoController::class, 'form'])->name('votar.form');
 Route::post('/votar', [VotacaoController::class, 'enviarVoto'])->name('votar');
+
+Route::get('/confirmar/{code}', [VotacaoController::class, 'confirmar'])->name('votar.confirmar');
