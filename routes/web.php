@@ -2,6 +2,10 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Middleware\LogAcessoMiddleware;
+
+use Illuminate\Support\Facades\Mail;
+use App\Http\Controllers\PrincipalController;
+use App\Http\Controllers\VotacaoController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -15,3 +19,14 @@ use App\Http\Middleware\LogAcessoMiddleware;
 
 Route::get('/', [App\Http\Controllers\Principal::class, 'principal']);
 
+Route::get('/email-teste', function () {
+    Mail::raw('Este é um e-mail de teste via Brevo!', function ($message) {
+        $message->to('diogo.paulino.santos@hotmail.com')
+                ->subject('Teste Brevo');
+    });
+
+    return 'E-mail enviado!';
+});
+
+Route::get('/votar', [VotacaoController::class, 'form'])->name('votar.form');
+Route::post('/votar', [VotacaoController::class, 'enviarVoto'])->name('votar');
