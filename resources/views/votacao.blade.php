@@ -7,7 +7,7 @@
 </head>
 <body class="bg-light">
 
-<div class="container mt-5">
+<div class="container mt-5"> 
     <h2 class="text-center mb-4">Votação do Grêmio Estudantil</h2>
 
     @if (session('success'))
