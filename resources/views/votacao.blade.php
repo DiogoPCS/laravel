@@ -16,6 +16,7 @@
 
     <form action="{{ route('votar') }}" method="POST" class="card p-4 shadow">
         @csrf
+        
 
         <div class="mb-3">
             <label for="email" class="form-label">Seu e-mail escolar</label>

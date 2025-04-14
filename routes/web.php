@@ -17,8 +17,6 @@ use App\Http\Controllers\VotoController;
 |
 */
 
-Route::get('/', [App\Http\Controllers\Principal::class, 'principal']);
-
 Route::get('/email-teste', function () {
     Mail::raw('Este é um e-mail de teste via Brevo!', function ($message) {
         $message->to('diogo.paulino.santos@hotmail.com')
@@ -28,7 +26,7 @@ Route::get('/email-teste', function () {
     return 'E-mail enviado!';
 });
 
-Route::get('/votar', [VotoController::class, 'form'])->name('votar.form');
+Route::get('/', [VotoController::class, 'form'])->name('votar.form');
 Route::post('/votar', [VotoController::class, 'enviarVoto'])->name('votar');
 
 Route::get('/confirmar/{code}', [VotoController::class, 'confirmar'])->name('votar.confirmar');

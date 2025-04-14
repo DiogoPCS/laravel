@@ -21,6 +21,12 @@ class VotoController extends Controller
             'email' => 'required|email',
             'chapa' => 'required',
         ]);
+        
+        $alreadyVoted = Votos::where('email', '=', $request->email)->first();
+
+        if ($alreadyVoted) {
+            return redirect()->route('votar.form')->with('success', 'Seu voto já foi registrado!');
+        }
 
         $code = Str::random(40);
 
