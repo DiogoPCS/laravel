@@ -39,7 +39,7 @@ class VotoController extends Controller
         $voto->save();
 
         // Enviar e-mail de confirmação
-        Mail::raw("Sua solicitação de voto para {$request->chapa} está aguardando. Para que o voto seja efetivado, acesse o link: <a href='http://127.0.0.1:8000/confirmar/{$code}' target='_blank'>Clique para Confirmar seu Voto<a>", function ($message) use ($request) {
+        Mail::raw("Sua solicitação de voto para {$request->chapa} está aguardando. Para que o voto seja efetivado, acesse o link: <a href='https://diogopcs.com.br/confirmar/{$code}' target='_blank'>Clique para Confirmar seu Voto<a>", function ($message) use ($request) {
             $message->to($request->email)
                     ->subject('Confirmação de voto – Grêmio Estudantil');
         });
