@@ -18,7 +18,7 @@
           <a href="#" style="color: #9C47E6;">Esqueceu a senha?</a>
         </div>
         <div class="text-center mt-3">
-          <span>Não tem uma conta? <a href="#" style="color: #9C47E6;">Cadastre-se</a></span>
+          <span>Não tem uma contaa? <a href="#" style="color: #9C47E6;">Cadastre-se</a></span>
         </div>
       </form>
     </div>
