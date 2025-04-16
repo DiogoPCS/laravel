@@ -1,49 +1,91 @@
-<!DOCTYPE html>
-<html lang="pt-BR">
-<head>
-    <meta charset="UTF-8">
-    <title>Votação do Grêmio Estudantil</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-</head>
-<body class="bg-light">
+@extends('_partials.body')
 
-<div class="container mt-5"> 
-    <h2 class="text-center mb-4">Votação do Grêmio Estudantil</h2>
+@section('content')
 
-    @if (session('success'))
-        <div class="alert alert-success">{{ session('success') }}</div>
-    @endif
+    <div class="container mt-3 mt-md-5">
+        <h2 class="text-center mb-3 mb-md-4">Votação do Grêmio Estudantil</h2>
 
-    <form action="{{ route('votar') }}" method="POST" class="card p-4 shadow">
-        @csrf
-        
+        @if (session('success'))
+            <div class="alert alert-success">{{ session('success') }}</div>
+        @endif
 
-        <div class="mb-3">
-            <label for="email" class="form-label">Seu e-mail escolar</label>
-            <input type="email" name="email" id="email" class="form-control" required placeholder="exemplo@escola.com">
-        </div>
+        <form action="{{ route('votar') }}" method="POST" class="card p-4 shadow">
+            @csrf
 
-        <div class="mb-3">
-            <label class="form-label">Escolha sua chapa:</label>
-
-            <div class="form-check">
-                <input class="form-check-input" type="radio" name="chapa" id="chapa1" value="Chapa 1" required>
-                <label class="form-check-label" for="chapa1">
-                    Chapa 1 – União Estudantil
-                </label>
+            <div class="mb-3">
+                <label for="email" class="form-label">Seu e-mail escolar</label>
+                <input type="email" name="email" id="email" class="form-control" required placeholder="exemplo@escola.com">
+                @error('email')
+                    <div class="text-danger mt-1">{{ $message }}</div>
+                @enderror
             </div>
 
-            <div class="form-check">
-                <input class="form-check-input" type="radio" name="chapa" id="chapa2" value="Chapa 2" required>
-                <label class="form-check-label" for="chapa2">
-                    Chapa 2 – Voz Jovem
-                </label>
+            <div class="mb-3">
+                <label class="form-label">Escolha sua chapa:</label>
+
+                <div class="form-check">
+                    <div class="row py-3">
+                        <div class="col-12 col-lg-9">
+                            <input class="form-check-input" type="radio" name="chapa" id="chapa_urc" value="Chapa URC" required>
+                            <label class="form-check-label" for="chapa_urc">
+                                Chapa URC - Unir, Reinventar e Construir
+                            </label>
+                        </div>
+                        <div class="col-12 col-lg-auto">
+                            <a href="#" data-bs-toggle="modal" data-bs-target="#chapa_urc_modal">Mais Sobre</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-check">
+                    <div class="row py-3">
+                        <div class="col-12 col-lg-9">
+                            <input class="form-check-input" type="radio" name="chapa" id="chapa_partido_dos_estudantes" value="Chapa Partido dos Estudantes" required>
+                            <label class="form-check-label" for="chapa_partido_dos_estudantes">
+                                Chapa Partido dos Estudantes
+                            </label>
+                        </div>
+                        <div class="col-12 col-lg-auto">
+                            <a href="#" data-bs-toggle="modal" data-bs-target="#chapa_partido_dos_estudantes_modal">Mais Sobre</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <button type="submit" class="btn btn-primary">Votar</button>
+        </form>
+    </div>
+
+    <!-- Modal 1 -->
+    <div class="modal fade" id="chapa_urc_modal" tabindex="-1" aria-labelledby="chapaURCLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="chapaURCLabel">Chapa URC</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                <img src="{{ asset('images/chapa_urc.png') }}" width="100%">
+                </div>
             </div>
         </div>
+    </div>
 
-        <button type="submit" class="btn btn-primary">Votar</button>
-    </form>
-</div>
+    <!-- Modal 2 -->
+    <div class="modal fade" id="chapa_partido_dos_estudantes_modal" tabindex="-1" aria-labelledby="chapaPartidoDosEstudantesLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="chapaPartidoDosEstudantesLabel">Partido dos Estudantes</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <img src="{{ asset('images/chapa_partido_dos_estudantes.png') }}" width="100%">
+                </div>
+            </div>
+        </div>
+    </div>
 
-</body>
-</html>
+    
+
+@endsection
