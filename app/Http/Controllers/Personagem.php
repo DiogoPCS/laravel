@@ -18,6 +18,7 @@ class Personagem extends Controller
     }
 
     function listarPersonagem() {
-        return view('listar-personagem');
+        $personagem = Personagens::where('id', '>', 0)->paginate(3);
+        return view('listar-personagem', ['personagem'=> $personagem]);
     }
 }
