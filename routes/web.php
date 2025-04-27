@@ -13,8 +13,15 @@ use App\Http\Middleware\LogAcessoMiddleware;
 |
 */
 
-Route::get('/', [App\Http\Controllers\Principal::class, 'principal']);
+Route::get('/', [App\Http\Controllers\Principal::class, 'viewPrincipal'])->name('view.principal');
+Route::get('/sobre-nos', [App\Http\Controllers\Principal::class, 'viewSobreNos'])->name('view.sobrenos');
 
+Route::get('/contato', [App\Http\Controllers\Principal::class, 'viewContato'])->name('view.contato');
+Route::post('/contato', [App\Http\Controllers\Principal::class, 'salvarContato'])->name('salvar.contato');
+
+Route::get('/listar-contatos', [App\Http\Controllers\Principal::class, 'listarContatos'])->name('view.lista-contatos');
+
+Route::get('/delete/', [App\Http\Controllers\Principal::class, 'listarContatos'])->name('view.lista-contatos');
 
 
 
