@@ -15,6 +15,11 @@ use App\Http\Middleware\LogAcessoMiddleware;
 
 Route::get('/', [App\Http\Controllers\Principal::class, 'principal']);
 
+Route::get('/cliente/add', [App\Http\Controllers\ClienteController::class, 'add'])->name('add-cliente');
+
+Route::post('/cliente/add', [App\Http\Controllers\ClienteController::class, 'store'])->name('store-cliente');
+
+
 
 
 
