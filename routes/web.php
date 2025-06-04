@@ -34,6 +34,3 @@ Route::post('veiculo/store', [App\Http\Controllers\VeiculoController::class, 'st
 Route::get('anuncio/listar', [App\Http\Controllers\VeiculoController::class, 'listar'])->name('anuncio-listar');
 Route::get('anuncio/remover', [App\Http\Controllers\VeiculoController::class, 'remover'])->name('anuncio-remover');
 Route::get('anuncio/editar', [App\Http\Controllers\VeiculoController::class, 'editar'])->name('anuncio-editar');
-
-
-
