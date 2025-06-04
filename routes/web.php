@@ -13,8 +13,26 @@ use App\Http\Middleware\LogAcessoMiddleware;
 |
 */
 
+
 Route::get('/', [App\Http\Controllers\Principal::class, 'principal']);
+// Rotas veiculo
+Route::get('/veiculo/formulario', [App\Http\Controllers\VeiculoController::class, 'formulario'])->name('veiculo-formulario');
+Route::post('/veiculo/store', [App\Http\Controllers\VeiculoController::class, 'store'])->name('veiculo-store');
+Route::get('/veiculo/listar', [App\Http\Controllers\VeiculoController::class, 'listar'])->name('veiculo-listar');
+Route::get('/veiculo/remover', [App\Http\Controllers\VeiculoController::class, 'remover'])->name('veiculo-remover');
+Route::get('/veiculo/editar', [App\Http\Controllers\VeiculoController::class, 'editar'])->name('veiculo-editar');
 
+// rotas propietário
+Route::get('/veiculo/formulario', [App\Http\Controllers\VeiculoController::class, 'formulario'])->name('propietario/formulario');
+Route::post('/veiculo/store', [App\Http\Controllers\VeiculoController::class, 'store'])->name('veiculo/store');
+Route::get('/propietario/listar', [App\Http\Controllers\VeiculoController::class, 'listar'])->name('propietario/listar');
+Route::get('/propietario/remover', [App\Http\Controllers\VeiculoController::class, 'remover'])->name('propietario/remover');
+Route::get('/propietario/editar', [App\Http\Controllers\VeiculoController::class, 'editar'])->name('propietario/editar');
 
-
+// Rotas Anuncio
+Route::get('/anuncio/formulario', [App\Http\Controllers\VeiculoController::class, 'formulario'])->name('anuncio/formulario');
+Route::post('/veiculo/store', [App\Http\Controllers\VeiculoController::class, 'store'])->name('veiculo-store');
+Route::get('/anuncio/listar', [App\Http\Controllers\VeiculoController::class, 'listar'])->name('anuncio/listar');
+Route::get('/anuncio/remover', [App\Http\Controllers\VeiculoController::class, 'remover'])->name('anuncio/remover');
+Route::get('/anuncio/editar', [App\Http\Controllers\VeiculoController::class, 'editar'])->name('anuncio/editar');
 
