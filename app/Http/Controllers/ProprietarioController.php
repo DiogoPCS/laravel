@@ -6,17 +6,44 @@ use Illuminate\Http\Request;
 
 class ProprietarioController extends Controller
 {
-    function adicionar(){
-        return view('proprietario-adicionar');
-}
+    function formulario(){
+        return view('proprietario-formulario');
+    }
+
     function store(Request $dados){
-        $propriedade = new PropriedadeModel();
-        $propriedade->create($dados->all());
-}   
+        if ($dados->id == '') {
+            //fazemos ação de create aqui...
+            $proprietario = new ProprietarioModel();
+            $proprietario->create($dados->all());
+        } else {
+            //fazemos a ação de update aqui
+            $proprietario = ProprietarioModel::find($dados->id); //localiza o registro
+            $update = $proprietario->update($dados->all()); //atualiza
+        }
+        
+        //recupera todos os registros atualizados
+        $proprietario = ProprietarioModel::all();
+        
+        //após adicionar ou editar redireciona para a página listar
+        return view('proprietario-listar', ['proprietario'=>$proprietario]);
+    }
 
     function list(){
-        $propriedade = PropriedadeModel::all();
-        return view('propriedade-listar', ['propriedade'=>$propriedade]);
-}
+        $proprietario = ProprietarioModel::all();
+        
+        return view('proprietario-listar', ['proprietario'=>$proprietario]);
+    }
 
+    function remove($id){
+        ProprietarioModel::destroy($id);
+
+        return redirect()->route('vproprietario-listar');
+    }
+    
+    function editar($id){
+				$proprietario = ProprietarioModel::find($id);
+
+        return redirect()->route('proprietario-formulario', ['proprietario' => $proprietario]);
+        //vamos enviar o $veiculo que veio do BD para a página veiculo-formulario
+    }
 }

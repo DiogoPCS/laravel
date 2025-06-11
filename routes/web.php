@@ -15,18 +15,25 @@ use App\Http\Middleware\LogAcessoMiddleware;
 
 Route::get('/', [App\Http\Controllers\Principal::class, 'principal']);
 
-Route::get('/proprietario/adicionar', [App\Http\Controllers\PropriedadeController::class, 'adicionar'])->name('proprietario-adicionar');
+Route::get('/veiculo/formulario', [App\Http\Controllers\VeiculoController::class, 'formulario'])->name('veiculo-formulario');
 Route::post('/veiculo/store', [App\Http\Controllers\VeiculoController::class, 'store'])->name('veiculo-store');
+Route::get('/veiculo/listar', [App\Http\Controllers\VeiculoController::class, 'listar'])->name('veiculo-listar');
+Route::get('veiculo/remove/{id}', [App\Http\Controllers\VeiculoController::class, 'remove'])->name('veiculo-remove');
+Route::get('veiculo/editar/{id}', [App\Http\Controllers\VeiculoController::class, 'editar'])->name('veiculo-editar');
+
+
+
+Route::post('/proprietario/store', [App\Http\Controllers\ProprietarioController::class, 'store'])->name('proprietario-store');
 Route::get('/proprietario/listar', [App\Http\Controllers\PropriedadeController::class, 'listar'])->name('proprietario-listar');
 Route::get('/proprietario/remover', [App\Http\Controllers\PropriedadeController::class, 'remover'])->name('proprietario-remover');
 Route::get('/proprietario/editar', [App\Http\Controllers\PropriedadeController::class, 'editar'])->name('proprietario-editar');
 
 
-Route::get('/anuncio/adicionar', [App\Http\Controllers\PropriedadeController::class, 'adicionar'])->name('anuncio-adicionar');
-Route::post('/veiculo/store', [App\Http\Controllers\VeiculoController::class, 'store'])->name('veiculo-store');
-Route::get('/anuncio/listar', [App\Http\Controllers\PropriedadeController::class, 'listar'])->name('anuncio-listar');
-Route::get('/anuncio/remover', [App\Http\Controllers\PropriedadeController::class, 'remover'])->name('anuncio-remover');
-Route::get('/anuncio/editar', [App\Http\Controllers\PropriedadeController::class, 'editar'])->name('anuncio-editar');
+
+Route::post('/anuncio/store', [App\Http\Controllers\AnuncioController::class, 'store'])->name('anuncio-store');
+Route::get('/anuncio/listar', [App\Http\Controllers\AnuncioController::class, 'listar'])->name('anuncio-listar');
+Route::get('/anuncio/remover', [App\Http\Controllers\AnuncioController::class, 'remover'])->name('anuncio-remover');
+Route::get('/anuncio/editar', [App\Http\Controllers\AnuncioController::class, 'editar'])->name('anuncio-editar');
 
 
 
