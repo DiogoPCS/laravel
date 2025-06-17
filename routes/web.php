@@ -14,7 +14,13 @@ use App\Http\Middleware\LogAcessoMiddleware;
 */
 
 Route::get('/', [App\Http\Controllers\Principal::class, 'principal']);
-Route::get('/dizer-ola', [App\Http\Controllers\Principal::class, 'dizerOla']);
-Route::get('/conectar', [App\Http\Controllers\Usuario::class, 'conectar']);
-Route::get('/desconectar', [App\Http\Controllers\Usuario::class, 'desconectar']);
+
+Route::get('/produto', [App\Http\Controllers\ProdutoController::class, 'formulario'])->name('produto-formulario');
+
+Route::post('/produto-store', [App\Http\Controllers\ProdutoController::class, 'store'])->name('produto-store');
+
+Route::get('/produto-listar', [App\Http\Controllers\ProdutoController::class, 'listar'])->name('produto-listar');
+
+Route::get('/produto-remover/{id}', [App\Http\Controllers\ProdutoController::class, 'remover'])->name('produto-remover');
+
 
