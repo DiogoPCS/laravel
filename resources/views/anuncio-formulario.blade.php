@@ -13,8 +13,8 @@
     <label for="preco">Preço</label>
     <input type="text" name="preco" id="preco" value={{ $anuncio-> preco ?? old('preco') }}>
 
-    <label for="data_de_publicacao">Data de Publicação</label>
-    <input type="number" name="data_de_publicacao" id="data_de_publicacao" value={{ $anuncio-> data_de_publicacao ?? old('data_de_publicacao') }}>
+    <label for="data_publicacao">Data de Publicação</label>
+    <input type="number" name="data_publicacao" id="data_publicacao" value={{ $anuncio-> data_publicacao ?? old('data_publicacao') }}>
 
     <button type="submit">Cadastrar</button>
 </form>

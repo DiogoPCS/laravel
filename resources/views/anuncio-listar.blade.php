@@ -13,24 +13,22 @@
             <th>Descricao</th>
             <th>Preco</th>
             <th>Data_publicacao</th>
-            <th>Ações</th>
         </tr>
     </thead>
     <tbody>
+				@foreach ($anuncio as $anuncio)
             <tr>
-                <td>Nome: 0</td>
-                <td>Cpf: Wolksvagem</td>
-                <td>Telefone: Fusca</td>
-                <td>Email: 1945</td>
+								<td>{{ $anuncio->id }}</td>
+                <td>{{ $anuncio->titulo }}</td>
+                <td>{{ $anuncio->descricao }}</td>
+                <td>{{ $anuncio->preco }}</td>                
+	              <td>{{ $anuncio->data_publicacao }}</td>                            
                 <td>
-										<a href="/anuncio/remove/0">Excluir</a>
-                    <a href="/anuncio/update/0">Atualizar</a>
+                    <a href="/anuncio/remove/{{ $anuncio->id }}">Excluir</a>
+                    <a href="{{ route('anuncio-editar', $anuncio->id) }}">Atualizar</a>
                 </td>
             </tr>
         @endforeach
     </tbody>
 </table>
-
-{{-- {{ $clientes->links() }} --}}
-</div>
 

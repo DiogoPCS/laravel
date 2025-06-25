@@ -22,14 +22,14 @@ Route::get('veiculo/remove/{id}', [App\Http\Controllers\VeiculoController::class
 Route::get('veiculo/editar/{id}', [App\Http\Controllers\VeiculoController::class, 'editar'])->name('veiculo-editar');
 
 
-
+Route::get('/proprietario/formulario', [App\Http\Controllers\ProprietarioController::class, 'formulario'])->name('proprietario-formulario');
 Route::post('/proprietario/store', [App\Http\Controllers\ProprietarioController::class, 'store'])->name('proprietario-store');
-Route::get('/proprietario/listar', [App\Http\Controllers\PropriedadeController::class, 'listar'])->name('proprietario-listar');
-Route::get('/proprietario/remover', [App\Http\Controllers\PropriedadeController::class, 'remover'])->name('proprietario-remover');
-Route::get('/proprietario/editar', [App\Http\Controllers\PropriedadeController::class, 'editar'])->name('proprietario-editar');
+Route::get('/proprietario/listar', [App\Http\Controllers\ProprietarioController::class, 'listar'])->name('proprietario-listar');
+Route::get('/proprietario/remover', [App\Http\Controllers\ProprietarioController::class, 'remover'])->name('proprietario-remover');
+Route::get('/proprietario/editar', [App\Http\Controllers\ProprietarioController::class, 'editar'])->name('proprietario-editar');
 
 
-
+Route::get('/anuncio/formulario', [App\Http\Controllers\AnuncioController::class, 'formulario'])->name('anuncio-formulario');
 Route::post('/anuncio/store', [App\Http\Controllers\AnuncioController::class, 'store'])->name('anuncio-store');
 Route::get('/anuncio/listar', [App\Http\Controllers\AnuncioController::class, 'listar'])->name('anuncio-listar');
 Route::get('/anuncio/remover', [App\Http\Controllers\AnuncioController::class, 'remover'])->name('anuncio-remover');

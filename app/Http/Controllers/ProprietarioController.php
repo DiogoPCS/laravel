@@ -37,7 +37,7 @@ class ProprietarioController extends Controller
     function remove($id){
         ProprietarioModel::destroy($id);
 
-        return redirect()->route('vproprietario-listar');
+        return redirect()->route('proprietario-listar');
     }
     
     function editar($id){

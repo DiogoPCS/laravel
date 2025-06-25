@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\AnuncioModel;
 
-class VeiculoController extends Controller
+class AnuncioController extends Controller
 {
     function formulario(){
         return view('anuncio-formulario');
