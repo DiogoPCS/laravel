@@ -8,10 +8,10 @@
     <input type="text" name="nome" id="nome" value={{ $proprietario-> nome ?? old('nome') }}>
 
     <label for="cpf">Cpf</label>
-    <input type="text" name="cpf" id="cpf" value={{ $proprietario-> cpf ?? old('cpf') }}>
+    <input type="number" name="cpf" id="cpf" value={{ $proprietario-> cpf ?? old('cpf') }}>
 
     <label for="telefone">Telefone</label>
-    <input type="text" name="telefone" id="telefone" value={{ $proprietario-> telefone ?? old('telefone') }}>
+    <input type="number" name="telefone" id="telefone" value={{ $proprietario-> telefone ?? old('telefone') }}>
 
     <label for="email">Email</label>
     <input type="text" name="email" id="email" value={{ $proprietario-> email ?? old('email') }}>
