@@ -9,5 +9,5 @@ class ProprietarioModel extends Model
 {
     use HasFactory;
     protected $table = 'proprietario';
-    protected $fillable = ['id', 'marca', 'modelo', 'ano', 'placa', 'cor'];
+    protected $fillable = ['id', 'nome', 'sexo', 'idade', 'cidade', 'rg'];
 }

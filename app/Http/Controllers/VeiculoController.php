@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\VeiculoModel;
 
 class VeiculoController extends Controller
 {
@@ -27,7 +28,7 @@ class VeiculoController extends Controller
 
 
 
-    function list(){
+    function listar(){
         $veiculos = VeiculoModel::all();
         
         return view('veiculo-listar', ['veiculos'=>$veiculos]);

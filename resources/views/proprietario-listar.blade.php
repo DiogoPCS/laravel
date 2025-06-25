@@ -19,11 +19,11 @@
     <tbody>
             <tr>
                 <td>id: 0</td>
-                <td>Marca: Wolksvagem</td>
-                <td>Modelo: Fusca</td>
-                <td>Ano: 1945</td>
-                <td>Placa: ABC-1234</td>
-                <td>Cor: Rosa</td>
+                <td>nome: Wolksvagem</td>
+                <td>sexo: Fusca</td>
+                <td>idade: 1945</td>
+                <td>cidade: ABC-1234</td>
+                <td>rg: Rosa</td>
                 <td>
 										<a href="/veiculo/remove/0">Excluir</a>
                     <a href="/veiculo/update/0">Atualizar</a>

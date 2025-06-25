@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\ProprietarioModel;
 
 class ProprietarioController extends Controller
 {
@@ -11,7 +12,7 @@ class ProprietarioController extends Controller
     }
 
     function store(Request $dados){
-        $proprietario = new VeiculoModel();
+        $proprietario = new ProprietarioModel();
         $proprietario->create($dados->all());
     }
 

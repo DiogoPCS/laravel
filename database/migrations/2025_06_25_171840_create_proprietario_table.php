@@ -11,16 +11,14 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('produto_detalhes', function (Blueprint $table) {
+        Schema::create('proprietario', function (Blueprint $table) {
             $table->id();
-            $table->float('comprimento', 8 , 2);
-            $table->float('largura', 8 , 2);
-            $table->float('altura', 8 , 2);
             $table->timestamps();
-
-            $table->foreign('produto_id')->reference('id')->on('produtos');
-            $table->unique(produto_id);
-
+            $table->string('nome', 255);
+            $table->string('sexo', 255);
+            $table->string('idade', 255);
+            $table->string('cidade', 255);
+            $table->string('rg', 255);
         });
     }
 
@@ -29,6 +27,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('produto_detalhes');
+        Schema::dropIfExists('proprietario');
     }
 };

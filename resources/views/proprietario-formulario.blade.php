@@ -1,19 +1,19 @@
-<form action="" method="post">
+<form action="{{ route('proprietario-store') }}" method="post">
     @csrf
-    <label for="marca">Marca</label>
-    <input type="text" name="marca" id="marca">
+    <label for="nome">nome</label>
+    <input type="text" name="nome" id="nome" >
 
-    <label for="modelo">Modelo</label>
-    <input type="text" name="modelo" id="modelo">
+    <label for="sexo">sexo</label>
+    <input type="nome" name="sexo" id="sexo">
 
-    <label for="ano">ano</label>
-    <input type="text" name="ano" id="ano">
+    <label for="idade">idade</label>
+    <input type="text" name="idade" id="idade">
 
-    <label for="placa">Placa</label>
-    <input type="text" name="placa" id="placa">
+    <label for="cidade">cidade</label>
+    <input type="text" name="cidade" id="cidade">
 
-    <label for="cor">Cor</label>
-    <input type="text" name="cor" id="cor">
+    <label for="rg">rg</label>
+    <input type="text" name="rg" id="rg">
 
     <button type="submit">Cadastrar</button>
 </form>

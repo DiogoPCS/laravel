@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\AnuncioModel;
 
 class AnuncioController extends Controller
 {
