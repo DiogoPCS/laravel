@@ -2,6 +2,10 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Middleware\LogAcessoMiddleware;
+use App\Http\Controllers\Principal;
+use App\Http\Controllers\VeiculoController;
+use App\Http\Controllers\ProprietarioController;
+use App\Http\Controllers\AnuncioController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -15,24 +19,27 @@ use App\Http\Middleware\LogAcessoMiddleware;
 
 
 Route::get('/', [App\Http\Controllers\Principal::class, 'principal']);
-// Rotas veiculo
-Route::get('/veiculo/formulario', [App\Http\Controllers\VeiculoController::class, 'formulario'])->name('veiculo-formulario');
-Route::post('/veiculo/store', [App\Http\Controllers\VeiculoController::class, 'store'])->name('veiculo-store');
-Route::get('/veiculo/listar', [App\Http\Controllers\VeiculoController::class, 'listar'])->name('veiculo-listar');
-Route::get('/veiculo/remover', [App\Http\Controllers\VeiculoController::class, 'remover'])->name('veiculo-remover');
-Route::get('/veiculo/editar', [App\Http\Controllers\VeiculoController::class, 'editar'])->name('veiculo-editar');
+// Rota principal
+Route::get('/', [Principal::class, 'principal']);
 
-// rotas propietário
-Route::get('/veiculo/formulario', [App\Http\Controllers\VeiculoController::class, 'formulario'])->name('propietario/formulario');
-Route::post('/veiculo/store', [App\Http\Controllers\VeiculoController::class, 'store'])->name('veiculo/store');
-Route::get('/propietario/listar', [App\Http\Controllers\VeiculoController::class, 'listar'])->name('propietario/listar');
-Route::get('/propietario/remover', [App\Http\Controllers\VeiculoController::class, 'remover'])->name('propietario/remover');
-Route::get('/propietario/editar', [App\Http\Controllers\VeiculoController::class, 'editar'])->name('propietario/editar');
+// ROTAS VEÍCULO
+Route::get('/veiculo/formulario', [VeiculoController::class, 'formulario'])->name('veiculo-formulario');
+Route::post('/veiculo/store', [VeiculoController::class, 'store'])->name('veiculo-store');
+Route::get('/veiculo/listar', [VeiculoController::class, 'listar'])->name('veiculo-listar');
+Route::get('/veiculo/remover/{id}', [VeiculoController::class, 'remover'])->name('veiculo-remover');
+Route::get('/veiculo/editar/{id}', [VeiculoController::class, 'editar'])->name('veiculo-editar');
 
-// Rotas Anuncio
-Route::get('/anuncio/formulario', [App\Http\Controllers\VeiculoController::class, 'formulario'])->name('anuncio/formulario');
-Route::post('/veiculo/store', [App\Http\Controllers\VeiculoController::class, 'store'])->name('veiculo-store');
-Route::get('/anuncio/listar', [App\Http\Controllers\VeiculoController::class, 'listar'])->name('anuncio/listar');
-Route::get('/anuncio/remover', [App\Http\Controllers\VeiculoController::class, 'remover'])->name('anuncio/remover');
-Route::get('/anuncio/editar', [App\Http\Controllers\VeiculoController::class, 'editar'])->name('anuncio/editar');
+// ROTAS PROPRIETÁRIO
+Route::get('/proprietario/formulario', [ProprietarioController::class, 'formulario'])->name('proprietario-formulario');
+Route::post('/proprietario/store', [ProprietarioController::class, 'store'])->name('proprietario-store');
+Route::get('/proprietario/listar', [ProprietarioController::class, 'listar'])->name('proprietario-listar');
+Route::get('/proprietario/remover/{id}', [ProprietarioController::class, 'remover'])->name('proprietario-remover');
+Route::get('/proprietario/editar/{id}', [ProprietarioController::class, 'editar'])->name('proprietario-editar');
 
+// ROTAS ANÚNCIO 
+Route::get('/anuncio/formulario', [AnuncioController::class, 'formulario'])->name('anuncio-formulario');
+Route::post('/anuncio/store', [AnuncioController::class, 'store'])->name('anuncio-store');
+Route::get('/anuncio/listar', [AnuncioController::class, 'listar'])->name('anuncio-listar');
+Route::get('/anuncio/remover/{id}', [AnuncioController::class, 'remover'])->name('anuncio-remover');
+Route::get('/anuncio/editar/{id}', [AnuncioController::class, 'editar'])->name('anuncio-editar');
+Route::get('/proprietario/editar/{id}', [App\Http\Controllers\ProprietarioController::class, 'editar'])->name('proprietario-editar');
