@@ -18,6 +18,7 @@ class UsuarioController extends Controller
         ]);
 
         $dados['password'] = bcrypt($dados['password']);
+        $dados['picture'] = 'https://cdn0.iconfinder.com/data/icons/seo-web-4-1/128/Vigor_User-Avatar-Profile-Photo-02-1024.png';
         $dados['status'] = 'active';
         $dados['enabled'] = true;
 
