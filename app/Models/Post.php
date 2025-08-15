@@ -4,15 +4,22 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use App\Models\User;
 
 class Post extends Model
 {
     use HasFactory;
-    protected $table = 'post';
+    protected $table = 'posts';
     protected $fillable = [
         'id',
-        'data',
         'description',
-        'picture'
+        'picture',
+        'user_id'
     ];
+
+    public function users(){
+        return $this->belongsTo(Users::class);
+        //pertence muitos users
+    }
+
 }
