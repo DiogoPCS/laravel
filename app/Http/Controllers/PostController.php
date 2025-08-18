@@ -26,8 +26,8 @@ class PostController extends Controller
         $dados = $request->validate([
             'description' => 'required|string|max:255'
         ]);
-
-        $dados['picture'] = $request['picutre'];
+        
+        $dados['picture'] = $request['picture'];
 
         $post = Post::create($dados);
 

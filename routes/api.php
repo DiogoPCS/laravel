@@ -29,6 +29,6 @@ Route::prefix('usuario')->group(function(){
 });
 
 Route::prefix('post')->group(function(){
-    Route::post('post', [App\Http\Controllers\PostController::class, 'create']);
+    Route::post('create', [App\Http\Controllers\PostController::class, 'create']);
     
 });
