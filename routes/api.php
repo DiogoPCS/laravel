@@ -30,5 +30,4 @@ Route::prefix('usuario')->group(function(){
 
 Route::prefix('post')->group(function(){
     Route::post('create', [App\Http\Controllers\PostController::class, 'create']);
-    
 });
