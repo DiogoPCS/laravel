@@ -21,10 +21,12 @@ class UsuarioController extends Controller
         $dados['picture'] = 'https://cdn0.iconfinder.com/data/icons/seo-web-4-1/128/Vigor_User-Avatar-Profile-Photo-02-1024.png';
         $dados['status'] = 'active';
         $dados['enabled'] = true;
+        $dados['tipo'] = 'admin';
 
         $usuario = User::create($dados);
 
         $token = $usuario->createToken('auth_token')->plainTextToken;
+        
 
         return response()->json([
             'message' => 'Usuário registrado com sucesso.',
