@@ -15,6 +15,9 @@ use App\Http\Middleware\LogAcessoMiddleware;
 
 Route::get('/', [App\Http\Controllers\Principal::class, 'principal']);
 
+Route::get('/produto', [App\Http\Controllers\Produto::class, 'visualizar']);
+Route::get('/produto/cadastrar', [App\Http\Controllers\Produto::class, 'cadastrar']);
+
 
 
 
