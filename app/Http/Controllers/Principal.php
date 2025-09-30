@@ -9,6 +9,8 @@ class Principal extends Controller
     function principal(){
         echo 'Página Principal';
     }
+
+    
 }
 
 
