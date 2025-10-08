@@ -3,41 +3,40 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Bootstrap demo</title>
+    <title>Tatuí Games</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
     <link rel="stylesheet" href="{{ asset('css/style.css') }}">
   </head>
   <body>
 
-    <div class="container-fluid fixed-top">
+    <div class="container-fluid fixed-top bg-dark">
         <div class="row">
             <div class="col-6 d-flex justify-content-start align-items-center">
                 <img src="{{ asset('images/logo.svg') }}" width="200px">
                 <img src="{{ asset('images/shield.svg') }}" width="55px">
                 <p style="color: white">Assistência</p>
             </div>
-            <div class="col-6 d-flex justify-content-end">
-                <div class="bg-light rounded d-flex justify-content-center align-items-center w-25 m-2" style="height: 50px">
-                    <p>pesquisar</p>
-                </div>
-                <div class="bg-light rounded d-flex justify-content-center align-items-center w-25 m-2" style="height: 50px">
-                    <p>Iniciar Sessão</p>
+            <div class="col-6 d-flex justify-content-end  align-items-center">
+                <div class="bg-light rounded-pill d-flex justify-content-center align-items-center  m-2 py-2">
+
+                    <label for="Pesquisar"><img src="{{ asset('images/search.svg') }}" class="m-2" alt="lupa"></label>
+                    <input type="text" placeholder="pesquisar" class="border-0 rounded-pill">
                 </div>
             </div>
         </div>
     </div>
     
 
-    <div class="container-fluid" style="margin-top: 85px"   >
+    <div class="container-fluid" style="margin-top: 85px">
         <div class="row">
             <div class="col-6 d-flex justify-content-start">
                 {{-- Botao Hamburguer --}}
-                <a class="btn" data-bs-toggle="offcanvas" href="#offcanvasExample" role="button" aria-controls="offcanvasExample">
-                    <img src="https://cdn4.iconfinder.com/data/icons/multimedia-75/512/multimedia-24-512.png" width="55px">Categorias
+                <a class="btn text-white" data-bs-toggle="offcanvas" href="#offcanvasExample" role="button" aria-controls="offcanvasExample">
+                    <img src="{{ asset('images/menu.svg') }}" width="55px">Categorias
                 </a>
             </div>
-            <div class="col-6 d-flex justify-content-end">
-                <p>Ofertas</p>
+            <div class="col-6 d-flex justify-content-end align-items-center">
+                <p  style=" color: white">Ofertas</p>
             </div>
         </div>
         <div class="row">
