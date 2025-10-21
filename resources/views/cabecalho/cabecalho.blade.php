@@ -2,8 +2,8 @@
         <div class="row">
             <div class="col-6 d-flex justify-content-start align-items-center">
                 <img src="{{ asset('images/logo.svg') }}" width="200px">
-                <img src="{{ asset('images/shield.svg') }}" width="55px">
-                <p style="color: white">Assistência</p>
+                <a href="" class="d-flex text-decoration-none"><img src="{{ asset('images/shield.svg') }}" class="img-fl" style="width: 24;">
+                <p style="color: white; margin: 0 ">Assistência</p></a>
             </div>
             <div class="col-6 d-flex justify-content-end">
                 <div class="bg-light rounded-pill d-flex justify-content-center align-items-center m-2 " style="height: 50px">

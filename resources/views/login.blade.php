@@ -9,7 +9,7 @@
         <div class="col-12 col-md-6 d-flex flex-column justify-content-center text-secondary bg-light rounded-2 p-5" id="login-box">
              
              <div class="row d-flex align-items-start mb-3">
-                <label for="nome">Digite o seu Eamil</label>
+                <label for="nome">Digite o seu Email</label>
                 <input type="text" class="bg-secondary border-0 rounded w-100">
             </div>
 
