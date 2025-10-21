@@ -10,7 +10,7 @@
 
         {{-- Banner Principal --}}
         <div class="row d-flex justify-content-center align-items-center">
-            <div class="col-10">
+            <div class="col-10 text-light">
                 <h1>Novidades</h1>
                 <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Vitae eum maiores quisquam nemo iste, quos, sapiente praesentium optio reiciendis ullam cum vel eius ex at eaque illo molestiae exercitationem expedita!</p>
                 <div class="row">
