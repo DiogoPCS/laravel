@@ -2,11 +2,11 @@
 
 <body id="bg-login">
     <div class="container-fluid min-vh-100 d-flex justify-content-center align-items-center">
-        <div class="row w-100"> <div class="col-6 d-flex justify-content-center align-items-center">
+        <div class="row w-100"> <div class="col-12 col-md-6 d-flex justify-content-center align-items-center">
             <img src="{{ asset('images/logo.svg') }}" alt="logo" class="img-fluid" id="logo" >
         </div>    
 
-        <div class="col-6 d-flex flex-column justify-content-center text-secondary bg-light rounded-2 p-5" id="login-box">
+        <div class="col-12 col-md-6 d-flex flex-column justify-content-center text-secondary bg-light rounded-2 p-5" id="login-box">
              
              <div class="row d-flex align-items-start mb-3">
                 <label for="nome">Digite o seu Eamil</label>
