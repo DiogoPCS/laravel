@@ -1,7 +1,8 @@
 @include('head.head')
 
-<body>
-    <div class="container" style="margin-top: 147px;">
+<body class="bg-login">
+    @include('menu-superior.menu')
+    <div class="container" style="margin-top: 167px;">
 
         <div class="row g-3 align-items-stretch">
             <div class="col-12 col-md-2 d-flex">

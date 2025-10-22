@@ -2,9 +2,9 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Middleware\LogAcessoMiddleware;
-use App\Http\Controllers\ProdutoCadastrarController;
 use App\Http\Controllers\LoginController; // <--- ADICIONE ESTA LINHA
 use App\Http\Controllers\Principal;     // (Você provavelmente também precisa destes)
+use App\Http\Controllers\ProdutosCadastroController;
 use App\Http\Controllers\Produto;
 /*
 |--------------------------------------------------------------------------
@@ -26,4 +26,6 @@ Route::get('/login', [App\Http\Controllers\LoginController::class, 'index']);
 
 Route::get('/login', [LoginController::class, 'index']);
 
-Route::get('/produtos-cadastrados', [ProdutoCadastrarController::class, 'index']);
+Route::get('/produtos-cadastrados', [ProdutosCadastroController::class, 'index']);
+
+Route::get('/cadastrar-produto', [App\Http\Controllers\CadastroController::class, 'index']);

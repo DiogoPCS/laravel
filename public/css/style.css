@@ -2,7 +2,7 @@ body {
     background: rgb(60, 60, 60);
 }
 
-#bg-login{
+.bg-login{
 background-image: url('../images/background.svg');
 background-repeat: no-repeat;
 background-size: cover;
@@ -21,11 +21,22 @@ background-size: cover;
     background-color: #515151;
 }
 
-.btn {
-    
-}
+/* buttons use Bootstrap's .btn — no override here */
 
 .socialMediaImg img {
     width: 24px;
     height: auto;
+}
+
+/* Form select placeholder styling for cadastra-produto view */
+#tipoproduto:invalid {
+    color: #6c757d; /* Bootstrap muted color */
+}
+#tipoproduto option {
+    color: #000; /* normal option text color */
+}
+
+/* Card used for forms to keep consistent spacing */
+.form-card {
+    margin: 0; /* remove extra margins, spacing handled by grid */
 }
