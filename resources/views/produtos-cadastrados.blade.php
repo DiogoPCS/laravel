@@ -13,11 +13,11 @@
                 </a>
             </div>
 
-            <div class="col-12 col-md-4 d-flex">
+            <div class="col-12 col-md-4 d-flex px-0">
                 @include('card-adimin.card-adimin')
             </div>
 
-            <div class="col-12 col-md-6 d-flex">
+            <div class="col-12 col-md-6 d-flex px-0">
                 @include('cabecalho.cabecalho')
             </div>
         </div>

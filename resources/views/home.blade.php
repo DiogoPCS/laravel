@@ -5,10 +5,7 @@
 @include('cabecalho.cabecalho')
     
 @include('menu-superior.menu')
-
-
-    
-<div style="margin-top: 157px">
+    <div style="margin-top: 157px">
 
     <div class="container-fluid" id="inicio">
 
@@ -44,21 +41,7 @@
                 </div>
             </div>
         </div>
-
-        {{-- Oferta Relâmpago --}}
-        <div class="row d-flex justify-content-center my-3">
-            <div class="col-10 bg-black text-light rounded">
-                <div class="row">
-                    <div class="col-6 text-center">
-                        <h1>Oferta Relâmpago</h1>
-                    </div>
-                    <div class="col-6 d-flex justify-content-between ">
-                       <button class="d-flex ">Ver mais</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-
+       
         {{-- Filtro Lateral e Listagem de Produtos --}}
 
         <div class="row">
@@ -79,6 +62,7 @@
     </div>
     
 </div>
+
 
 
 </body>

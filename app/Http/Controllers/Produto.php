@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 class Produto extends Controller
 {
     function visualizar() {
-        return view('produto-cadastrar');
+    return view('produtos-cadastrados');
     }
     function cadastrar() {
         echo 'cadastrar';

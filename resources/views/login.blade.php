@@ -18,7 +18,7 @@
                 <input type="password" class="bg-secondary border-0 rounded w-100">
             </div>
             <div class="row">
-                <button type="submit" class="border-0 rounded-2 bg-primary text-dark w-100"><h2 class="opacity-50">Login </h2></button>
+                <a href="" type="submit" class="border-0 rounded-2 bg-primary text-dark w-100"><h2 class="opacity-50">Login </h2></a>
             </div>
         </div>
         </div>

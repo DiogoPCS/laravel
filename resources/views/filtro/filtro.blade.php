@@ -3,7 +3,7 @@
         <p>Filtros</p>
     </div>
     <div class="col-12">
-        <div class="row text-light bg-secondary p-2" style="border-bottom-right-radius: 8px;">
+        <div class="row text-light bg-dark p-2" style="border-bottom-right-radius: 8px;">
             <div class="col-12">
                 <p>Tipo de promoção</p>
             </div>
