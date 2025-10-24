@@ -4,7 +4,7 @@
         <div class="row">
             
             <div class="col-6 d-flex ">
-                <div class="">
+                <div class="m-3">
                     <div class="col-12 ">
                         <img src="{{ asset('images/logo.svg') }}" width="200px">
                     </div>

@@ -1,7 +1,7 @@
 
 
 
-<div class="container-fluid fixed-top bg-dark text-light" style="margin-top: 85px"   >
+<div class="container-fluid fixed-top bg-dark text-light" style="margin-top: 126px"   >
         <div class="row">
             <div class="col-6 d-flex justify-content-start ">
                 {{-- Botao Hamburguer --}}

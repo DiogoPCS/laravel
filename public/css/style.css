@@ -40,3 +40,13 @@ background-size: cover;
 .form-card {
     margin: 0; /* remove extra margins, spacing handled by grid */
 }
+
+a[data-bs-target="#filtroCollapse"] svg {
+    transition: transform 0.3s ease;
+  }
+  
+  /* Quando o menu NÃO estiver colapsado (aberto), gira a flecha para cima */
+  a[data-bs-target="#filtroCollapse"]:not(.collapsed) svg {
+    transform: rotate(-180deg);
+
+  }

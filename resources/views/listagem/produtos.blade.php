@@ -1,94 +1,21 @@
 <div class="row m-3">
 
-    {{-- Card --}}
-    <div class="col-4 bg-dark text-light rounded">
-        <div class="row">
-            <div class="col-12 p-3">
-                <img src="https://cdn.awsli.com.br/800x800/1385/1385452/produto/79576243/18ae6615fd.jpg" class=" w-100 rounded">
-            </div>
-            <div class="col-12 text-center">
-                <h4>Nome do Produto</h4>
-            </div>
-            <div class="col-12 text-center">
-                <h4>Descrição do produto</h4>
-            </div>
-            <div class="col-12 text-center">
-                <h5>R$ 300</h5>
-            </div>
+    {{-- Card (listagem) - same style as admin card but without action buttons --}}
+        <div class="col-4 d-flex px-0">
+            <div class="bg-dark text-light rounded w-100 h-100 d-flex flex-column" style="max-width:260px; margin:0 5px 5px 0; min-height:360px;">
+                        <div class="p-2">
+                            <img src="{{ asset('images/controle.svg') }}" class="w-100 rounded" style="height:180px; object-fit:cover;">
+                        </div>
+                        <div class="text-center px-3 pt-3 flex-grow-1 d-flex flex-column justify-content-between">
+                            <div>
+                                <h5 class="mb-2">Nome do Produto</h5>
+                                <p class="mb-2">Descrição do produto</p>
+                            </div>
+                            <div>
+                                <h5 class="mb-3">R$ 300</h5>
+                            </div>
+                        </div>
         </div>
     </div>
-
-    {{-- Card --}}
-    <div class="col-4 bg-dark text-light rounded">
-        <div class="row">
-            <div class="col-12 p-3">
-                <img src="https://cdn.awsli.com.br/800x800/1385/1385452/produto/79576243/18ae6615fd.jpg" class=" w-100 rounded">
-            </div>
-            <div class="col-12 text-center">
-                <h4>Nome do Produto</h4>
-            </div>
-            <div class="col-12 text-center">
-                <h4>Descrição do produto</h4>
-            </div>
-            <div class="col-12 text-center">
-                <h5>R$ 300</h5>
-            </div>
-        </div>
     </div>
 
-    {{-- Card --}}
-    <div class="col-4 bg-dark text-light rounded">
-        <div class="row">
-            <div class="col-12 p-3">
-                <img src="https://cdn.awsli.com.br/800x800/1385/1385452/produto/79576243/18ae6615fd.jpg" class=" w-100 rounded">
-            </div>
-            <div class="col-12 text-center">
-                <h4>Nome do Produto</h4>
-            </div>
-            <div class="col-12 text-center">
-                <h4>Descrição do produto</h4>
-            </div>
-            <div class="col-12 text-center">
-                <h5>R$ 300</h5>
-            </div>
-        </div>
-    </div>
-
-    {{-- Card --}}
-    <div class="col-4 bg-dark text-light rounded">
-        <div class="row">
-            <div class="col-12 p-3">
-                <img src="https://cdn.awsli.com.br/800x800/1385/1385452/produto/79576243/18ae6615fd.jpg" class=" w-100 rounded">
-            </div>
-            <div class="col-12 text-center">
-                <h4>Nome do Produto</h4>
-            </div>
-            <div class="col-12 text-center">
-                <h4>Descrição do produto</h4>
-            </div>
-            <div class="col-12 text-center">
-                <h5>R$ 300</h5>
-            </div>
-        </div>
-    </div>
-
-    {{-- Card --}}
-    <div class="col-4 bg-dark text-light rounded">
-        <div class="row">
-            <div class="col-12 p-3">
-                <img src="https://cdn.awsli.com.br/800x800/1385/1385452/produto/79576243/18ae6615fd.jpg" class=" w-100 rounded">
-            </div>
-            <div class="col-12 text-center">
-                <h4>Nome do Produto</h4>
-            </div>
-            <div class="col-12 text-center">
-                <h4>Descrição do produto</h4>
-            </div>
-            <div class="col-12 text-center">
-                <h5>R$ 300</h5>
-            </div>
-        </div>
-    </div>
-    
-
-</div>
