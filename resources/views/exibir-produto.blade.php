@@ -3,7 +3,6 @@
 <body style="background-color: #f0f2f5;" >
     
     @include('cabecalho.cabecalho')
-    @include('menu-superior.menu')
 
    
     <div class="container bg-white rounded shadow-sm p-4" style="margin-top: 198px; margin-bottom: 50px;">
@@ -14,7 +13,7 @@
             <div class="col-md-5">
                 
                 <div class="row g-2">
-                    <div class="col-2 d-flex flex-column align-items-center">
+                    <div class="col-2 d-flex flex-column align-items-center" id="miniImg">
                         {{-- Thumbnails: clicking or pressing Enter/Space will set the main image --}}
                         <img src="{{ asset('images/controle.svg') }}" data-src="{{ asset('images/controle.svg') }}" style="cursor:pointer;" class="img-fluid rounded border border-primary p-1 mb-2 thumb-select" role="button" tabindex="0" aria-pressed="true" alt="Miniatura 1">
                         <img src="{{ asset('images/controle2.svg') }}" data-src="{{ asset('images/controle2.svg') }}" style="cursor:pointer;" class="img-fluid rounded border p-1 mb-2 thumb-select" role="button" tabindex="0" aria-pressed="false" alt="Miniatura 2">
@@ -109,7 +108,6 @@
 
     </div> 
 
-    @include('footer.footer')
     
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 
@@ -150,4 +148,6 @@
             });
         })();
     </script>
+        @include('footer.footer')
+
 </body>

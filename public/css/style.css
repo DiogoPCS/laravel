@@ -50,3 +50,16 @@ a[data-bs-target="#filtroCollapse"] svg {
     transform: rotate(-180deg);
 
   }
+
+ #mainProductImage {
+    width: 100%;
+    height: auto;
+    max-height: 300px;
+    object-fit: contain;
+  }
+
+  #miniImg img[aria-pressed="true"] {
+    border: #0000ff 2px solid;
+  }
+
+  
