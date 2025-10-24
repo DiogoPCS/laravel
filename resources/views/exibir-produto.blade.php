@@ -1,49 +1,34 @@
 @include('head.head')
 
-{{-- Adicionamos um fundo cinza-claro para o body, como no seu design --}}
-<body style="background-color: #f0f2f5;">
+<body style="background-color: #f0f2f5;" >
     
     @include('cabecalho.cabecalho')
     @include('menu-superior.menu')
 
-    {{-- 
-      Container principal.
-      - 'bg-white' para o miolo branco.
-      - 'rounded' e 'shadow-sm' para o efeito de card.
-      - 'p-4' para o espaçamento interno.
-      - 'margin-top' para não ficar atrás dos menus 'fixed-top'.
-    --}}
-    <div class="container bg-white rounded shadow-sm p-4" style="margin-top: 150px; margin-bottom: 50px;">
+   
+    <div class="container bg-white rounded shadow-sm p-4" style="margin-top: 198px; margin-bottom: 50px;">
 
-        {{-- Breadcrumb "Produto" --}}
         <p class="text-muted small mb-3">Produto</p>
 
-        {{-- ============================================== --}}
-        {{-- ROW PRINCIPAL (Imagens + Infos) --}}
-        {{-- ============================================== --}}
         <div class="row">
-
-            {{-- COLUNA DA ESQUERDA (GALERIA) --}}
             <div class="col-md-5">
                 
-                {{-- Row aninhada para a galeria principal --}}
                 <div class="row g-2">
-                    {{-- Miniaturas Verticais --}}
-                    <div class="col-2">
-                        <img src="{{ asset('images/controle.svg') }}" class="img-fluid rounded border border-primary p-1 mb-2">
-                        <img src="{{ asset('images/controle.svg') }}" class="img-fluid rounded border p-1 mb-2">
-                        <img src="{{ asset('images/controle.svg') }}" class="img-fluid rounded border p-1 mb-2">
+                    <div class="col-2 d-flex flex-column align-items-center">
+                        {{-- Thumbnails: clicking or pressing Enter/Space will set the main image --}}
+                        <img src="{{ asset('images/controle.svg') }}" data-src="{{ asset('images/controle.svg') }}" style="cursor:pointer;" class="img-fluid rounded border border-primary p-1 mb-2 thumb-select" role="button" tabindex="0" aria-pressed="true" alt="Miniatura 1">
+                        <img src="{{ asset('images/controle2.svg') }}" data-src="{{ asset('images/controle2.svg') }}" style="cursor:pointer;" class="img-fluid rounded border p-1 mb-2 thumb-select" role="button" tabindex="0" aria-pressed="false" alt="Miniatura 2">
+                        <img src="{{ asset('images/controle3.svg') }}" data-src="{{ asset('images/controle3.svg') }}" style="cursor:pointer;" class="img-fluid rounded border p-1 mb-2 thumb-select" role="button" tabindex="0" aria-pressed="false" alt="Miniatura 3">
                     </div>
-                    {{-- Imagem Principal --}}
                     <div class="col-10">
-                        <img src="{{ asset('images/controle.svg') }}" class="img-fluid rounded border p-3 w-100">
+                        <img id="mainProductImage" src="{{ asset('images/controle.svg') }}" class="img-fluid rounded border p-3 w-100" alt="Imagem do produto">
                     </div>
                 </div>
 
-                {{-- Row aninhada para as fotos da loja e specs de tamanho --}}
-                <div class="row g-3 mt-3">
-                    <div class="col-6">
+                <div class="row g-3 mt-3 align-items-center justify-content-center">
                         <h6 class="small">Fotos da loja</h6>
+                    <div class="col-6 ">
+
                         <img src="{{ asset('images/controle.svg') }}" class="img-fluid rounded border">
                     </div>
                     <div class="col-6">
@@ -59,13 +44,10 @@
                 </div>
             </div>
 
-            {{-- COLUNA DA DIREITA (INFORMAÇÕES E COMENTÁRIOS) --}}
             <div class="col-md-7">
                 
-                {{-- Row aninhada para Infos e Comentários --}}
                 <div class="row">
                     
-                    {{-- Infos do Produto --}}
                     <div class="col-md-8">
                         <span class="badge bg-warning text-dark mb-2">Novo</span>
                         <h1>Controle PS4 Sony Dualshock 4 Sem Fio Preto</h1>
@@ -94,7 +76,6 @@
                         </ul>
                     </div>
 
-                    {{-- Caixa de Comentários --}}
                     <div class="col-md-4">
                         <div class="border rounded p-3 bg-light h-100">
                             <form>
@@ -111,32 +92,62 @@
             </div>
 
         </div> 
-        {{-- Fim da Row Principal --}}
-
-
-        {{-- ============================================== --}}
-        {{-- ROW DE PRODUTOS RECOMENDADOS --}}
-        {{-- ============================================== --}}
+       
         <hr class="my-5">
 
         <div class="row">
             <div class="col-12">
                 <h3 class="mb-4">Produtos Recomendados</h3>
             </div>
-            
-            {{-- Aqui usamos o novo componente que criamos --}}
-            <div class="col-md-3">
+        </div>
+
+        <div class="row">
+            <div class="col-12">
                 @include('listagem.produtos')
             </div>
-          
         </div>
 
     </div> 
-    {{-- Fim do Container --}}
-
 
     @include('footer.footer')
     
-    {{-- Importante: Adicionar o JS do Bootstrap no final --}}
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script>
+        (function(){
+            // Find elements
+            const thumbs = document.querySelectorAll('.thumb-select');
+            const main = document.getElementById('mainProductImage');
+
+            if(!thumbs || !main) return;
+
+            function setActive(thumb){
+                thumbs.forEach(t => {
+                    t.classList.remove('border-primary');
+                    t.classList.add('border');
+                    t.setAttribute('aria-pressed','false');
+                });
+                thumb.classList.remove('border');
+                thumb.classList.add('border-primary');
+                thumb.setAttribute('aria-pressed','true');
+            }
+
+            thumbs.forEach(thumb => {
+                // click handler
+                thumb.addEventListener('click', function(e){
+                    const src = this.dataset.src || this.src;
+                    if(src) main.src = src;
+                    setActive(this);
+                });
+
+                // keyboard (Enter / Space)
+                thumb.addEventListener('keydown', function(e){
+                    if(e.key === 'Enter' || e.key === ' ') {
+                        e.preventDefault();
+                        this.click();
+                    }
+                });
+            });
+        })();
+    </script>
 </body>
