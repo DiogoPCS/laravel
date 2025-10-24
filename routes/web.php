@@ -29,3 +29,5 @@ Route::get('/login', [LoginController::class, 'index']);
 Route::get('/produtos-cadastrados', [ProdutosCadastroController::class, 'index']);
 
 Route::get('/cadastrar-produto', [App\Http\Controllers\CadastroController::class, 'index']);
+
+Route::get('/exibir-produto', [App\Http\Controllers\ExibirProdutoController::class, 'index']);
