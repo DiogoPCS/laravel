@@ -9,7 +9,6 @@
 
     <div class="container-fluid" id="inicio">
 
-        {{-- Banner Principal --}}
         <div class="row d-flex bg-dark justify-content-center align-items-center">
             <div class="col-10 text-light">
                 <h1>Novidades</h1>
@@ -42,19 +41,14 @@
             </div>
         </div>
        
-        {{-- Filtro Lateral e Listagem de Produtos --}}
+       
 
         <div class="row">
-            {{-- Coluna do Filtro --}}
             <div class="col-2">
                 @include('filtro.filtro')
             </div>
 
-            {{-- 
-              COLUNA DA LISTAGEM (CORRIGIDA)
-              1. Mudei de 'col-9' para 'col-10' para preencher a linha (2 + 10 = 12).
-              2. O @include agora chama seu NOVO arquivo de grid.
-            --}}
+            
             <div class="col-10">
                 @include('listagem.produtos')
             </div>

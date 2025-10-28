@@ -14,7 +14,6 @@
                 
                 <div class="row g-2">
                     <div class="col-2 d-flex flex-column align-items-center" id="miniImg">
-                        {{-- Thumbnails: clicking or pressing Enter/Space will set the main image --}}
                         <img src="{{ asset('images/controle.svg') }}" data-src="{{ asset('images/controle.svg') }}" style="cursor:pointer;" class="img-fluid rounded border border-primary p-1 mb-2 thumb-select" role="button" tabindex="0" aria-pressed="true" alt="Miniatura 1">
                         <img src="{{ asset('images/controle2.svg') }}" data-src="{{ asset('images/controle2.svg') }}" style="cursor:pointer;" class="img-fluid rounded border p-1 mb-2 thumb-select" role="button" tabindex="0" aria-pressed="false" alt="Miniatura 2">
                         <img src="{{ asset('images/controle3.svg') }}" data-src="{{ asset('images/controle3.svg') }}" style="cursor:pointer;" class="img-fluid rounded border p-1 mb-2 thumb-select" role="button" tabindex="0" aria-pressed="false" alt="Miniatura 3">
@@ -113,7 +112,6 @@
 
     <script>
         (function(){
-            // Find elements
             const thumbs = document.querySelectorAll('.thumb-select');
             const main = document.getElementById('mainProductImage');
 
@@ -131,14 +129,12 @@
             }
 
             thumbs.forEach(thumb => {
-                // click handler
                 thumb.addEventListener('click', function(e){
                     const src = this.dataset.src || this.src;
                     if(src) main.src = src;
                     setActive(this);
                 });
 
-                // keyboard (Enter / Space)
                 thumb.addEventListener('keydown', function(e){
                     if(e.key === 'Enter' || e.key === ' ') {
                         e.preventDefault();

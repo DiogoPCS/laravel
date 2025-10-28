@@ -1,11 +1,10 @@
 <?php
 
-use Illuminate\Support\Facades\Route;
-use App\Http\Middleware\LogAcessoMiddleware;
-use App\Http\Controllers\LoginController; // <--- ADICIONE ESTA LINHA
-use App\Http\Controllers\Principal;     // (Você provavelmente também precisa destes)
+use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ProdutosCadastroController;
-use App\Http\Controllers\Produto;
+use App\Http\Controllers\ProdutoController;
+use Illuminate\Support\Facades\Route;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -17,20 +16,24 @@ use App\Http\Controllers\Produto;
 |
 */
 
-Route::get('/', [App\Http\Controllers\Principal::class, 'principal']);
+Route::get('/', function () {
+    return view('home');
+});
 
-Route::get('/produto', [App\Http\Controllers\Produto::class, 'visualizar']);
-Route::get('/produto/cadastrar', [App\Http\Controllers\Produto::class, 'cadastrar']);
+Route::get('/dashboard', function () {
+    return view('dashboard');
+})->middleware(['auth', 'verified'])->name('dashboard');
 
-Route::get('/login', [App\Http\Controllers\LoginController::class, 'index']);
+Route::middleware('auth')->group(function () {
+    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+});
 
-Route::get('/login', [LoginController::class, 'index']);
+require __DIR__.'/auth.php';
 
+// Produtos admin listing (uses ProdutosCadastroController)
 Route::get('/produtos-cadastrados', [ProdutosCadastroController::class, 'index']);
 
-Route::get('/cadastrar-produto', [App\Http\Controllers\CadastroController::class, 'index']);
-
-Route::get('/exibir-produto', [App\Http\Controllers\ExibirProdutoController::class, 'index']);
-
 // Resource routes for produtos (index, create, store, show, edit, update, destroy)
-Route::resource('produtos', App\Http\Controllers\ProdutoController::class);
+Route::resource('produtos', ProdutoController::class);

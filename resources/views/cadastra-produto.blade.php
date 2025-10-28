@@ -11,10 +11,7 @@
                     <div class="bg-light rounded-2 p-4 form-card">
                         <h4 class="mb-3 text-center">Cadastrar Produto</h4>
 
-                        {{-- 
-                          MUDANÇA 1: Ação da Rota
-                          O backend usa uma rota nomeada 'produtos.store'[cite: 21].
-                        --}}
+                        
                         <form action="{{ route('produtos.store') }}" method="POST" enctype="multipart/form-data">
                             @csrf
                             <div class="mb-3">
@@ -22,15 +19,11 @@
                                 <input id="nome" name="nome" type="text" class="form-control" placeholder="Nome do produto" required>
                             </div>
                             
-                            {{-- 
-                              MUDANÇA 2: Campo 'tipoproduto' -> 'categoria'
-                              O backend espera 'categoria' [cite: 5] e espera texto[cite: 33, 34, 35, 36].
-                            --}}
+                           
                             <div class="mb-3">
                                 <label for="categoria" class="form-label">Categoria</label>
                                 <select id="categoria" name="categoria" class="form-select" required>
                                     <option value="" disabled selected hidden>Selecione a categoria</option>
-                                    {{-- Estes valores vêm dos arquivos do backend [cite: 33, 34, 35, 36] --}}
                                     <option value="Action Figures">Action Figures</option>
                                     <option value="Perifericos">Periféricos</option>
                                     <option value="Jogos">Jogos</option>
@@ -47,19 +40,13 @@
                                 <input id="preco" name="preco" type="number" step="0.01" class="form-control" placeholder="R$ 0.00" required>
                             </div>
 
-                            {{-- 
-                              MUDANÇA 3: Campo 'estoque' (obrigatório)
-                              Adicionamos este campo que faltava.
-                            --}}
+                           
                             <div class="mb-3">
                                 <label for="estoque" class="form-label">Estoque</label>
                                 <input id="estoque" name="estoque" type="number" class="form-control" placeholder="0" required>
                             </div>
 
-                            {{-- 
-                              MUDANÇA 4: Campo 'imagem' -> 'foto_1', 'foto_2', 'foto_3'
-                              O backend espera 3 fotos com estes nomes[cite: 5, 6].
-                            --}}
+                           
                             <div class="mb-3">
                                 <label for="foto_1" class="form-label">Foto 1 (Obrigatória)</label>
                                 <input id="foto_1" name="foto_1" type="file" class="form-control" required>
@@ -75,10 +62,8 @@
                                 <input id="foto_3" name="foto_3" type="file" class="form-control">
                             </div>
 
-                            {{-- 
-                              MUDANÇA 5: Botão de Salvar
-                              Trocamos <a> por <button type="submit"> para o form funcionar.
-                            --}}
+                            
+                             
                             <div class="d-grid">
                                 <button type="submit" class="btn btn-primary text-decoration-none">
                                     <h2 class="text-black opacity-50 m-0">Salvar produto</h2>
