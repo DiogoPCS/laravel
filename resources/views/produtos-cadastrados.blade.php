@@ -16,17 +16,28 @@
                 </a>
             </div>
 
-            <div class="col-12 col-md-4 d-flex px-0">
-                @include('card-adimin.card-adimin')
-                
-            </div>
-
-            <div class="col-12 col-md-6 d-flex px-0">
-            </div>
-        </div>
-    </div>
-    @include('editar.editar-produto')
+            @if(isset($produtos) && $produtos->count())
+                @foreach($produtos as $produto)
+                    <div class="col-12 col-md-4 d-flex">
+                        @include('card-adimin.card-adimin', ['produto' => $produto])
+                    </div>
+                @endforeach
+            @else
+                <div class="col-12 col-md-10 d-flex">
+                    <p class="text-muted">Nenhum produto cadastrado ainda.</p>
+                </div>
+        
+            @endif
+        </div> {{-- Esta tag fecha o <div class="row ..."> --}}
+    </div> {{-- Esta tag fecha o <div class="container ..."> --}}
    
+    {{-- 
+      APAGUE AS LINHAS QUE ESTAVAM AQUI:
+      - @include('excluir-produto...')
+      - @include('editar-produto...')
+      - </div> (solta)
+      - </div> (solta)
+    --}}
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 

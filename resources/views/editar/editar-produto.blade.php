@@ -1,52 +1,90 @@
-
-<div class="modal fade" id="modalEditarProduto" tabindex="-1" aria-labelledby="modalEditarProdutoLabel" aria-hidden="true" data-bs-backdrop="static">
+{{-- ID do modal agora é dinâmico e bate com o ID do botão --}}
+<div class="modal fade" id="modalEditarProduto-{{ $produto->id }}" 
+     tabindex="-1" aria-labelledby="modalEditarProdutoLabel-{{ $produto->id }}" aria-hidden="true" 
+     data-bs-backdrop="static">
+     
     <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content">
+        <div class="modal-content bg-dark text-light">
             <div class="modal-header">
-                <h5 class="modal-title" id="modalEditarProdutoLabel">Editar Produto</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                <h5 class="modal-title" id="modalEditarProdutoLabel-{{ $produto->id }}">Editar Produto</h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
 
             <div class="modal-body">
-                <form id="formEditarProduto" action="#" method="POST" enctype="multipart/form-data">
+                {{-- 
+                  - ID do formulário é dinâmico
+                  - Ação aponta para a rota 'produtos.update'
+                  - Método @method('PUT') é necessário para atualização
+                --}}
+                <form id="formEditarProduto-{{ $produto->id }}" 
+                      action="{{ route('produtos.update', $produto->id) }}" 
+                      method="POST" 
+                      enctype="multipart/form-data">
+                    
                     @csrf
-                    <input type="hidden" id="editId" name="id" value="">
+                    @method('PUT')
 
+                    {{-- Campo Nome (pré-preenchido) --}}
                     <div class="mb-3">
-                        <label for="editNome" class="form-label">Nome do produto</label>
-                        <input id="editNome" name="nome" type="text" class="form-control" placeholder="Nome do produto">
+                        <label for="editNome-{{ $produto->id }}" class="form-label">Nome do produto</label>
+                        <input id="editNome-{{ $produto->id }}" name="nome" type="text" class="form-control" 
+                               placeholder="Nome do produto" value="{{ $produto->nome }}" required>
                     </div>
 
+                    {{-- Campo Categoria (corrigido e pré-selecionado) --}}
                     <div class="mb-3">
-                        <label for="editTipoproduto" class="form-label">Tipo de produto</label>
-                        <select id="editTipoproduto" name="tipoproduto" class="form-select" required>
-                            <option value="" disabled selected hidden>Selecione o tipo do produto</option>
-                            <option value="1">Jogos</option>
-                            <option value="2">Consoles</option>
-                            <option value="3">Acessórios</option>
+                        <label for="editCategoria-{{ $produto->id }}" class="form-label">Categoria</label>
+                        <select id="editCategoria-{{ $produto->id }}" name="categoria" class="form-select" required>
+                            <option value="" disabled>Selecione a categoria</option>
+                            <option value="Action Figures" {{ $produto->categoria == 'Action Figures' ? 'selected' : '' }}>Action Figures</option>
+                            <option value="Perifericos" {{ $produto->categoria == 'Perifericos' ? 'selected' : '' }}>Periféricos</option>
+                            <option value="Jogos" {{ $produto->categoria == 'Jogos' ? 'selected' : '' }}>Jogos</option>
                         </select>
                     </div>
 
+                    {{-- Campo Preço (pré-preenchido) --}}
                     <div class="mb-3">
-                        <label for="editDescricao" class="form-label">Descrição</label>
-                        <textarea id="editDescricao" name="descricao" class="form-control" rows="3" placeholder="Descreva o produto"></textarea>
+                        <label for="editPreco-{{ $produto->id }}" class="form-label">Preço</label>
+                        <input id="editPreco-{{ $produto->id }}" name="preco" type="number" step="0.01" 
+                               class="form-control" placeholder="R$ 0.00" value="{{ $produto->preco }}" required>
+                    </div>
+
+                    {{-- Campo Estoque (corrigido e pré-preenchido) --}}
+                    <div class="mb-3">
+                        <label for="editEstoque-{{ $produto->id }}" class="form-label">Estoque</label>
+                        <input id="editEstoque-{{ $produto->id }}" name="estoque" type="number" 
+                               class="form-control" placeholder="0" value="{{ $produto->estoque }}" required>
+                    </div>
+
+                    {{-- Campos de Foto (corrigidos) --}}
+                    <div class="mb-2">
+                        <label class="form-label d-block">Imagens Atuais:</label>
+                        <img src="{{ Storage::url($produto->foto_1) }}" height="50" class="rounded me-2">
+                        @if($produto->foto_2) <img src="{{ Storage::url($produto->foto_2) }}" height="50" class="rounded me-2"> @endif
+                        @if($produto->foto_3) <img src="{{ Storage::url($produto->foto_3) }}" height="50" class="rounded"> @endif
                     </div>
 
                     <div class="mb-3">
-                        <label for="editPreco" class="form-label">Preço</label>
-                        <input id="editPreco" name="preco" type="number" step="0.01" class="form-control" placeholder="R$ 0.00">
+                        <label for="editFoto1-{{ $produto->id }}" class="form-label">Foto 1 (Manterá a atual se não enviar nova)</label>
+                        <input id="editFoto1-{{ $produto->id }}" name="foto_1" type="file" class="form-control">
                     </div>
 
                     <div class="mb-3">
-                        <label for="editImagem" class="form-label">Foto do produto</label>
-                        <input id="editImagem" name="imagem" type="file" class="form-control">
+                        <label for="editFoto2-{{ $produto->id }}" class="form-label">Foto 2</label>
+                        <input id="editFoto2-{{ $produto->id }}" name="foto_2" type="file" class="form-control">
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="editFoto3-{{ $produto->id }}" class="form-label">Foto 3</label>
+                        <input id="editFoto3-{{ $produto->id }}" name="foto_3" type="file" class="form-control">
                     </div>
                 </form>
             </div>
 
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                <button type="submit" form="formEditarProduto" class="btn btn-primary">Salvar alterações</button>
+                {{-- Botão de submit aponta para o ID dinâmico do formulário --}}
+                <button type="submit" form="formEditarProduto-{{ $produto->id }}" class="btn btn-primary">Salvar alterações</button>
             </div>
         </div>
     </div>

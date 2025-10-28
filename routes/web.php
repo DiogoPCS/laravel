@@ -31,3 +31,6 @@ Route::get('/produtos-cadastrados', [ProdutosCadastroController::class, 'index']
 Route::get('/cadastrar-produto', [App\Http\Controllers\CadastroController::class, 'index']);
 
 Route::get('/exibir-produto', [App\Http\Controllers\ExibirProdutoController::class, 'index']);
+
+// Resource routes for produtos (index, create, store, show, edit, update, destroy)
+Route::resource('produtos', App\Http\Controllers\ProdutoController::class);
