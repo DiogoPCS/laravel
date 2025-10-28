@@ -4,6 +4,15 @@
     
     @include('cabecalho.cabecalho')
     @include('menu-superior.menu')    
+    <form method="POST" action="{{ route('logout') }}" class="d-inline">
+    @csrf
+
+    <a href="{{ route('logout') }}" 
+       onclick="event.preventDefault(); this.closest('form').submit();"
+       class="text-decoration-none text-light">
+        Sair
+    </a>
+</form>
     <div class="container" style="margin-top: 199px;">
 
         <div class="row g-2 align-items-stretch">
@@ -23,14 +32,22 @@
                     </div>
                 @endforeach
             @else
-                <div class="col-12 col-md-10 d-flex">
-                    <p class="d-flex justify-content-center align-items-center   text-light">Nenhum produto cadastrado ainda.</p>
-                </div>
-        
             @endif
         </div> 
-    </div>
-   
+
+        <div class="row justify-content-center my-4 "> 
+            <div class="col-auto ">
+                <form method="POST" action="{{ route('logout') }}" class="d-inline">
+                    @csrf
+                    <button type="submit" class="btn btn-outline-light">
+                        Sair
+                    </button>
+                </form>
+            </div>
+        </div>
+        
+
+    </div> 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 
 </body>
