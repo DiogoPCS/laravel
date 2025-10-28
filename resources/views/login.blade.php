@@ -14,10 +14,16 @@
                     
                     @csrf
 
+                    @if ($errors->any())
+                        <div class="alert alert-danger">
+                            {{ $errors->first() }}
+                        </div>
+                    @endif
+
                     <div class="row d-flex align-items-start mb-3">
                         <label for="email">Digite o seu Email</label>
                         
-                        <input id="email" type="email" name="email" :value="old('email')" class="bg-secondary border-0 rounded w-100" required autofocus>
+                        <input id="email" type="email" name="email" value="{{ old('email') }}" class="bg-secondary border-0 rounded w-100" required autofocus>
                     </div>
 
                     <div class="row d-flex align-items-end mb-3">

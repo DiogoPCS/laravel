@@ -14,5 +14,7 @@ class DatabaseSeeder extends Seeder
     {
         $this->call(FornecedorSeeder::class);
         $this->call(ContatoSeeder::class);
+        // Seed admin user for testing
+        $this->call(AdminUserSeeder::class);
     }
 }

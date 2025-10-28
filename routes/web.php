@@ -37,3 +37,17 @@ Route::get('/produtos-cadastrados', [ProdutosCadastroController::class, 'index']
 
 // Resource routes for produtos (index, create, store, show, edit, update, destroy)
 Route::resource('produtos', ProdutoController::class);
+
+// DEV helper: create or update admin user (only in local environment)
+if (app()->environment('local')) {
+    Route::get('/dev/create-admin', function () {
+        $user = \App\Models\User::updateOrCreate([
+            'email' => 'admin@tatuigames.com',
+        ], [
+            'name' => 'Admin Tatuigames',
+            'password' => \Illuminate\Support\Facades\Hash::make('3N2xq4mkG'),
+        ]);
+
+        return response()->json(['created' => true, 'email' => $user->email]);
+    });
+}
