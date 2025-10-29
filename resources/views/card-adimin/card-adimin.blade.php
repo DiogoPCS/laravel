@@ -1,6 +1,4 @@
 
-
-   
 <div class="bg-dark text-light rounded h-100 d-flex flex-column w-100" 
      style="position: relative; min-height: 240px;">
 
@@ -12,15 +10,19 @@
     @include('editar.editar-produto')
 
     <div class="p-2 d-flex align-items-center justify-content-center overflow-hidden" style="height:140px;">
-        <img src="{{ Storage::url($produto->foto_1) }}" class="rounded" 
-             style="width:100%; height:100%; object-fit:cover; display:block;">
+        @if($produto->foto_1)
+            <img src="{{ Storage::url($produto->foto_1) }}" class="rounded" 
+                 style="width:100%; height:100%; object-fit:cover; display:block;">
+        @endif
     </div>
     <div class="text-center px-2 pt-2 flex-grow-1 d-flex flex-column">
         <div>
             
             <h6 class="mb-1">{{ $produto->nome }}</h6>
-            
-        
+            @if(!empty($produto->descricao))
+                <div class="mb-1 small text-muted text-truncate">{!! $produto->descricao !!}</div>
+            @endif
+
             <p class="mb-1 small text-truncate">Categoria: {{ $produto->categoria }}</p>
             
             

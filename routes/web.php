@@ -11,15 +11,19 @@ use App\Http\Controllers\ProdutoController;
 |--------------------------------------------------------------------------
 */
 
-// A rota raiz ("/") vai carregar sua loja
-Route::get('/', function () {
-    return view('home'); //
-})->name('home');
+use App\Models\Produto;
 
-// A rota /exibir-produto também será pública
-Route::get('/exibir-produto', function () {
-    return view('exibir-produto'); //
+Route::get('/', function () {
+    // Pass the latest products to the home view so the listing can render dynamic data
+    $produtos = Produto::latest()->get();
+    return view('home', compact('produtos'));
 });
+
+
+Route::get('/produto/{produto}', [\App\Http\Controllers\ProdutoController::class, 'publicShow'])->name('produto.show');
+
+// Public search route used by the header search form
+Route::get('/buscar', [\App\Http\Controllers\ProdutoController::class, 'publicSearch'])->name('produtos.search');
 
 
 /*

@@ -19,6 +19,7 @@ class Produto extends Model // <- Note que "extends Model"
         'preco',
         'estoque',
         'categoria',
+        'descricao',
         'foto_1',
         'foto_2',
         'foto_3',

@@ -1,15 +1,20 @@
 
 <div class="row g-3">
-    {{-- Exemplo: renderiza 4 produtos. Substitua pelo loop real: @foreach($produtos as $produto) --}}
-    @for($i = 0; $i < 4; $i++)
+    {{-- Loop pelos produtos fornecidos pela view (passados pelo controller/route) --}}
+    @forelse($produtos ?? [] as $produto)
         <div class="col-6 col-sm-4 col-md-3 col-lg-3">
             @include('listagem.card-produto', [
-                'imagem' => asset('images/controle.svg'),
-                'nome' => 'Nome do Produto',
-                'preco' => 'R$256,00',
-                'estoque' => 'Quantidade em estoque: 20 unidades'
+                'produto' => $produto,
+                'imagem' => $produto->foto_1 ? \Illuminate\Support\Facades\Storage::url($produto->foto_1) : asset('images/controle.svg'),
+                'nome' => $produto->nome ?? 'Produto sem nome',
+                'preco' => isset($produto->preco) ? 'R$'.number_format($produto->preco, 2, ',', '.') : 'R$0,00',
+                'estoque' => isset($produto->estoque) ? 'Quantidade em estoque: '.$produto->estoque.' unidades' : 'Sem estoque'
             ])
         </div>
-    @endfor
+    @empty
+        <div class="col-12">
+            <div class="alert alert-info">Nenhum produto encontrado.</div>
+        </div>
+    @endforelse
 
 </div>

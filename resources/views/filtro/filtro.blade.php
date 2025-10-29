@@ -28,28 +28,45 @@
         
       
         <div class="d-grid mb-3">
-            <a href="#" class="btn btn-light rounded-pill d-flex align-items-center justify-content-center py-2" 
+            <a href="{{ route('produtos.search') }}" class="btn btn-light rounded-pill d-flex align-items-center justify-content-center py-2" 
                style="text-decoration: none;">
-                
-                <img src="{{ asset('images/filter.svg') }}" alt="Filtro" 
-                     style="width: 20px; height: 20px;" class="me-2">
-                
-                <span class="fw-bold text-dark">Filtrar</span>
+                <img src="{{ asset('images/filter.svg') }}" alt="Filtro" style="width: 20px; height: 20px;" class="me-2">
+                <span class="fw-bold text-dark">Limpar filtros</span>
             </a>
         </div>
 
-        
-         <div class="filtro-lista">
-            <a href="#" class="d-block text-light text-decoration-none py-1">Tipo de promoção</a>
-            <a href="#" class="d-block text-light text-decoration-none py-1">Oferta relâmpago (656)</a>
-            <a href="#" class="d-block text-light text-decoration-none py-1">Oferta do dia (266)</a>
-            <a href="#" class="d-block text-light text-decoration-none py-1">Categorias</a>
-            <a href="#" class="d-block text-light text-decoration-none py-1">Acessórios para Veículos (777)</a>
-            <a href="#" class="d-block text-light text-decoration-none py-1">Agro (250)</a>
-            <a href="#" class="d-block text-light text-decoration-none py-1">Alimentos e Bebidas (117)</a>
-            <a href="#" class="d-block text-light text-decoration-none py-1">Pet Shop (57)</a>
-            <a href="#" class="d-block text-light text-decoration-none py-1">Saúde (437)</a>
-            <a href="#" class="d-block text-light text-decoration-none py-1">Preço</a>
+        <div class="mb-3">
+            <div class="d-flex gap-2">
+                @php
+                    $base = route('produtos.search');
+                    $current = request()->except(['page']);
+                @endphp
+                {{-- Sort buttons --}}
+                <a href="{{ $base.'?'.http_build_query(array_merge($current, ['sort' => 'price_asc'])) }}" class="btn btn-sm btn-outline-light">Preço: do menor</a>
+                <a href="{{ $base.'?'.http_build_query(array_merge($current, ['sort' => 'price_desc'])) }}" class="btn btn-sm btn-outline-light">Preço: do maior</a>
+            </div>
+        </div>
+
+        <div class="filtro-lista">
+            <h6 class="text-light">Categorias</h6>
+            @php
+                // get distinct categories from products
+                $categorias = \App\Models\Produto::whereNotNull('categoria')
+                    ->select('categoria')
+                    ->distinct()
+                    ->orderBy('categoria')
+                    ->pluck('categoria');
+            @endphp
+
+            @forelse($categorias as $cat)
+                @php
+                    $params = array_merge($current, ['categoria' => $cat]);
+                    $link = $base . '?' . http_build_query($params);
+                @endphp
+                <a href="{{ $link }}" class="d-block text-light text-decoration-none py-1">{{ $cat }}</a>
+            @empty
+                <div class="text-light small">Nenhuma categoria encontrada.</div>
+            @endforelse
         </div>
     </div>
 </div>

@@ -3,7 +3,6 @@
 <body class="bg-login">
     
     @include('cabecalho.cabecalho')
-    @include('menu-superior.menu')    
     <form method="POST" action="{{ route('logout') }}" class="d-inline">
     @csrf
 
@@ -13,7 +12,7 @@
         Sair
     </a>
 </form>
-    <div class="container" style="margin-top: 199px;">
+    <div class="container" style="margin-top: 152px;">
 
         <div class="row g-2 align-items-stretch">
             <div class="col-12 col-md-2 d-flex">

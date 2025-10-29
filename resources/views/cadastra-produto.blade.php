@@ -2,7 +2,6 @@
 
 <body class="bg-login d-flex flex-column min-vh-100">
     @include('cabecalho.cabecalho')
-    @include('menu-superior.menu')
 
     <main class="flex-grow-1 d-flex justify-content-center align-items-center" style="padding-top:160px;">
         <div class="container">
