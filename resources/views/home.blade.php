@@ -8,10 +8,10 @@
 
     <div class="container-fluid" id="inicio">
 
+        {{-- Banner Principal --}}
         <div class="row d-flex bg-dark justify-content-center align-items-center">
             <div class="col-10 text-light">
-                <h1>Novidades</h1>
-                <p>O novo console apresenta uma tela OLED vibrante de 7 polegadas (17,78 cm), um amplo suporte ajustável, uma base com uma porta LAN integrada, 64 GB de espaço de armazenamento interno e um áudio aprimorado.</p>
+                <h1O novo console apresenta uma tela OLED vibrante de 7 polegadas (17,78 cm), um amplo suporte ajustável, uma base com uma porta LAN integrada, 64 GB de espaço de armazenamento interno e um áudio aprimorado. molestiae exercitationem expedita!</p>
                 <div class="row">
                     <div class="col-12">
                         <div id="carouselExample" class="carousel slide">
@@ -40,14 +40,19 @@
             </div>
         </div>
        
-       
+        {{-- Filtro Lateral e Listagem de Produtos --}}
 
         <div class="row">
+            {{-- Coluna do Filtro --}}
             <div class="col-2">
                 @include('filtro.filtro')
             </div>
 
-            
+            {{-- 
+              COLUNA DA LISTAGEM (CORRIGIDA)
+              1. Mudei de 'col-9' para 'col-10' para preencher a linha (2 + 10 = 12).
+              2. O @include agora chama seu NOVO arquivo de grid.
+            --}}
             <div class="col-10">
                 @include('listagem.produtos')
             </div>

@@ -18,7 +18,122 @@
                     <input id="search" name="q" type="text" class="form-control bg-transparent border-0" placeholder="Pesquisar" style="box-shadow:none; width:220px;" value="{{ request('q') }}">
                 </div>
             </form>
+            {{-- Autocomplete suggestions container --}}
+            <div id="search-suggestions" class="position-absolute bg-white shadow-sm rounded" style="z-index:1050; display:none; max-width:360px; max-height:420px; overflow:auto;">
+                <div id="suggestions-list" class="list-group list-group-flush"></div>
+                <div id="suggestions-products" class="p-2 border-top small text-muted" style="">
+                </div>
+            </div>
         </div>
+
+            <script>
+            // Simple debounce
+            function debounce(fn, delay){
+                let t;
+                return function(...args){
+                    clearTimeout(t);
+                    t = setTimeout(()=> fn.apply(this,args), delay);
+                }
+            }
+
+            (function(){
+                const input = document.getElementById('search');
+                const panel = document.getElementById('search-suggestions');
+                const list = document.getElementById('suggestions-list');
+                const products = document.getElementById('suggestions-products');
+
+                if (!input || !panel) return;
+
+                // Position panel centered under the input (keeps within viewport)
+                function positionPanel(){
+                    const rect = input.getBoundingClientRect();
+
+                    // choose panel width: at least input width, up to 360px for readability
+                    const preferred = Math.max(rect.width, 320);
+                    const maxW = 360;
+                    const width = Math.min(preferred, maxW);
+                    panel.style.width = width + 'px';
+
+                    // compute left so panel is centered on input
+                    let left = rect.left + window.scrollX + (rect.width / 2) - (width / 2);
+
+                    // clamp to viewport with small margin
+                    const margin = 8;
+                    const maxLeft = window.innerWidth - width - margin;
+                    if (left < margin) left = margin;
+                    if (left > maxLeft) left = maxLeft;
+
+                // place the panel exactly touching the bottom edge of the input (no gap)
+                panel.style.top = (rect.bottom + window.scrollY - 1) + 'px';
+                panel.style.left = left + 'px';
+
+                // make the top corners flush so the panel looks 'colado' ao input
+                panel.style.borderTopLeftRadius = '0px';
+                panel.style.borderTopRightRadius = '0px';
+                }
+
+                function render(items){
+                    list.innerHTML = '';
+                    products.innerHTML = '';
+
+                    if (!items.length){
+                        panel.style.display = 'none';
+                        return;
+                    }
+
+                    // suggestions: show first 6 names
+                    items.slice(0,6).forEach(it => {
+                        const a = document.createElement('a');
+                        a.href = it.url;
+                        a.className = 'list-group-item list-group-item-action d-flex align-items-center';
+                        a.innerHTML = `<img src="${it.imagem}" style="width:38px;height:38px;object-fit:cover;margin-right:8px;border-radius:4px;">` +
+                                      `<div><div class=fw-bold>${it.nome}</div><div class=small text-muted>R$${(it.preco!==null? Number(it.preco).toFixed(2): '0.00')}</div></div>`;
+                        list.appendChild(a);
+                    });
+
+                    // products panel: show small list
+                    const grid = document.createElement('div');
+                    grid.className = 'd-flex flex-column gap-2';
+                    items.slice(0,8).forEach(it => {
+                        const card = document.createElement('a');
+                        card.href = it.url;
+                        card.className = 'd-flex align-items-center text-decoration-none text-dark';
+                        card.style.width = '100%';
+                        card.innerHTML = `<img src="${it.imagem}" style="width:48px;height:48px;object-fit:cover;border-radius:6px;margin-right:8px;">` +
+                                         `<div><div class=small>${it.nome}</div><div class=small text-muted>R$${(it.preco!==null? Number(it.preco).toFixed(2): '0.00')}</div></div>`;
+                        grid.appendChild(card);
+                    });
+                    products.appendChild(grid);
+
+                    positionPanel();
+                    panel.style.display = 'block';
+                }
+
+                const fetchSuggestions = debounce(function(){
+                    const q = input.value.trim();
+                    if (!q){ render([]); return; }
+
+                    const url = '{{ route('produtos.suggest') }}?q=' + encodeURIComponent(q);
+                    fetch(url)
+                        .then(r => r.json())
+                        .then(data => {
+                            render(data.items || []);
+                        })
+                        .catch(()=> render([]));
+                }, 250);
+
+                input.addEventListener('input', fetchSuggestions);
+
+                // hide on click outside
+                document.addEventListener('click', function(e){
+                    if (!panel.contains(e.target) && e.target !== input) {
+                        panel.style.display = 'none';
+                    }
+                });
+
+                window.addEventListener('resize', () => { if (panel.style.display!=='none') positionPanel(); });
+            })();
+            </script>
     </div>
 
     <div class="row bg-dark text-light" style="height:40px;">

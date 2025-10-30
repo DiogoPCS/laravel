@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Schema;
+use Illuminate\Support\Facades\Storage as StorageFacade;
 
 class ProdutoController extends Controller
 {
@@ -131,6 +132,45 @@ class ProdutoController extends Controller
         $produtos = $query->get();
 
         return view('home', compact('produtos'));
+    }
+
+    /**
+     * AJAX suggestions for autocomplete
+     * Returns a small JSON array of matching products (id, nome, preco, imagem_url)
+     */
+    public function suggest(Request $request)
+    {
+        $q = trim($request->get('q', ''));
+
+        if ($q === '') {
+            return response()->json(['items' => []]);
+        }
+
+        $produtos = Produto::where('nome', 'LIKE', "%{$q}%")
+            ->orWhere('descricao', 'LIKE', "%{$q}%")
+            ->orderBy('nome')
+            ->take(8)
+            ->get();
+
+        $items = $produtos->map(function($p){
+            $image = null;
+            if (!empty($p->foto_1)) {
+                // Ensure full URL
+                $image = StorageFacade::url($p->foto_1);
+            } else {
+                $image = asset('images/controle.svg');
+            }
+
+            return [
+                'id' => $p->id,
+                'nome' => $p->nome,
+                'preco' => $p->preco,
+                'imagem' => $image,
+                'url' => route('produto.show', ['produto' => $p->id]),
+            ];
+        });
+
+        return response()->json(['items' => $items]);
     }
 
   

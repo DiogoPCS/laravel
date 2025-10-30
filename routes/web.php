@@ -25,6 +25,9 @@ Route::get('/produto/{produto}', [\App\Http\Controllers\ProdutoController::class
 // Public search route used by the header search form
 Route::get('/buscar', [\App\Http\Controllers\ProdutoController::class, 'publicSearch'])->name('produtos.search');
 
+// AJAX suggestions for header autocomplete
+Route::get('/produtos/suggest', [\App\Http\Controllers\ProdutoController::class, 'suggest'])->name('produtos.suggest');
+
 
 /*
 |--------------------------------------------------------------------------
