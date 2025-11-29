@@ -34,6 +34,10 @@
                             <option value="Jogos" {{ $produto->categoria == 'Jogos' ? 'selected' : '' }}>Jogos</option>
                         </select>
                     </div>
+                    <div class="mb-3">
+    <label for="editDescricao-{{ $produto->id }}" class="form-label">Descrição</label>
+    <textarea id="editDescricao-{{ $produto->id }}" name="descricao" class="form-control" rows="3">{{ $produto->descricao }}</textarea>
+</div>
 
                     <div class="mb-3">
                         <label for="editPreco-{{ $produto->id }}" class="form-label">Preço</label>

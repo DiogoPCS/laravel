@@ -13,26 +13,65 @@
     </a>
 </form>
     <div class="container" style="margin-top: 152px;">
+        <div id="admin-products-list">
+            @include('admin.produtos-grid', ['produtos' => $produtos ?? collect()])
+        </div>
 
-        <div class="row g-2 align-items-stretch">
-            <div class="col-12 col-md-2 d-flex">
-               <a href="{{ route('produtos.create') }}" class="text-decoration-none d-block">
-                    <div class="bg-dark rounded-2 border text-center border-2 border-white border-opacity-25 d-flex flex-column justify-content-center align-items-center p-3 h-100 w-100">
-                        <img src="{{ asset('images/mais.svg') }}" class="opacity-50 mb-2" alt="mais">
-                        <h6 class="text-light opacity-50 mb-0">Adicionar produto</h6>
-                    </div>
-                </a>
-            </div>
+        {{-- AJAX handlers for edit/delete forms inside the admin grid --}}
+        <script>
+            (function(){
+                const containerId = 'admin-products-list';
+                const container = document.getElementById(containerId);
+                if (!container) return;
 
-            @if(isset($produtos) && $produtos->count())
-                @foreach($produtos as $produto)
-                    <div class="col-12 col-md-2  d-flex" >
-                        @include('card-adimin.card-adimin', ['produto' => $produto])
-                    </div>
-                @endforeach
-            @else
-            @endif
-        </div> 
+                const tokenMeta = document.querySelector('meta[name="csrf-token"]');
+                const csrf = tokenMeta ? tokenMeta.getAttribute('content') : '';
+
+                document.addEventListener('submit', function(e){
+                    const form = e.target;
+                    if (!form) return;
+
+                    const isEdit = form.id && form.id.startsWith('formEditarProduto-');
+                    const isDelete = form.classList && form.classList.contains('ajax-delete');
+                    if (!isEdit && !isDelete) return;
+
+                    e.preventDefault();
+                    const url = form.getAttribute('action');
+                    const formData = new FormData(form);
+
+                    // send AJAX request
+                    fetch(url, {
+                        method: 'POST',
+                        headers: {
+                            'X-Requested-With': 'XMLHttpRequest',
+                            'X-CSRF-TOKEN': csrf
+                        },
+                        body: formData
+                    })
+                    .then(resp => {
+                        if (!resp.ok) throw new Error('Network response was not ok');
+                        return resp.text();
+                    })
+                    .then(html => {
+                        // replace admin grid
+                        container.innerHTML = html;
+
+                        // hide modal if form was in one
+                        const modalEl = form.closest('.modal');
+                        if (modalEl && window.bootstrap) {
+                            try {
+                                const inst = window.bootstrap.Modal.getInstance(modalEl) || new window.bootstrap.Modal(modalEl);
+                                inst.hide();
+                            } catch (err) { /* ignore */ }
+                        }
+                    })
+                    .catch(err => {
+                        console.error('AJAX form error', err);
+                        alert('Erro ao processar a operação. Veja o console para detalhes.');
+                    });
+                });
+            })();
+        </script>
 
         <div class="row justify-content-center my-4 "> 
             <div class="col-auto ">

@@ -19,7 +19,9 @@ class ProdutoController extends Controller
 
     public function create()
     {
-        return view('produtos.create');
+        // The project stores the create form at resources/views/cadastra-produto.blade.php
+        // Return that view so the admin "Adicionar produto" link opens the existing form.
+        return view('cadastra-produto');
     }
 
         public function store(Request $request)
@@ -35,6 +37,8 @@ class ProdutoController extends Controller
             'foto_1' => 'required|mimes:jpeg,png,jpg,gif,webp,svg|max:10240', 
             'foto_2' => 'nullable|mimes:jpeg,png,jpg,gif,webp,svg|max:10240', 
             'foto_3' => 'nullable|mimes:jpeg,png,jpg,gif,webp,svg|max:10240', 
+
+
         ]);
 
         $data = $validatedData;
@@ -102,8 +106,13 @@ class ProdutoController extends Controller
         $categoria = $request->get('categoria');
         $sort = $request->get('sort');
 
-        // If no filters provided, redirect to home where default recent products show
+        // If no filters provided, for normal requests redirect to home.
+        // For AJAX requests (filters triggered via JS) return the default latest products partial.
         if (empty($q) && empty($categoria) && empty($sort)) {
+            if ($request->ajax()) {
+                $produtos = Produto::latest()->get();
+                return view('listagem.produtos', compact('produtos'));
+            }
             return redirect('/');
         }
 
@@ -130,6 +139,11 @@ class ProdutoController extends Controller
         }
 
         $produtos = $query->get();
+
+        // If this is an AJAX request (filter via fetch), return only the products partial
+        if ($request->ajax()) {
+            return view('listagem.produtos', compact('produtos'));
+        }
 
         return view('home', compact('produtos'));
     }
@@ -228,13 +242,18 @@ class ProdutoController extends Controller
         }
 
         $produto->update($data);
+        // If AJAX request, return updated admin grid HTML
+        if ($request->ajax()) {
+            $produtos = Produto::latest()->get();
+            return view('admin.produtos-grid', compact('produtos'));
+        }
 
         return redirect('/produtos-cadastrados')
             ->with('success', 'Produto atualizado com sucesso!');
     }
 
     
-    public function destroy(Produto $produto)
+    public function destroy(Request $request, Produto $produto)
     {
         
         Storage::delete($produto->foto_1);
@@ -248,6 +267,10 @@ class ProdutoController extends Controller
         }
 
         $produto->delete();
+        if ($request->ajax()) {
+            $produtos = Produto::latest()->get();
+            return view('admin.produtos-grid', compact('produtos'));
+        }
 
         return redirect('/produtos-cadastrados')
             ->with('success', 'Produto excluído com sucesso!');

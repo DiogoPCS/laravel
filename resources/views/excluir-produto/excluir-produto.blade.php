@@ -18,7 +18,7 @@
             <div class="modal-footer border-top border-secondary">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
                 
-                <form action="{{ route('produtos.destroy', $produto->id) }}" method="POST" class="d-inline">
+                <form action="{{ route('produtos.destroy', $produto->id) }}" method="POST" class="d-inline ajax-delete">
                     @csrf
                     @method('DELETE')
                     <button type="submit" class="btn btn-danger">Sim, Excluir</button>

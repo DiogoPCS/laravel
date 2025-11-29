@@ -18,7 +18,7 @@
 @endphp
 
 <a href="{{ $cardLink ?? '#' }}" class="text-decoration-none text-reset">
-    <div class="card h-100 shadow-sm border-0">
+    <div class="card h-100 shadow-sm border-0 mt-3">
         @if($cardImage)
             <div style="padding:12px;">
                 <img src="{{ $cardImage }}" class="w-100 rounded" alt="Produto" style="height:140px; object-fit:cover;">

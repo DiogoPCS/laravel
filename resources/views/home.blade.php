@@ -54,7 +54,9 @@
               2. O @include agora chama seu NOVO arquivo de grid.
             --}}
             <div class="col-10">
-                @include('listagem.produtos')
+                <div id="products-list">
+                    @include('listagem.produtos')
+                </div>
             </div>
         </div>
 
@@ -70,3 +72,40 @@
 
 </body>
 @include('footer.footer')
+
+<script>
+    (function(){
+        // Delegate clicks on any filter link with class 'ajax-filter'
+        document.addEventListener('click', function(e){
+            const el = e.target.closest && e.target.closest('a.ajax-filter');
+            if(!el) return;
+            e.preventDefault();
+
+            const url = el.href;
+            const container = document.getElementById('products-list');
+            if(!container) return;
+
+            // show a simple loading state
+            const previous = container.innerHTML;
+            container.innerHTML = '<div class="p-4 text-center">Carregando...</div>';
+
+            fetch(url, {
+                headers: {
+                    'X-Requested-With': 'XMLHttpRequest',
+                    'Accept': 'text/html'
+                },
+                credentials: 'same-origin'
+            }).then(function(res){
+                if(!res.ok) throw new Error('Network response was not ok');
+                return res.text();
+            }).then(function(html){
+                // Replace container HTML with returned partial
+                container.innerHTML = html;
+            }).catch(function(err){
+                console.error(err);
+                container.innerHTML = previous; // restore
+                alert('Erro ao aplicar o filtro. Veja o console para detalhes.');
+            });
+        });
+    })();
+</script>

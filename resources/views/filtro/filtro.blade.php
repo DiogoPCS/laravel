@@ -1,72 +1,100 @@
-<div class="row my-3">
-    
-    <div class="col-12 d-flex justify-content-between align-items-center text-light" 
-         style="background: black; border-top-right-radius: 8px; padding: 0.75rem 1rem;">
-      
-        <h2 class="mb-0 fs-4">Filtros</h2>
 
-      
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+<div class="row my-3">
+    <div class="col-12 d-flex justify-content-between align-items-center" 
+         style="background: black; border-top-right-radius: 8px; padding: 1rem;">
+        
+        <h5 class="mb-0 fw-bold text-white">Filtros</h5>
+
         <a role="button" 
-           class="text-light collapsed" 
-           style="text-decoration: none;"
+           class="text-light text-decoration-none" 
            data-bs-toggle="collapse" 
            data-bs-target="#filtroCollapse" 
-           aria-expanded="false"
+           aria-expanded="true" 
            aria-controls="filtroCollapse">
-            
-           
-            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-chevron-down" viewBox="0 0 16 16">
-              <path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708"/>
-            </svg>
+            <i class="bi bi-chevron-down transition-icon"></i>
         </a>
     </div>
     
-   
-    <div class="col-12 text-light bg-dark p-3 collapse" 
+    <div class="col-12 bg-dark p-3 collapse show" 
          style="border-bottom-right-radius: 8px;"
          id="filtroCollapse">
         
-      
-        <div class="d-grid mb-3">
-            <a href="{{ route('produtos.search') }}" class="btn btn-light rounded-pill d-flex align-items-center justify-content-center py-2" 
-               style="text-decoration: none;">
-                <img src="{{ asset('images/filter.svg') }}" alt="Filtro" style="width: 20px; height: 20px;" class="me-2">
-                <span class="fw-bold text-dark">Limpar filtros</span>
+        @php
+            $base = route('produtos.search');
+            $current = request()->except(['page']);
+        @endphp
+
+        <div class="mb-4">
+            <a href="{{ route('produtos.search') }}" 
+               class="btn btn-light rounded-pill w-100 fw-bold d-flex align-items-center justify-content-center py-2 ajax-filter"
+               style="box-shadow: 0 2px 4px rgba(0,0,0,0.2);">
+               <i class="bi bi-funnel-fill me-2"></i> 
+               Limpar filtros
             </a>
         </div>
 
-        <div class="mb-3">
-            <div class="d-flex gap-2">
-                @php
-                    $base = route('produtos.search');
-                    $current = request()->except(['page']);
-                @endphp
-                {{-- Sort buttons --}}
-                <a href="{{ $base.'?'.http_build_query(array_merge($current, ['sort' => 'price_asc'])) }}" class="btn btn-sm btn-outline-light">Preço: do menor</a>
-                <a href="{{ $base.'?'.http_build_query(array_merge($current, ['sort' => 'price_desc'])) }}" class="btn btn-sm btn-outline-light">Preço: do maior</a>
-            </div>
+        <div class="d-flex gap-2 mb-4">
+            <a href="{{ $base.'?'.http_build_query(array_merge($current, ['sort' => 'price_asc'])) }}" 
+               class="btn btn-outline-light flex-fill text-center py-2 ajax-filter {{ request('sort') == 'price_asc' ? 'active' : '' }}"
+               style="font-size: 0.9rem; border-radius: 4px;">
+               Preço: do<br>menor
+            </a>
+            
+            <a href="{{ $base.'?'.http_build_query(array_merge($current, ['sort' => 'price_desc'])) }}" 
+               class="btn btn-outline-light flex-fill text-center py-2 ajax-filter {{ request('sort') == 'price_desc' ? 'active' : '' }}"
+               style="font-size: 0.9rem; border-radius: 4px;">
+               Preço: do<br>maior
+            </a>
         </div>
 
         <div class="filtro-lista">
-            <h6 class="text-light">Categorias</h6>
+            <h6 class="text-white fw-bold mb-3">Categorias</h6>
+            
             @php
-                // get distinct categories from products
                 $categorias = \App\Models\Produto::whereNotNull('categoria')
-                    ->select('categoria')
-                    ->distinct()
-                    ->orderBy('categoria')
-                    ->pluck('categoria');
+                    ->distinct()->orderBy('categoria')->pluck('categoria');
+                $catAtual = request('categoria');
             @endphp
 
-            @forelse($categorias as $cat)
-                @php
-                    $params = array_merge($current, ['categoria' => $cat]);
-                    $link = $base . '?' . http_build_query($params);
-                @endphp
-                <a href="{{ $link }}" class="d-block text-light text-decoration-none py-1">{{ $cat }}</a>
-            @empty
-                <div class="text-light small">Nenhuma categoria encontrada.</div>
-            @endforelse
+            <div class="d-flex flex-column gap-2">
+                @forelse($categorias as $cat)
+                    @php
+                        $params = array_merge($current, ['categoria' => $cat]);
+                        $link = $base . '?' . http_build_query($params);
+                        $active = $catAtual == $cat;
+                    @endphp
+                    <a href="{{ $link }}" 
+                       class="text-decoration-none ajax-filter category-item {{ $active ? 'text-light fw-bold' : 'text-light' }}"
+                       style="transition: all 0.2s;">
+                        {{ $cat }}
+                    </a>
+                @empty
+                    <div class="text-white-50 small">Nenhuma categoria.</div>
+                @endforelse
+            </div>
         </div>
     </div>
 </div>
+
+<style>
+    /* Faz a seta girar quando abre/fecha */
+    .transition-icon {
+        transition: transform 0.3s ease;
+    }
+    a[aria-expanded="true"] .transition-icon {
+        transform: rotate(180deg);
+    }
+
+    /* Efeito de hover nas categorias */
+    .category-item:hover {
+        padding-left: 5px;
+        color: #fff !important;
+    }
+
+    /* Ajuste para o botão ativo ficar preenchido */
+    .btn-outline-light.active {
+        background-color: white;
+        color: black;
+    }
+</style>

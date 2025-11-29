@@ -84,14 +84,24 @@
                             <span class="text-muted small">{{ $produto->estoque ?? 0 }} unidades disponíveis</span>
                         </div>
 
-                        <h5 class="mt-4">Descrição</h5>
-                        <ul class="list-unstyled small text-muted">
-                            <li>- Unidades por kit: 1</li>
-                            <li>- Possui Bluetooth.</li>
-                            <li>- Com sensor de toque.</li>
-                            <li>- Com vibração incorporada.</li>
-                            <li>- ... e mais</li>
-                        </ul>
+                      <h5 class="mt-4">Descrição</h5>
+<ul class="list-unstyled small text-muted">
+    @if(!empty($produto->descricao))
+        {{-- Transforma o texto em linhas separadas para criar a lista --}}
+        @foreach(explode("\n", $produto->descricao) as $linha)
+            {{-- Verifica se a linha não está vazia para não criar bullets vazios --}}
+            @if(trim($linha) != "")
+                {{-- Adiciona o traço se o usuário não tiver colocado --}}
+                <li>
+                    @if(!str_starts_with(trim($linha), '-')) - @endif 
+                    {{ $linha }}
+                </li>
+            @endif
+        @endforeach
+    @else
+        <li>Nenhuma descrição informada para este produto.</li>
+    @endif
+</ul>
                     </div>
 
                     <div class="col-md-4">
