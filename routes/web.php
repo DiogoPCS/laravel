@@ -13,6 +13,8 @@ use App\Http\Controllers\ProdutoController;
 
 use App\Models\Produto;
 
+Route::post('/admin/carousel/update', [App\Http\Controllers\CarouselController::class, 'update'])->name('carousel.update')->middleware('auth');
+
 Route::get('/', function () {
     // Pass the latest products to the home view so the listing can render dynamic data
     $produtos = Produto::latest()->get();

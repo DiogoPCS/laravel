@@ -30,6 +30,9 @@
                                     <option value="Action Figures">Action Figures</option>
                                     <option value="Perifericos">Periféricos</option>
                                     <option value="Jogos">Jogos</option>
+                                    <option value="Jogos">Acessório</option>
+                                    <option value="Jogos">Console</option>
+
                                 </select>
                             </div>
 

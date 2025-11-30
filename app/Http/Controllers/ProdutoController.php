@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Produto;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
@@ -99,6 +100,8 @@ class ProdutoController extends Controller
     /**
      * Public search endpoint used by the site header.
      * Searches by product name and description (case-insensitive, partial match)
+     *//**
+     * Public search endpoint used by the site header and filters.
      */
     public function publicSearch(Request $request)
     {
@@ -106,16 +109,7 @@ class ProdutoController extends Controller
         $categoria = $request->get('categoria');
         $sort = $request->get('sort');
 
-        // If no filters provided, for normal requests redirect to home.
-        // For AJAX requests (filters triggered via JS) return the default latest products partial.
-        if (empty($q) && empty($categoria) && empty($sort)) {
-            if ($request->ajax()) {
-                $produtos = Produto::latest()->get();
-                return view('listagem.produtos', compact('produtos'));
-            }
-            return redirect('/');
-        }
-
+        // --- LÓGICA DE FILTROS DOS PRODUTOS ---
         $query = Produto::query();
 
         if (!empty($q)) {
@@ -129,7 +123,6 @@ class ProdutoController extends Controller
             $query->where('categoria', $categoria);
         }
 
-        // Sorting
         if ($sort === 'price_asc') {
             $query->orderBy('preco', 'asc');
         } elseif ($sort === 'price_desc') {
@@ -138,16 +131,36 @@ class ProdutoController extends Controller
             $query->latest();
         }
 
-        $produtos = $query->get();
+        $produtos = $query->paginate(12)->withQueryString();
 
-        // If this is an AJAX request (filter via fetch), return only the products partial
+        // --- LÓGICA DE CATEGORIAS (Para o Menu Lateral) ---
+        // 1. Busca categorias existentes no banco e conta os produtos
+        $dbCats = Produto::select('categoria', DB::raw('count(*) as total'))
+            ->whereNotNull('categoria')
+            ->where('categoria', '<>', '')
+            ->groupBy('categoria')
+            ->get()
+            ->keyBy('categoria');
+
+        // 2. Lista fixa para garantir que essas sempre apareçam
+        $static = ['Action Figures', 'Perifericos', 'Jogos', 'Acessório', 'Console', 'Informática'];
+
+        // 3. Junta as listas e organiza
+        $allCategorias = collect(array_merge($dbCats->keys()->toArray(), $static))
+            ->unique()
+            ->sort()
+            ->values();
+
+        // --- RETORNO ---
+        
+        // Se for AJAX (clique no filtro), retorna só a lista de produtos (o filtro não recarrega)
         if ($request->ajax()) {
             return view('listagem.produtos', compact('produtos'));
         }
 
-        return view('home', compact('produtos'));
+        // Se for carregamento normal, manda TUDO (produtos + dados do filtro)
+        return view('home', compact('produtos', 'allCategorias', 'dbCats'));
     }
-
     /**
      * AJAX suggestions for autocomplete
      * Returns a small JSON array of matching products (id, nome, preco, imagem_url)

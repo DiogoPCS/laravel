@@ -1,13 +1,12 @@
-
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
-<div class="row my-3">
-    <div class="col-12 d-flex justify-content-between align-items-center" 
-         style="background: black; border-top-right-radius: 8px; padding: 1rem;">
-        
-        <h5 class="mb-0 fw-bold text-white">Filtros</h5>
 
+<div class="d-flex flex-column h-100">
+    
+    <div class="d-flex justify-content-between align-items-center mb-3 pt-1">
+        <span class="text-white-50 small text-uppercase fw-bold">Filtros</span>
+        
         <a role="button" 
-           class="text-light text-decoration-none" 
+           class="text-light text-decoration-none d-lg-none" 
            data-bs-toggle="collapse" 
            data-bs-target="#filtroCollapse" 
            aria-expanded="true" 
@@ -16,9 +15,7 @@
         </a>
     </div>
     
-    <div class="col-12 bg-dark p-3 collapse show" 
-         style="border-bottom-right-radius: 8px;"
-         id="filtroCollapse">
+    <div class="collapse show d-lg-block" id="filtroCollapse">
         
         @php
             $base = route('produtos.search');
@@ -27,74 +24,158 @@
 
         <div class="mb-4">
             <a href="{{ route('produtos.search') }}" 
-               class="btn btn-light rounded-pill w-100 fw-bold d-flex align-items-center justify-content-center py-2 ajax-filter"
-               style="box-shadow: 0 2px 4px rgba(0,0,0,0.2);">
-               <i class="bi bi-funnel-fill me-2"></i> 
-               Limpar filtros
+               class="btn btn-outline-light btn-sm w-100 rounded-pill d-flex align-items-center justify-content-center gap-2 ajax-filter"
+               style="border-color: #333; background-color: #202020;">
+               <i class="bi bi-x-lg" style="font-size: 0.8rem;"></i> 
+               <span style="font-size: 0.85rem;">Limpar</span>
             </a>
         </div>
 
-        <div class="d-flex gap-2 mb-4">
-            <a href="{{ $base.'?'.http_build_query(array_merge($current, ['sort' => 'price_asc'])) }}" 
-               class="btn btn-outline-light flex-fill text-center py-2 ajax-filter {{ request('sort') == 'price_asc' ? 'active' : '' }}"
-               style="font-size: 0.9rem; border-radius: 4px;">
-               Preço: do<br>menor
-            </a>
-            
-            <a href="{{ $base.'?'.http_build_query(array_merge($current, ['sort' => 'price_desc'])) }}" 
-               class="btn btn-outline-light flex-fill text-center py-2 ajax-filter {{ request('sort') == 'price_desc' ? 'active' : '' }}"
-               style="font-size: 0.9rem; border-radius: 4px;">
-               Preço: do<br>maior
-            </a>
+        <hr class="border-secondary opacity-25 my-4">
+
+        <div class="mb-4">
+            <label class="text-white fw-bold mb-2" style="font-size: 0.9rem;">Preço</label>
+            <div class="d-flex gap-2">
+                <a href="{{ $base.'?'.http_build_query(array_merge($current, ['sort' => 'price_asc'])) }}" 
+                   class="btn flex-fill text-center py-2 ajax-filter price-btn {{ request('sort') == 'price_asc' ? 'active' : '' }}">
+                   Menor
+                </a>
+                
+                <a href="{{ $base.'?'.http_build_query(array_merge($current, ['sort' => 'price_desc'])) }}" 
+                   class="btn flex-fill text-center py-2 ajax-filter price-btn {{ request('sort') == 'price_desc' ? 'active' : '' }}">
+                   Maior
+                </a>
+            </div>
         </div>
+
+        <hr class="border-secondary opacity-25 my-4">
 
         <div class="filtro-lista">
-            <h6 class="text-white fw-bold mb-3">Categorias</h6>
+            <h6 class="text-white fw-bold mb-3" style="font-size: 0.9rem;">Categorias</h6>
             
             @php
-                $categorias = \App\Models\Produto::whereNotNull('categoria')
-                    ->distinct()->orderBy('categoria')->pluck('categoria');
+                $dbCats = \App\Models\Produto::whereNotNull('categoria')
+                    ->where('categoria', '<>', '')
+                    ->select('categoria', \Illuminate\Support\Facades\DB::raw('count(*) as total'))
+                    ->groupBy('categoria')
+                    ->get()
+                    ->keyBy('categoria');
+
+                $static = ['Action Figures', 'Perifericos', 'Jogos', 'Acessório', 'Console', 'Informática'];
+                $merged = collect(array_merge($dbCats->keys()->toArray(), $static))->unique()->sort()->values();
+                $totalProducts = \App\Models\Produto::count();
+                $allNames = collect(['Todos'])->merge($merged->filter(function($n){ return $n !== 'Todos'; }))->values();
                 $catAtual = request('categoria');
             @endphp
 
-            <div class="d-flex flex-column gap-2">
-                @forelse($categorias as $cat)
+            <div class="d-flex flex-column gap-1">
+                @foreach($allNames as $catName)
                     @php
-                        $params = array_merge($current, ['categoria' => $cat]);
-                        $link = $base . '?' . http_build_query($params);
-                        $active = $catAtual == $cat;
+                        if ($catName === 'Todos') {
+                            $link = $base; 
+                            $active = empty($catAtual);
+                            $count = $totalProducts;
+                        } else {
+                            $params = array_merge($current, ['categoria' => $catName]);
+                            $link = $base . '?' . http_build_query($params);
+                            $active = ($catAtual == $catName);
+                            $count = isset($dbCats[$catName]) ? $dbCats[$catName]->total : 0;
+                        }
                     @endphp
+                    
                     <a href="{{ $link }}" 
-                       class="text-decoration-none ajax-filter category-item {{ $active ? 'text-light fw-bold' : 'text-light' }}"
-                       style="transition: all 0.2s;">
-                        {{ $cat }}
+                       class="text-decoration-none ajax-filter category-item d-flex justify-content-between align-items-center py-2 px-2 rounded {{ $active ? 'active' : '' }}">
+                        <span>{{ $catName }}</span>
+                        <span class="small count-badge ms-2" style="font-size: 0.75rem;">({{ $count }})</span>
+                        <i class="bi bi-check2 check-icon {{ $active ? 'd-block' : 'd-none' }}"></i>
                     </a>
-                @empty
-                    <div class="text-white-50 small">Nenhuma categoria.</div>
-                @endforelse
+                @endforeach
             </div>
         </div>
     </div>
 </div>
 
 <style>
-    /* Faz a seta girar quando abre/fecha */
-    .transition-icon {
-        transition: transform 0.3s ease;
+    /* Transição do ícone do Collapse */
+    .transition-icon { transition: transform 0.3s ease; }
+    a[aria-expanded="true"] .transition-icon { transform: rotate(180deg); }
+    
+    /* --- Estilo Categorias --- */
+    .category-item {
+        color: rgba(255, 255, 255, 0.5);
+        transition: all 0.2s ease-in-out;
+        border-left: 3px solid transparent;
     }
-    a[aria-expanded="true"] .transition-icon {
-        transform: rotate(180deg);
-    }
-
-    /* Efeito de hover nas categorias */
     .category-item:hover {
-        padding-left: 5px;
-        color: #fff !important;
+        background-color: #2a2a2a;
+        color: #fff;
+        padding-left: 12px !important;
+    }
+    .category-item.active {
+        background-color: #333;
+        color: #fff;
+        font-weight: 600;
+        padding-left: 12px !important;
+        border-left: 3px solid #fff;
+    }
+    .category-item .count-badge { transition: color 0.2s; }
+    .category-item.active .count-badge { color: #fff !important; }
+
+    /* --- Estilo Botões de Preço --- */
+    .price-btn {
+        background-color: #2a2a2a;
+        color: #aaa;
+        border: 1px solid transparent;
+        font-size: 0.8rem;
+        transition: all 0.2s ease; /* Animação suave */
+    }
+    
+    /* Hover do botão de preço */
+    .price-btn:hover {
+        background-color: #333;
+        color: #fff;
+        transform: translateY(-2px); /* Leve subida */
     }
 
-    /* Ajuste para o botão ativo ficar preenchido */
-    .btn-outline-light.active {
-        background-color: white;
-        color: black;
+    /* Estado Ativo do botão de preço */
+    .price-btn.active {
+        background-color: #404040;
+        color: #fff;
+        font-weight: bold;
+        border: 1px solid #fff; /* Borda branca para destacar */
+        box-shadow: 0 0 10px rgba(255,255,255,0.1);
     }
 </style>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    
+    // 1. Animação das Categorias
+    const categoryLinks = document.querySelectorAll('.category-item');
+    categoryLinks.forEach(link => {
+        link.addEventListener('click', function() {
+            categoryLinks.forEach(el => {
+                el.classList.remove('active');
+                const check = el.querySelector('.check-icon');
+                if(check) { check.classList.remove('d-block'); check.classList.add('d-none'); }
+            });
+            this.classList.add('active');
+            const activeCheck = this.querySelector('.check-icon');
+            if(activeCheck) { activeCheck.classList.remove('d-none'); activeCheck.classList.add('d-block'); }
+        });
+    });
+
+    // 2. Animação dos Botões de Preço (NOVO)
+    const priceBtns = document.querySelectorAll('.price-btn');
+    priceBtns.forEach(btn => {
+        btn.addEventListener('click', function() {
+            // Remove active de todos os botões de preço
+            priceBtns.forEach(el => el.classList.remove('active'));
+            
+            // Adiciona active no que foi clicado
+            this.classList.add('active');
+        });
+    });
+
+});
+</script>

@@ -25,19 +25,36 @@
                                placeholder="Nome do produto" value="{{ $produto->nome }}" required>
                     </div>
 
+                    {{-- ATUALIZAÇÃO DA LISTA DE CATEGORIAS --}}
                     <div class="mb-3">
                         <label for="editCategoria-{{ $produto->id }}" class="form-label">Categoria</label>
                         <select id="editCategoria-{{ $produto->id }}" name="categoria" class="form-select" required>
                             <option value="" disabled>Selecione a categoria</option>
-                            <option value="Action Figures" {{ $produto->categoria == 'Action Figures' ? 'selected' : '' }}>Action Figures</option>
-                            <option value="Perifericos" {{ $produto->categoria == 'Perifericos' ? 'selected' : '' }}>Periféricos</option>
-                            <option value="Jogos" {{ $produto->categoria == 'Jogos' ? 'selected' : '' }}>Jogos</option>
+                            
+                            @php
+                                $categorias = [
+                                    'Action Figures', 
+                                    'Perifericos', 
+                                    'Jogos', 
+                                    'Acessório', 
+                                    'Console', 
+                                    'Informática'
+                                ];
+                            @endphp
+
+                            @foreach($categorias as $cat)
+                                <option value="{{ $cat }}" {{ $produto->categoria == $cat ? 'selected' : '' }}>
+                                    {{ $cat }}
+                                </option>
+                            @endforeach
+
                         </select>
                     </div>
+
                     <div class="mb-3">
-    <label for="editDescricao-{{ $produto->id }}" class="form-label">Descrição</label>
-    <textarea id="editDescricao-{{ $produto->id }}" name="descricao" class="form-control" rows="3">{{ $produto->descricao }}</textarea>
-</div>
+                        <label for="editDescricao-{{ $produto->id }}" class="form-label">Descrição</label>
+                        <textarea id="editDescricao-{{ $produto->id }}" name="descricao" class="form-control" rows="3">{{ $produto->descricao }}</textarea>
+                    </div>
 
                     <div class="mb-3">
                         <label for="editPreco-{{ $produto->id }}" class="form-label">Preço</label>
@@ -53,7 +70,7 @@
 
                     <div class="mb-2">
                         <label class="form-label d-block">Imagens Atuais:</label>
-                        <img src="{{ Storage::url($produto->foto_1) }}" height="50" class="rounded me-2">
+                        @if($produto->foto_1) <img src="{{ Storage::url($produto->foto_1) }}" height="50" class="rounded me-2"> @endif
                         @if($produto->foto_2) <img src="{{ Storage::url($produto->foto_2) }}" height="50" class="rounded me-2"> @endif
                         @if($produto->foto_3) <img src="{{ Storage::url($produto->foto_3) }}" height="50" class="rounded"> @endif
                     </div>

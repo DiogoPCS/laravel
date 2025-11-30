@@ -1,144 +1,138 @@
 @include('head.head')
 
-<body style="background-color: #f0f2f5;" >
+<body style="background-color: #121212; color: #f5f5f5;">
     
     @include('cabecalho.cabecalho')
 
-   
-    <div class="container bg-white rounded shadow-sm p-4" style="margin-top: 198px; margin-bottom: 50px;">
+    <div class="container" style="margin-top: 130px; margin-bottom: 50px;">
 
-        <p class="text-muted small mb-3">Produto</p>
+        <div class="mb-4">
+            <a href="{{ url('/') }}" class="text-decoration-none text-white-50 hover-white small">
+                <i class="bi bi-arrow-left"></i> Voltar para a loja
+            </a>
+        </div>
 
-        <div class="row">
-            <div class="col-md-5">
+        <div class="row g-5">
+            <div class="col-md-7 col-lg-8">
                 
                 <div class="row g-2">
-                    <div class="col-2 d-flex flex-column align-items-center" id="miniImg">
+                    <div class="col-2 d-flex flex-column gap-2" id="miniImg">
                         @php
-                            // Build an array of lateral image URLs from the produto model if present.
                             $lateralImages = [];
-                            if (!empty($produto->foto_1)) {
-                                $lateralImages[] = \Illuminate\Support\Facades\Storage::url($produto->foto_1);
-                            }
-                            if (!empty($produto->foto_2)) {
-                                $lateralImages[] = \Illuminate\Support\Facades\Storage::url($produto->foto_2);
-                            }
-                            if (!empty($produto->foto_3)) {
-                                $lateralImages[] = \Illuminate\Support\Facades\Storage::url($produto->foto_3);
-                            }
-
-                            // main image is the first available lateral image (or null)
+                            if (!empty($produto->foto_1)) $lateralImages[] = \Illuminate\Support\Facades\Storage::url($produto->foto_1);
+                            if (!empty($produto->foto_2)) $lateralImages[] = \Illuminate\Support\Facades\Storage::url($produto->foto_2);
+                            if (!empty($produto->foto_3)) $lateralImages[] = \Illuminate\Support\Facades\Storage::url($produto->foto_3);
                             $mainImage = count($lateralImages) ? $lateralImages[0] : null;
                         @endphp
 
                         @if(count($lateralImages))
                             @foreach($lateralImages as $idx => $imgUrl)
-                                <img src="{{ $imgUrl }}" data-src="{{ $imgUrl }}" style="cursor:pointer;" class="img-fluid rounded border {{ $idx===0 ? 'border-primary' : '' }} p-1 mb-2 thumb-select" role="button" tabindex="0" aria-pressed="{{ $idx===0 ? 'true' : 'false' }}" alt="Miniatura {{ $idx+1 }}">
+                                <img src="{{ $imgUrl }}" 
+                                     data-src="{{ $imgUrl }}" 
+                                     style="cursor:pointer; object-fit: cover; height: 80px;" 
+                                     class="img-fluid rounded border-0 thumb-select {{ $idx===0 ? 'opacity-100 ring-active' : 'opacity-50' }}" 
+                                     role="button" 
+                                     alt="Miniatura {{ $idx+1 }}">
                             @endforeach
                         @endif
                     </div>
+
                     <div class="col-10">
                         @if($mainImage)
-                            <img id="mainProductImage" src="{{ $mainImage }}" class="img-fluid rounded border p-3 w-100" alt="Imagem do produto">
+                            <div class="rounded overflow-hidden bg-black d-flex align-items-center justify-content-center" style="min-height: 400px;">
+                                <img id="mainProductImage" src="{{ $mainImage }}" class="img-fluid" style="max-height: 500px;" alt="Imagem do produto">
+                            </div>
                         @endif
                     </div>
                 </div>
 
-                <div class="row g-3 mt-3 align-items-center justify-content-center">
-                        <h6 class="small">Fotos da loja</h6>
-                    <div class="col-6 ">
+                <div class="mt-5">
+                    <h4 class="mb-3 fw-bold">Sobre o Jogo/Produto</h4>
+                    <div class="text-white-50" style="line-height: 1.6;">
+                        @if(!empty($produto->descricao))
+                            {!! nl2br(e($produto->descricao)) !!}
+                        @else
+                            <p>Nenhuma descrição informada para este produto.</p>
+                        @endif
+                    </div>
 
-                        <img src="{{ asset('images/controle.svg') }}" class="img-fluid rounded border">
-                    </div>
-                    <div class="col-6">
-                        <img src="{{ asset('images/controle.svg') }}" class="img-fluid rounded border">
-                    </div>
-                    <div class="col-12">
-                        <h6 class="small">Tamanho do produto</h6>
-                        <ul class="list-unstyled text-muted small">
-                            <li>Tamanho da embalagem: 18 cm x 18 cm x 18 cm</li>
-                            <li>Peso bruto: 0,345 Kg</li>
-                        </ul>
+                    <div class="row mt-4 g-3">
+                        <div class="col-md-6">
+                            <div class="p-3 rounded" style="background-color: #202020;">
+                                <span class="text-white-50 small d-block mb-1">Categoria</span>
+                                <span class="fw-bold">{{ $produto->categoria ?? 'Geral' }}</span>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
 
-            <div class="col-md-7">
-                
-                <div class="row">
+            <div class="col-md-5 col-lg-4">
+                <div class="sticky-top" style="top: 100px;">
                     
-                    <div class="col-md-8">
-                        <span class="badge bg-warning text-dark mb-2">Novo</span>
-                        <h1>{{ $produto->nome ?? 'Produto sem nome' }}</h1>
-                        
-                        <h2 class="fw-bold my-3">{{ isset($produto->preco) ? 'R$'.number_format($produto->preco,2,',','.') : 'R$0,00' }}</h2>
-
-                        <h6 class="small">Tipo: <strong>{{ $produto->categoria ?? '—' }}</strong></h6>
-                        @if(!empty($mainImage))
-                            <img src="{{ $mainImage }}" class="border rounded p-1" style="width: 50px;">
+                   <div class="d-flex align-items-center mb-2 gap-2">
+                        @if($produto->created_at >= now()->subDays(7))
+                            <span class="badge bg-warning text-dark small px-2 py-1 fw-bold text-uppercase shadow-sm">
+                                NOVO
+                            </span>
                         @endif
-                        
-                        <div class="mt-3">
-                            <label for="quantidade" class="form-label small">Quantidade:</label>
-                            <input type="number" class="form-control" id="quantidade" value="1" style="width: 100px;">
-                            <span class="text-muted small">{{ $produto->estoque ?? 0 }} unidades disponíveis</span>
                         </div>
 
-                      <h5 class="mt-4">Descrição</h5>
-<ul class="list-unstyled small text-muted">
-    @if(!empty($produto->descricao))
-        {{-- Transforma o texto em linhas separadas para criar a lista --}}
-        @foreach(explode("\n", $produto->descricao) as $linha)
-            {{-- Verifica se a linha não está vazia para não criar bullets vazios --}}
-            @if(trim($linha) != "")
-                {{-- Adiciona o traço se o usuário não tiver colocado --}}
-                <li>
-                    @if(!str_starts_with(trim($linha), '-')) - @endif 
-                    {{ $linha }}
-                </li>
-            @endif
-        @endforeach
-    @else
-        <li>Nenhuma descrição informada para este produto.</li>
-    @endif
-</ul>
+                    <h2 class="fw-bold mb-3">{{ $produto->nome ?? 'Produto sem nome' }}</h2>
+                    
+                    <div class="mb-4">
+                        <h3 class="fw-bold mb-0">{{ isset($produto->preco) ? 'R$'.number_format($produto->preco,2,',','.') : 'R$0,00' }}</h3>
                     </div>
 
-                    <div class="col-md-4">
-                        <div class="border rounded p-3 bg-light h-100">
-                            <form>
-                                <div class="mb-3">
-                                    <label for="comentario" class="form-label small text-muted">Deixe um comentário sobre o atendimento</label>
-                                    <textarea class="form-control" id="comentario" rows="8"></textarea>
-                                </div>
-                                <button type="submit" class="btn btn-primary btn-sm float-end">Comentar</button>
-                            </form>
+                    <div class="d-grid">
+                        <button class="btn btn-primary btn-lg py-3 fw-bold text-uppercase">
+                            Comprar Agora
+                        </button>
+                    </div>
+
+                    <div class="mt-4 pt-4 border-top border-secondary border-opacity-25">
+                        <div class="d-flex justify-content-between text-white-50 small">
+                            <span>Estoque</span>
+                            <span class="{{ ($produto->estoque ?? 0) > 0 ? 'text-success' : 'text-danger' }}">
+                                {{ $produto->estoque ?? 0 }} unidades
+                            </span>
                         </div>
+                    </div>
+
+                    <div class="mt-4 p-3 rounded" style="background-color: #202020;">
+                        <h6 class="small text-white-50 mb-2">Fale Conosco</h6>
+                        <form>
+                            <div class="mb-2">
+                                <textarea class="form-control bg-dark text-light border-secondary placeholder-gray" 
+                                          id="comentario" 
+                                          rows="3" 
+                                          placeholder="Dúvidas sobre o produto?"></textarea>
+                            </div>
+                            <div class="d-flex justify-content-end">
+                                <button type="submit" class="btn btn-sm btn-light">Enviar</button>
+                            </div>
+                        </form>
                     </div>
 
                 </div>
             </div>
-
         </div> 
        
-        <hr class="my-5">
+        <hr class="my-5 border-secondary border-opacity-25">
 
         <div class="row">
             <div class="col-12">
-                <h3 class="mb-4">Produtos Recomendados</h3>
+                <h4 class="mb-4 fw-bold">Você também pode gostar</h4>
             </div>
-        </div>
-
-        <div class="row">
             <div class="col-12">
-                {{-- Passa os produtos recomendados para o partial de listagem --}}
                 @include('listagem.produtos', ['produtos' => $recommended ?? collect()])
             </div>
         </div>
 
     </div> 
 
-    
+    @include('footer.footer')
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 
     <script>
@@ -150,13 +144,11 @@
 
             function setActive(thumb){
                 thumbs.forEach(t => {
-                    t.classList.remove('border-primary');
-                    t.classList.add('border');
-                    t.setAttribute('aria-pressed','false');
+                    t.classList.remove('opacity-100', 'ring-active');
+                    t.classList.add('opacity-50');
                 });
-                thumb.classList.remove('border');
-                thumb.classList.add('border-primary');
-                thumb.setAttribute('aria-pressed','true');
+                thumb.classList.remove('opacity-50');
+                thumb.classList.add('opacity-100', 'ring-active');
             }
 
             thumbs.forEach(thumb => {
@@ -165,16 +157,17 @@
                     if(src) main.src = src;
                     setActive(this);
                 });
-
-                thumb.addEventListener('keydown', function(e){
-                    if(e.key === 'Enter' || e.key === ' ') {
-                        e.preventDefault();
-                        this.click();
-                    }
-                });
             });
         })();
     </script>
-        @include('footer.footer')
 
-</body>
+    <style>
+        .form-control:focus {
+            background-color: #2a2a2a;
+            color: #fff;
+            border-color: #555;
+            box-shadow: none;
+        }
+        
+        .placeholder-gray::placeholder {
+            color:

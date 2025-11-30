@@ -1,4 +1,4 @@
-<footer class="bg-dark text-light py-4 mt-auto">
+<footer class="text-light py-4 mt-auto" style="background-color: #121212; border-top: 1px solid #333;">
     <div class="container">
         <div class="row align-items-center">
             
@@ -9,16 +9,16 @@
                     </div>
                     
                     <div class="d-flex gap-3 align-items-center">
-                        <a href="https://www.facebook.com/juninho.sartori.94" target="_blank" class="opacity-75 hover-opacity-100">
+                        <a href="https://www.facebook.com/juninho.sartori.94" target="_blank" class="opacity-75 hover-opacity-100 transition-icon">
                             <img src="{{ asset('images/facebook.svg') }}" alt="Facebook" width="24">
                         </a>
-                        <a href="https://www.youtube.com/@Tatu%C3%ADGames/" target="_blank" class="opacity-75 hover-opacity-100">
+                        <a href="https://www.youtube.com/@Tatu%C3%ADGames/" target="_blank" class="opacity-75 hover-opacity-100 transition-icon">
                             <img src="{{ asset('images/youtube.svg') }}" alt="YouTube" width="24">
                         </a>
-                        <a href="https://www.instagram.com/tatuigames?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" target="_blank" class="opacity-75 hover-opacity-100">
+                        <a href="https://www.instagram.com/tatuigames?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" target="_blank" class="opacity-75 hover-opacity-100 transition-icon">
                             <img src="{{ asset('images/instagram.svg') }}" alt="Instagram" width="24">
                         </a>
-                        <a href="https://api.whatsapp.com/send/?phone=5515997728373&text&type=phone_number&app_absent=0" target="_blank" class="opacity-75 hover-opacity-100">
+                        <a href="https://api.whatsapp.com/send/?phone=5515997728373&text&type=phone_number&app_absent=0" target="_blank" class="opacity-75 hover-opacity-100 transition-icon">
                             <img src="{{ asset('images/WhatsApp-Logo.svg') }}" alt="WhatsApp" width="24">
                         </a>
                     </div>
@@ -38,3 +38,12 @@
 </footer>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+<style>
+    /* Pequeno efeito ao passar o mouse nos ícones sociais */
+    .transition-icon:hover {
+        opacity: 1 !important;
+        transform: scale(1.1);
+        transition: transform 0.2s;
+    }
+</style>

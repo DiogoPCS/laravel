@@ -3,89 +3,63 @@
 <body class="bg-login">
     
     @include('cabecalho.cabecalho')
-    <form method="POST" action="{{ route('logout') }}" class="d-inline">
-    @csrf
+    
+    <div class="position-absolute top-0 end-0 p-3" style="z-index: 1000; margin-top: 100px;">
+        <form method="POST" action="{{ route('logout') }}">
+            @csrf
+            <button type="submit" class="btn btn-outline-danger btn-sm">Sair</button>
+        </form>
+    </div>
 
-    <a href="{{ route('logout') }}" 
-       onclick="event.preventDefault(); this.closest('form').submit();"
-       class="text-decoration-none text-light">
-        Sair
-    </a>
-</form>
     <div class="container" style="margin-top: 152px;">
         <div id="admin-products-list">
             @include('admin.produtos-grid', ['produtos' => $produtos ?? collect()])
         </div>
+    </div> 
 
-        {{-- AJAX handlers for edit/delete forms inside the admin grid --}}
-        <script>
-            (function(){
-                const containerId = 'admin-products-list';
-                const container = document.getElementById(containerId);
-                if (!container) return;
-
-                const tokenMeta = document.querySelector('meta[name="csrf-token"]');
-                const csrf = tokenMeta ? tokenMeta.getAttribute('content') : '';
-
-                document.addEventListener('submit', function(e){
-                    const form = e.target;
-                    if (!form) return;
-
-                    const isEdit = form.id && form.id.startsWith('formEditarProduto-');
-                    const isDelete = form.classList && form.classList.contains('ajax-delete');
-                    if (!isEdit && !isDelete) return;
-
-                    e.preventDefault();
-                    const url = form.getAttribute('action');
-                    const formData = new FormData(form);
-
-                    // send AJAX request
-                    fetch(url, {
-                        method: 'POST',
-                        headers: {
-                            'X-Requested-With': 'XMLHttpRequest',
-                            'X-CSRF-TOKEN': csrf
-                        },
-                        body: formData
-                    })
-                    .then(resp => {
-                        if (!resp.ok) throw new Error('Network response was not ok');
-                        return resp.text();
-                    })
-                    .then(html => {
-                        // replace admin grid
-                        container.innerHTML = html;
-
-                        // hide modal if form was in one
-                        const modalEl = form.closest('.modal');
-                        if (modalEl && window.bootstrap) {
-                            try {
-                                const inst = window.bootstrap.Modal.getInstance(modalEl) || new window.bootstrap.Modal(modalEl);
-                                inst.hide();
-                            } catch (err) { /* ignore */ }
-                        }
-                    })
-                    .catch(err => {
-                        console.error('AJAX form error', err);
-                        alert('Erro ao processar a operação. Veja o console para detalhes.');
-                    });
-                });
-            })();
-        </script>
-
-        <div class="row justify-content-center my-4 "> 
-            <div class="col-auto ">
-                <form method="POST" action="{{ route('logout') }}" class="d-inline">
+    <div class="modal fade" id="modalEditarCarrossel" tabindex="-1" aria-labelledby="modalCarrosselLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content bg-dark text-light border border-secondary">
+                <div class="modal-header border-bottom border-secondary">
+                    <h5 class="modal-title" id="modalCarrosselLabel">Editar Imagens da Home</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <form action="{{ url('/admin/carousel/update') }}" method="POST" enctype="multipart/form-data">
                     @csrf
-                    <button type="submit" class="btn btn-outline-light">
-                        Sair
-                    </button>
+                    <div class="modal-body">
+                        <div class="alert alert-warning small py-2">
+                            <i class="bi bi-info-circle"></i> Recomendado: Imagens 1920x600px (Formato JPG ou PNG).
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="banner1" class="form-label">Banner 1 (Principal)</label>
+                            <input class="form-control bg-secondary text-light border-0" type="file" id="banner1" name="banner1">
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="banner2" class="form-label">Banner 2</label>
+                            <input class="form-control bg-secondary text-light border-0" type="file" id="banner2" name="banner2">
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="banner3" class="form-label">Banner 3</label>
+                            <input class="form-control bg-secondary text-light border-0" type="file" id="banner3" name="banner3">
+                        </div>
+                    </div>
+                    <div class="modal-footer border-top border-secondary">
+                        <button type="button" class="btn btn-outline-light" data-bs-dismiss="modal">Cancelar</button>
+                        <button type="submit" class="btn btn-primary">Salvar Alterações</button>
+                    </div>
                 </form>
             </div>
         </div>
-        
+    </div>
 
-    </div> 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 
-</body>
+    <script>
+        (function(){
+            // ... (Mantenha seu script JS existente aqui) ...
+        })();
+    </script>
+</body> 
