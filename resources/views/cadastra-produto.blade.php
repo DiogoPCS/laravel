@@ -1,8 +1,7 @@
 @include('head.head')
 
 <body class="bg-login d-flex flex-column min-vh-100">
-    @include('cabecalho.cabecalho')
-    @include('menu-superior.menu')
+   
 
     <main class="flex-grow-1 d-flex justify-content-center align-items-center" style="padding-top:160px;">
         <div class="container">
@@ -23,18 +22,31 @@
                                 <input id="nome" name="nome" type="text" class="form-control" placeholder="Nome do produto" required>
                             </div>
                             
-                            <div class="mb-3">
-                                <label for="categoria" class="form-label">Categoria</label>
-                                <select id="categoria" name="categoria" class="form-select" required>
-                                    <option value="" disabled selected hidden>Selecione a categoria</option>
-                                    <option value="Action Figures">Action Figures</option>
-                                    <option value="Perifericos">Periféricos</option>
-                                    <option value="Jogos">Jogos</option>
-                                    <option value="Jogos">Acessório</option>
-                                    <option value="Jogos">Console</option>
+                           <div class="mb-3">
+    <label for="categoria" class="form-label">Categoria</label>
+    <select id="categoria" name="categoria" class="form-select" required>
+        <option value="" disabled selected hidden>Selecione a categoria</option>
+        
+        @php
+            // Lista Fixa e Já Ordenada (Removemos o sort() para evitar trocas acidentais)
+            $categorias = [
+                'Acessório',
+                'Action Figures', 
+                'Console', 
+                'Informática',
+                'Jogos', 
+                'Perifericos'
+            ];
+        @endphp
 
-                                </select>
-                            </div>
+        @foreach($categorias as $cat)
+            {{-- O old() garante que se a validação falhar, a categoria volta selecionada --}}
+            <option value="{{ $cat }}" {{ old('categoria') == $cat ? 'selected' : '' }}>
+                {{ $cat }}
+            </option>
+        @endforeach
+    </select>
+</div>
 
                             <div class="mb-3">
                                 <label for="descricao" class="form-label">Descrição</label>

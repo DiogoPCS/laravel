@@ -209,6 +209,35 @@ class ProdutoController extends Controller
    
     public function update(Request $request, Produto $produto)
     {
+        // ... (sua validação e sanitização continuam aqui) ...
+    $data = $validatedData;
+
+    // --- NOVO: Lógica de Exclusão de Imagem ---
+    
+    // Foto 1
+    if ($request->input('delete_foto_1') == '1') {
+        Storage::delete($produto->foto_1); // Apaga arquivo físico
+        $data['foto_1'] = null; // Define como null no banco
+    }
+
+    // Foto 2
+    if ($request->input('delete_foto_2') == '1') {
+        if ($produto->foto_2) Storage::delete($produto->foto_2);
+        $data['foto_2'] = null;
+    }
+
+    // Foto 3
+    if ($request->input('delete_foto_3') == '1') {
+        if ($produto->foto_3) Storage::delete($produto->foto_3);
+        $data['foto_3'] = null;
+    }
+    // ------------------------------------------
+
+    // ... (O resto do seu código de upload continua igual abaixo) ...
+    
+    if ($request->hasFile('foto_1')) {
+        // ...
+    }
         
         $validatedData = $request->validate([
             'nome' => 'required|max:255|unique:produtos,nome,' . $produto->id,

@@ -68,7 +68,7 @@
             </div>
 
             <div class="col-md-5 col-lg-4">
-                <div class="sticky-top" style="top: 100px;">
+                <div id="productSidebar" class="sticky-top" style="top: 100px;">
                     
                    <div class="d-flex align-items-center mb-2 gap-2">
                         @if($produto->created_at >= now()->subDays(7))
@@ -84,11 +84,27 @@
                         <h3 class="fw-bold mb-0">{{ isset($produto->preco) ? 'R$'.number_format($produto->preco,2,',','.') : 'R$0,00' }}</h3>
                     </div>
 
-                    <div class="d-grid">
-                        <button class="btn btn-primary btn-lg py-3 fw-bold text-uppercase">
-                            Comprar Agora
-                        </button>
-                    </div>
+                    <div class="d-grid" id="buyBox">
+    @php
+        // 1. Número do telefone (Apenas números)
+        $telefone = "5515997728373";
+        
+        // 2. Prepara os dados
+        $nomeProduto = $produto->nome ?? 'Produto';
+        $precoProduto = isset($produto->preco) ? 'R$ ' . number_format($produto->preco, 2, ',', '.') : 'R$ 0,00';
+        
+        // 3. Monta a mensagem usando \n para quebra de linha
+        // IMPORTANTE: Tem que usar aspas duplas " " para o \n funcionar
+        $mensagem = "Olá! Quero comprar o produto: *{$nomeProduto}*\nPreço: *{$precoProduto}*";
+        
+        // 4. Gera o link final (o PHP transforma o \n no código correto automaticamente)
+        $linkWhatsApp = "https://api.whatsapp.com/send?phone={$telefone}&text=" . urlencode($mensagem);
+    @endphp
+
+    <a href="{{ $linkWhatsApp }}" target="_blank" class="btn btn-primary btn-lg py-3 fw-bold text-uppercase d-flex align-items-center justify-content-center gap-2">
+        <i class="bi bi-whatsapp"></i> Comprar Agora
+    </a>
+</div>
 
                     <div class="mt-4 pt-4 border-top border-secondary border-opacity-25">
                         <div class="d-flex justify-content-between text-white-50 small">
@@ -98,22 +114,6 @@
                             </span>
                         </div>
                     </div>
-
-                    <div class="mt-4 p-3 rounded" style="background-color: #202020;">
-                        <h6 class="small text-white-50 mb-2">Fale Conosco</h6>
-                        <form>
-                            <div class="mb-2">
-                                <textarea class="form-control bg-dark text-light border-secondary placeholder-gray" 
-                                          id="comentario" 
-                                          rows="3" 
-                                          placeholder="Dúvidas sobre o produto?"></textarea>
-                            </div>
-                            <div class="d-flex justify-content-end">
-                                <button type="submit" class="btn btn-sm btn-light">Enviar</button>
-                            </div>
-                        </form>
-                    </div>
-
                 </div>
             </div>
         </div> 
@@ -158,6 +158,44 @@
                     setActive(this);
                 });
             });
+
+            // Make the buy box fixed on small screens so it's always reachable
+            function updateBuyBoxPosition(){
+                const buy = document.getElementById('buyBox');
+                const sidebar = document.getElementById('productSidebar');
+                if(!buy || !sidebar) return;
+
+                if(window.innerWidth <= 768){
+                    // mobile: fixed at bottom, full-width with some padding
+                    buy.style.position = 'fixed';
+                    buy.style.left = '12px';
+                    buy.style.right = '12px';
+                    buy.style.bottom = '12px';
+                    buy.style.zIndex = '1200';
+                    buy.style.background = 'linear-gradient(180deg, rgba(18,18,18,0.95), rgba(18,18,18,0.95))';
+                    buy.style.padding = '8px';
+                    buy.style.borderRadius = '8px';
+                    // ensure the button fills the box
+                    const btn = buy.querySelector('a.btn');
+                    if(btn){ btn.classList.add('w-100'); }
+                } else {
+                    // desktop/tablet: restore to document flow so sticky-top works
+                    buy.style.position = '';
+                    buy.style.left = '';
+                    buy.style.right = '';
+                    buy.style.bottom = '';
+                    buy.style.zIndex = '';
+                    buy.style.background = '';
+                    buy.style.padding = '';
+                    buy.style.borderRadius = '';
+                    const btn = buy.querySelector('a.btn');
+                    if(btn){ btn.classList.remove('w-100'); }
+                }
+            }
+
+            // run on load and resize
+            window.addEventListener('load', updateBuyBoxPosition);
+            window.addEventListener('resize', updateBuyBoxPosition);
         })();
     </script>
 

@@ -27,29 +27,30 @@
 
                     {{-- ATUALIZAÇÃO DA LISTA DE CATEGORIAS --}}
                     <div class="mb-3">
-                        <label for="editCategoria-{{ $produto->id }}" class="form-label">Categoria</label>
-                        <select id="editCategoria-{{ $produto->id }}" name="categoria" class="form-select" required>
-                            <option value="" disabled>Selecione a categoria</option>
-                            
-                            @php
-                                $categorias = [
-                                    'Action Figures', 
-                                    'Perifericos', 
-                                    'Jogos', 
-                                    'Acessório', 
-                                    'Console', 
-                                    'Informática'
-                                ];
-                            @endphp
+    <label for="editCategoria-{{ $produto->id }}" class="form-label">Categoria</label>
+    <select id="editCategoria-{{ $produto->id }}" name="categoria" class="form-select" required>
+        <option value="" disabled>Selecione a categoria</option>
+        
+        @php
+            $categorias = [
+                'Action Figures', 
+                'Perifericos', 
+                'Jogos', 
+                'Acessório', 
+                'Console', 
+                'Informática'
+            ];
+            sort($categorias);
+        @endphp
 
-                            @foreach($categorias as $cat)
-                                <option value="{{ $cat }}" {{ $produto->categoria == $cat ? 'selected' : '' }}>
-                                    {{ $cat }}
-                                </option>
-                            @endforeach
+        @foreach($categorias as $cat)
+            <option value="{{ $cat }}" {{ $produto->categoria == $cat ? 'selected' : '' }}>
+                {{ $cat }}
+            </option>
+        @endforeach
 
-                        </select>
-                    </div>
+    </select>
+</div>
 
                     <div class="mb-3">
                         <label for="editDescricao-{{ $produto->id }}" class="form-label">Descrição</label>
