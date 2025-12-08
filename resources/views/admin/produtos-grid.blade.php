@@ -47,10 +47,9 @@
 </div>
 
 <style>
-    /* Pequeno efeito visual ao passar o mouse */
     .hover-card:hover {
-        background-color: #343a40 !important; /* lighten bg */
-        border-color: #ffc107 !important; /* warning color border */
+        background-color: #343a40 !important; 
+        border-color: #ffc107 !important; 
         transition: all 0.3s ease;
     }
 </style>

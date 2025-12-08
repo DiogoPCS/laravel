@@ -28,7 +28,7 @@
         <option value="" disabled selected hidden>Selecione a categoria</option>
         
         @php
-            // Lista Fixa e Já Ordenada (Removemos o sort() para evitar trocas acidentais)
+            
             $categorias = [
                 'Acessório',
                 'Action Figures', 
@@ -40,7 +40,7 @@
         @endphp
 
         @foreach($categorias as $cat)
-            {{-- O old() garante que se a validação falhar, a categoria volta selecionada --}}
+         
             <option value="{{ $cat }}" {{ old('categoria') == $cat ? 'selected' : '' }}>
                 {{ $cat }}
             </option>

@@ -1,6 +1,5 @@
 
 <div class="row g-3">
-    {{-- Loop pelos produtos fornecidos pela view (passados pelo controller/route) --}}
     @forelse($produtos ?? [] as $produto)
         <div class="col-6 col-sm-4 col-md-3 col-lg-3">
             @include('listagem.card-produto', [

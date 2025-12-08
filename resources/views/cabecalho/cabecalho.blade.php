@@ -14,16 +14,13 @@
         <div class="col-6 d-flex justify-content-end align-items-center">
             <form method="GET" action="{{ route('produtos.search') }}" class="d-flex position-relative w-100 justify-content-end">
                 
-                {{-- MUDANÇA 1: Background #2a2a2a (Cinza escuro) --}}
                 <div class="rounded-pill d-flex align-items-center position-relative transition-search" 
                      style="height:40px; padding-left:12px; padding-right:12px; z-index: 1060; width: 260px; background-color: #2a2a2a;">
                     
-                    {{-- MUDANÇA 2: Inverter a cor do ícone para branco usando filter --}}
                     <label for="search" class="me-2 mb-0" style="cursor: pointer;">
                         <img src="{{ asset('images/search.svg') }}" alt="search" style="height:20px; filter: invert(1);">
                     </label>
                     
-                    {{-- MUDANÇA 3: Texto branco no input e placeholder ajustado via CSS --}}
                     <input id="search" name="q" type="text" 
                            class="form-control bg-transparent border-0 text-white placeholder-gray" 
                            placeholder="Pesquisar loja" 
@@ -31,7 +28,6 @@
                            value="{{ request('q') }}" autocomplete="off">
                 </div>
 
-                {{-- MUDANÇA 4: Painel de sugestões escuro (bg-dark text-light) --}}
                 <div id="search-suggestions" class="position-absolute bg-dark text-light shadow-lg" 
                      style="z-index:1050; display:none; top: 35px; right: 0; width: 260px; max-height:420px; overflow:auto; border-bottom-left-radius: 15px; border-bottom-right-radius: 15px; padding-top: 20px; border: 1px solid #444;">
                     
@@ -67,11 +63,11 @@
                         return;
                     }
 
-                    // Sugestões
+                 
                     items.slice(0,6).forEach(it => {
                         const a = document.createElement('a');
                         a.href = it.url;
-                        // MUDANÇA 5: Estilo escuro para os itens da lista
+                     
                         a.className = 'list-group-item list-group-item-action d-flex align-items-center border-0 bg-dark text-light hover-dark-item';
                         a.innerHTML = `<img src="${it.imagem}" style="width:38px;height:38px;object-fit:cover;margin-right:10px;border-radius:4px;">` +
                                       `<div><div class="fw-bold" style="font-size:0.9rem;">${it.nome}</div><div class="small text-warning fw-bold">R$${(it.preco!==null? Number(it.preco).toFixed(2): '0.00')}</div></div>`;
@@ -127,40 +123,35 @@
 
         <style>
 
-            /* --- Customização da Scrollbar (Barra de Rolagem) --- */
 
-/* Firefox */
 #search-suggestions {
-    scrollbar-width: thin; /* Deixa a barra mais fina */
-    scrollbar-color: #555 #2a2a2a; /* Cor do "dedo" e Cor do fundo */
+    scrollbar-width: thin;
+    scrollbar-color: #555 #2a2a2a;
 }
 
-/* Chrome, Edge, Safari */
 #search-suggestions::-webkit-scrollbar {
-    width: 8px; /* Largura da barra */
+    width: 8px; 
 }
 
 #search-suggestions::-webkit-scrollbar-track {
-    background: #2a2a2a; /* Cor do fundo da calha (mesma do menu) */
-    border-radius: 0 15px 15px 0; /* Arredonda o canto inferior direito */
+    background: #2a2a2a;
+    border-radius: 0 15px 15px 0; 
 }
 
 #search-suggestions::-webkit-scrollbar-thumb {
-    background-color: #555; /* Cor da barra em si (cinza médio) */
-    border-radius: 20px; /* Deixa a barra redondinha */
-    border: 2px solid #2a2a2a; /* Cria uma margem visual para a barra "flutuar" */
+    background-color: #555; 
+    border-radius: 20px; 
+    border: 2px solid #2a2a2a;
 }
 
 #search-suggestions::-webkit-scrollbar-thumb:hover {
-    background-color: #777; /* Fica mais clara quando passa o mouse */
+    background-color: #777; 
 }
-            /* Cor do placeholder (texto de ajuda) para cinza claro */
             .placeholder-gray::placeholder {
                 color: #bbb !important;
                 opacity: 1;
             }
             
-            /* Efeito ao focar na barra de pesquisa (fica um pouco mais clara) */
             .transition-search {
                 transition: background-color 0.3s;
             }
@@ -168,7 +159,6 @@
                 background-color: #333 !important;
             }
 
-            /* Efeito Hover nos itens da lista de sugestão */
             .hover-dark-item:hover {
                 background-color: #333 !important;
                 color: white !important;
@@ -177,19 +167,16 @@
                 background-color: #333 !important;
             }
             <style>
-    /* Cor do placeholder... */
     .placeholder-gray::placeholder {
         color: #bbb !important;
         opacity: 1;
     }
     
-    /* ... seus outros estilos ... */
 
     .hover-bg-secondary:hover {
         background-color: #333 !important;
     }
 
-    /* === COLE O CÓDIGO DA SCROLLBAR AQUI === */
     #search-suggestions {
         scrollbar-width: thin;
         scrollbar-color: #555 #2a2a2a;
@@ -218,7 +205,6 @@
     </div>
 </div>
 
-{{-- Offcanvas mantido igual --}}
 <div class="offcanvas offcanvas-start bg-dark" data-bs-scroll="true" tabindex="-1" id="offcanvasWithBothOptions" aria-labelledby="offcanvasWithBothOptionsLabel">
   <div class="offcanvas-header bg-black d-flex justify-content-between">
     <h5 class="offcanvas-title text-light" id="offcanvasWithBothOptionsLabel">Categorias</h5>

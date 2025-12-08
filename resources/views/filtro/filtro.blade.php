@@ -96,11 +96,11 @@
 </div>
 
 <style>
-    /* Transição do ícone do Collapse */
+    
     .transition-icon { transition: transform 0.3s ease; }
     a[aria-expanded="true"] .transition-icon { transform: rotate(180deg); }
     
-    /* --- Estilo Categorias --- */
+   
     .category-item {
         color: rgba(255, 255, 255, 0.5);
         transition: all 0.2s ease-in-out;
@@ -121,28 +121,27 @@
     .category-item .count-badge { transition: color 0.2s; }
     .category-item.active .count-badge { color: #fff !important; }
 
-    /* --- Estilo Botões de Preço --- */
+   
     .price-btn {
         background-color: #2a2a2a;
         color: #aaa;
         border: 1px solid transparent;
         font-size: 0.8rem;
-        transition: all 0.2s ease; /* Animação suave */
+        transition: all 0.2s ease; 
     }
     
-    /* Hover do botão de preço */
+
     .price-btn:hover {
         background-color: #333;
         color: #fff;
-        transform: translateY(-2px); /* Leve subida */
+        transform: translateY(-2px); 
     }
 
-    /* Estado Ativo do botão de preço */
     .price-btn.active {
         background-color: #404040;
         color: #fff;
         font-weight: bold;
-        border: 1px solid #fff; /* Borda branca para destacar */
+        border: 1px solid #fff; 
         box-shadow: 0 0 10px rgba(255,255,255,0.1);
     }
 </style>
@@ -150,7 +149,6 @@
 <script>
 document.addEventListener('DOMContentLoaded', function() {
     
-    // 1. Animação das Categorias
     const categoryLinks = document.querySelectorAll('.category-item');
     categoryLinks.forEach(link => {
         link.addEventListener('click', function() {
@@ -165,14 +163,11 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 
-    // 2. Animação dos Botões de Preço (NOVO)
     const priceBtns = document.querySelectorAll('.price-btn');
     priceBtns.forEach(btn => {
         btn.addEventListener('click', function() {
-            // Remove active de todos os botões de preço
             priceBtns.forEach(el => el.classList.remove('active'));
             
-            // Adiciona active no que foi clicado
             this.classList.add('active');
         });
     });

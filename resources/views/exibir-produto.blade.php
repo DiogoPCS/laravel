@@ -86,18 +86,16 @@
 
                     <div class="d-grid" id="buyBox">
     @php
-        // 1. Número do telefone (Apenas números)
+       
         $telefone = "5515997728373";
-        
-        // 2. Prepara os dados
+    
         $nomeProduto = $produto->nome ?? 'Produto';
         $precoProduto = isset($produto->preco) ? 'R$ ' . number_format($produto->preco, 2, ',', '.') : 'R$ 0,00';
         
-        // 3. Monta a mensagem usando \n para quebra de linha
-        // IMPORTANTE: Tem que usar aspas duplas " " para o \n funcionar
+     
         $mensagem = "Olá! Quero comprar o produto: *{$nomeProduto}*\nPreço: *{$precoProduto}*";
         
-        // 4. Gera o link final (o PHP transforma o \n no código correto automaticamente)
+        
         $linkWhatsApp = "https://api.whatsapp.com/send?phone={$telefone}&text=" . urlencode($mensagem);
     @endphp
 
@@ -166,7 +164,7 @@
                 if(!buy || !sidebar) return;
 
                 if(window.innerWidth <= 768){
-                    // mobile: fixed at bottom, full-width with some padding
+                    
                     buy.style.position = 'fixed';
                     buy.style.left = '12px';
                     buy.style.right = '12px';
@@ -175,11 +173,11 @@
                     buy.style.background = 'linear-gradient(180deg, rgba(18,18,18,0.95), rgba(18,18,18,0.95))';
                     buy.style.padding = '8px';
                     buy.style.borderRadius = '8px';
-                    // ensure the button fills the box
+                   
                     const btn = buy.querySelector('a.btn');
                     if(btn){ btn.classList.add('w-100'); }
                 } else {
-                    // desktop/tablet: restore to document flow so sticky-top works
+                   
                     buy.style.position = '';
                     buy.style.left = '';
                     buy.style.right = '';
@@ -193,7 +191,7 @@
                 }
             }
 
-            // run on load and resize
+            
             window.addEventListener('load', updateBuyBoxPosition);
             window.addEventListener('resize', updateBuyBoxPosition);
         })();

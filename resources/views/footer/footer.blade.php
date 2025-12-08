@@ -40,7 +40,7 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 
 <style>
-    /* Pequeno efeito ao passar o mouse nos ícones sociais */
+   
     .transition-icon:hover {
         opacity: 1 !important;
         transform: scale(1.1);

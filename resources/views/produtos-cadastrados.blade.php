@@ -69,7 +69,6 @@
 
     <script>
         (function(){
-            // ... (Mantenha seu script JS existente aqui) ...
         })();
     </script>
 </body>
