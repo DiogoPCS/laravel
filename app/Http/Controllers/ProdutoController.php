@@ -12,7 +12,7 @@ use Illuminate\Support\Facades\Storage as StorageFacade;
 
 class ProdutoController extends Controller
 {
-       public function index()
+    public function index()
     {
         $produtos = Produto::latest()->paginate(12);
         return view('produtos.index', compact('produtos'));
@@ -20,8 +20,6 @@ class ProdutoController extends Controller
 
     public function create()
     {
-        // The project stores the create form at resources/views/cadastra-produto.blade.php
-        // Return that view so the admin "Adicionar produto" link opens the existing form.
         return view('cadastra-produto');
     }
 
@@ -44,19 +42,15 @@ class ProdutoController extends Controller
 
         $data = $validatedData;
 
-        // sanitize description to prevent malicious HTML/script tags, allow a small whitelist of tags
         $descricaoRaw = $request->input('descricao');
         $allowed = '<b><i><strong><em><p><br><ul><ol><li>';
 
-        // Only include descricao if the produtos table actually has the column
         if (Schema::hasColumn('produtos', 'descricao')) {
             $data['descricao'] = $descricaoRaw ? strip_tags($descricaoRaw, $allowed) : null;
         } else {
-            // ensure we don't try to insert an attribute the DB doesn't have
             unset($data['descricao']);
         }
 
-        // foto_1 is required
         if ($request->hasFile('foto_1')) {
             $data['foto_1'] = $this->storeFileWithUniqueName($request->file('foto_1'));
         }
@@ -69,7 +63,6 @@ class ProdutoController extends Controller
             $data['foto_3'] = $this->storeFileWithUniqueName($request->file('foto_3'));
         }
 
-        // Create the produto record
         Produto::create($data);
 
         return redirect('/produtos-cadastrados')
@@ -82,9 +75,6 @@ class ProdutoController extends Controller
         return view('produtos.show', compact('produto'));
     }
 
-    /**
-     * Public product detail page (used by the storefront)
-     */
     public function publicShow(Produto $produto)
     {
         // Recommended products: same category, exclude current product
@@ -97,12 +87,6 @@ class ProdutoController extends Controller
         return view('exibir-produto', compact('produto', 'recommended'));
     }
 
-    /**
-     * Public search endpoint used by the site header.
-     * Searches by product name and description (case-insensitive, partial match)
-     *//**
-     * Public search endpoint used by the site header and filters.
-     */
     public function publicSearch(Request $request)
     {
         $q = trim($request->get('q', ''));
@@ -133,8 +117,6 @@ class ProdutoController extends Controller
 
         $produtos = $query->paginate(12)->withQueryString();
 
-        // --- LÓGICA DE CATEGORIAS (Para o Menu Lateral) ---
-        // 1. Busca categorias existentes no banco e conta os produtos
         $dbCats = Produto::select('categoria', DB::raw('count(*) as total'))
             ->whereNotNull('categoria')
             ->where('categoria', '<>', '')
@@ -142,29 +124,19 @@ class ProdutoController extends Controller
             ->get()
             ->keyBy('categoria');
 
-        // 2. Lista fixa para garantir que essas sempre apareçam
         $static = ['Action Figures', 'Perifericos', 'Jogos', 'Acessório', 'Console', 'Informática'];
 
-        // 3. Junta as listas e organiza
         $allCategorias = collect(array_merge($dbCats->keys()->toArray(), $static))
             ->unique()
             ->sort()
             ->values();
 
-        // --- RETORNO ---
-        
-        // Se for AJAX (clique no filtro), retorna só a lista de produtos (o filtro não recarrega)
         if ($request->ajax()) {
             return view('listagem.produtos', compact('produtos'));
         }
 
-        // Se for carregamento normal, manda TUDO (produtos + dados do filtro)
         return view('home', compact('produtos', 'allCategorias', 'dbCats'));
     }
-    /**
-     * AJAX suggestions for autocomplete
-     * Returns a small JSON array of matching products (id, nome, preco, imagem_url)
-     */
     public function suggest(Request $request)
     {
         $q = trim($request->get('q', ''));
@@ -182,7 +154,6 @@ class ProdutoController extends Controller
         $items = $produtos->map(function($p){
             $image = null;
             if (!empty($p->foto_1)) {
-                // Ensure full URL
                 $image = StorageFacade::url($p->foto_1);
             } else {
                 $image = asset('images/controle.svg');
@@ -209,82 +180,65 @@ class ProdutoController extends Controller
    
     public function update(Request $request, Produto $produto)
     {
-        // ... (sua validação e sanitização continuam aqui) ...
-    $data = $validatedData;
+        $data = $validatedData;
 
-    // --- NOVO: Lógica de Exclusão de Imagem ---
-    
-    // Foto 1
-    if ($request->input('delete_foto_1') == '1') {
-        Storage::delete($produto->foto_1); // Apaga arquivo físico
-        $data['foto_1'] = null; // Define como null no banco
-    }
+        if ($request->input('delete_foto_1') == '1') {
+            Storage::delete($produto->foto_1);
+            $data['foto_1'] = null;
+        }
 
-    // Foto 2
-    if ($request->input('delete_foto_2') == '1') {
-        if ($produto->foto_2) Storage::delete($produto->foto_2);
-        $data['foto_2'] = null;
-    }
+        if ($request->input('delete_foto_2') == '1') {
+            if ($produto->foto_2) Storage::delete($produto->foto_2);
+            $data['foto_2'] = null;
+        }
 
-    // Foto 3
-    if ($request->input('delete_foto_3') == '1') {
-        if ($produto->foto_3) Storage::delete($produto->foto_3);
-        $data['foto_3'] = null;
-    }
-    // ------------------------------------------
+        if ($request->input('delete_foto_3') == '1') {
+            if ($produto->foto_3) Storage::delete($produto->foto_3);
+            $data['foto_3'] = null;
+        }
 
-    // ... (O resto do seu código de upload continua igual abaixo) ...
-    
-    if ($request->hasFile('foto_1')) {
-        // ...
-    }
-        
         $validatedData = $request->validate([
             'nome' => 'required|max:255|unique:produtos,nome,' . $produto->id,
             'preco' => 'required|numeric|min:0',
             'estoque' => 'required|integer|min:0',
             'categoria' => 'required|string|max:100',
             'descricao' => 'nullable|string|max:2000',
-
             'foto_1' => 'nullable|mimes:jpeg,png,jpg,gif,webp,svg|max:10240',
             'foto_2' => 'nullable|mimes:jpeg,png,jpg,gif,webp,svg|max:10240',
             'foto_3' => 'nullable|mimes:jpeg,png,jpg,gif,webp,svg|max:10240',
         ]);
 
-       
-    $data = $validatedData;
+        $data = $validatedData;
 
-    // sanitize descricao only if the column exists
-    $descricaoRaw = $request->input('descricao');
-    $allowed = '<b><i><strong><em><p><br><ul><ol><li>';
-    if (Schema::hasColumn('produtos', 'descricao')) {
-        $data['descricao'] = $descricaoRaw ? strip_tags($descricaoRaw, $allowed) : null;
-    } else {
-        unset($data['descricao']);
-    }
+        $descricaoRaw = $request->input('descricao');
+        $allowed = '<b><i><strong><em><p><br><ul><ol><li>';
+        if (Schema::hasColumn('produtos', 'descricao')) {
+            $data['descricao'] = $descricaoRaw ? strip_tags($descricaoRaw, $allowed) : null;
+        } else {
+            unset($data['descricao']);
+        }
 
-        
         if ($request->hasFile('foto_1')) {
-            Storage::delete($produto->foto_1); 
+            Storage::delete($produto->foto_1);
             $data['foto_1'] = $request->file('foto_1')->store('public/produtos');
         }
 
         if ($request->hasFile('foto_2')) {
             if ($produto->foto_2) {
-                Storage::delete($produto->foto_2); 
+                Storage::delete($produto->foto_2);
             }
             $data['foto_2'] = $request->file('foto_2')->store('public/produtos');
         }
 
         if ($request->hasFile('foto_3')) {
             if ($produto->foto_3) {
-                Storage::delete($produto->foto_3); 
+                Storage::delete($produto->foto_3);
             }
             $data['foto_3'] = $request->file('foto_3')->store('public/produtos');
         }
 
         $produto->update($data);
-        // If AJAX request, return updated admin grid HTML
+
         if ($request->ajax()) {
             $produtos = Produto::latest()->get();
             return view('admin.produtos-grid', compact('produtos'));
@@ -318,10 +272,7 @@ class ProdutoController extends Controller
             ->with('success', 'Produto excluído com sucesso!');
     }
 
-    /**
-     * Store uploaded file using its original name, appending a counter when duplicates exist.
-     * Returns storage path like 'public/produtos/filename.jpg'
-     */
+   
     private function storeFileWithUniqueName($file)
     {
         $originalName = $file->getClientOriginalName();
