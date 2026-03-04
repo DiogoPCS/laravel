@@ -13,7 +13,8 @@ use App\Http\Middleware\LogAcessoMiddleware;
 |
 */
 
-Route::get('/', [App\Http\Controllers\Principal::class, 'principal']);
+Route::get('/', [App\Http\Controllers\Principal::class, 'home'])->name('pagina-inicial');
+Route::get('/sobre', [App\Http\Controllers\Sobre::class, 'about'])->name('pagina-sobre');
 
 
 
