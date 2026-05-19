@@ -4,17 +4,17 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request; //request é responsavel por receber os dados do formulario
 
-class AlunoController extends Controller
+class LoginAlunoController extends Controller
 {
     function index() {
-        return view('aluno.index');
+        return view('loginaluno.index');
     }
 
     function adicionar(Request $dados) { 
-        $aluno = new \App\Models\AlunoModel();
+        $aluno = new \App\Models\LoginAlunoModel();
         $aluno::create($dados->all());
 
-        return view('aluno.index', ['sucesso'=>'Aluno cadastrado!']);
+        return view('loginaluno.index', ['sucesso'=>'Aluno cadastrado!']);
      }
 
     function remover(Request $dados) {  }

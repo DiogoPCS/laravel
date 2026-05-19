@@ -15,12 +15,12 @@ use App\Http\Middleware\LogAcessoMiddleware;
 
 Route::get('/', [App\Http\Controllers\Principal::class, 'principal']);
 
-Route::prefix('/aluno')->group(function(){ // grupo de rotas de alunos
-    Route::get('/index', [App\Http\Controllers\AlunoController::class, 'index'])->name('aluno.index');
-    Route::post('/adicionar', [App\Http\Controllers\AlunoController::class, 'adicionar'])->name('aluno.adicionar');
-    Route::post('/remover', [App\Http\Controllers\AlunoController::class, 'remover'])->name('aluno.remover');
-    Route::post('/atualizar', [App\Http\Controllers\AlunoController::class, 'atualizar'])->name('aluno.atualizar');
-    Route::get('/consultar', [App\Http\Controllers\AlunoController::class, 'consultar'])->name('aluno.consultar');
+Route::prefix('/loginaluno')->group(function(){ // grupo de rotas de alunos
+    Route::get('/index', [App\Http\Controllers\LoginAlunoController::class, 'index'])->name('loginaluno.index');
+    Route::post('/adicionar', [App\Http\Controllers\LoginAlunoController::class, 'adicionar'])->name('loginaluno.adicionar');
+    Route::post('/remover', [App\Http\Controllers\LoginAlunoController::class, 'remover'])->name('loginaluno.remover');
+    Route::post('/atualizar', [App\Http\Controllers\LoginAlunoController::class, 'atualizar'])->name('loginaluno.atualizar');
+    Route::get('/consultar', [App\Http\Controllers\LoginAlunoController::class, 'consultar'])->name('loginaluno.consultar');
 
 }); 
 
