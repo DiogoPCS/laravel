@@ -4,20 +4,19 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-class AlunoController extends Controller
+class ProfessorController extends Controller
 {
     function index(){ 
-        return view('aluno.index');
+        return view('professor.index');
     }
 
     function add(Request $dados) { 
-        $professor = new \App\Models\ProfessorModel();
+        $professor = new \App\Models\AlunoModel();
         $professor::create($dados->all());
 
-        $alunos = new \App\Models\ProfessorModel();
+        $professor = new \App\Models\AlunoModel();
 
         return view('professor.index', ['success'=>'Cadastrado!', 'professor'=>$professor::all()]);
     }
-
 
 }

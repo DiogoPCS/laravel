@@ -19,7 +19,15 @@ Route::get('/', [App\Http\Controllers\Principal::class, 'principal']);
 Route::prefix('/aluno')->group(function(){
     Route::get('/index', [App\Http\Controllers\AlunoController::class, 'index'])->name('aluno.index');
     Route::post('/add', [App\Http\Controllers\AlunoController::class, 'add'])->name('aluno.add');
-    Route::post('/remove', [App\Http\Controllers\AlunoController::class, 'remove'])->name('aluno.remove');
-    Route::post('/edit', [App\Http\Controllers\AlunoController::class, 'edit'])->name('aluno.edit');
-    Route::get('/list', [App\Http\Controllers\AlunoController::class, 'list'])->name('aluno.list');
 }); 
+
+Route::prefix('/curso')->group(function(){
+    Route::get('/index', [App\Http\Controllers\CursoController::class, 'index'])->name('curso.index');
+    Route::post('/add', [App\Http\Controllers\CursoController::class, 'add'])->name('curso.add');
+}); 
+
+Route::prefix('/professor')->group(function(){
+    Route::get('/index', [App\Http\Controllers\ProfessorController::class, 'index'])->name('professor.index');
+    Route::post('/add', [App\Http\Controllers\ProfessorController::class, 'add'])->name('professor.add');
+}); 
+
