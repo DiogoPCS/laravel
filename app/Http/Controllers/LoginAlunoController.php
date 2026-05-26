@@ -10,6 +10,10 @@ class LoginAlunoController extends Controller
         return view('loginaluno.index');
     }
 
+    function cadastro() {
+        return view('loginaluno.cadastro');
+    }
+
     function adicionar(Request $dados) { 
         $aluno = new \App\Models\LoginAlunoModel();
         $aluno::create($dados->all());

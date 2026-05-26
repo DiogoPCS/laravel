@@ -9,5 +9,5 @@ class LoginAlunoModel extends Model
 {
     use HasFactory;
     protected $table = 'alunos';
-    protected $fillable = ['id', 'nome', 'email'];
+    protected $fillable = ['id', 'nome', 'email', 'senha'];
 }

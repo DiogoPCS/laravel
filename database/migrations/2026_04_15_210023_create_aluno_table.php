@@ -14,8 +14,9 @@ return new class extends Migration
         Schema::create('alunos', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
+            $table->string('nome');
             $table->string('email');
-            $table->password('senha');
+            $table->string('senha');
         });
     }
 

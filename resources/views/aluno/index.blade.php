@@ -67,7 +67,7 @@
     }
 </style>
 
-<form action="{{ route('aluno.adicionar') }}" method="post">
+<form action="{{ route('loginaluno.adicionar') }}" method="post">
     @csrf 
     
     <label for="nome">Nome</label>
