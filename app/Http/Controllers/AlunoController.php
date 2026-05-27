@@ -11,12 +11,12 @@ class AlunoController extends Controller
     }
 
     function add(Request $dados) { 
-        $professor = new \App\Models\ProfessorModel();
-        $professor::create($dados->all());
+        $aluno = new \App\Models\AlunoModel();
+        $aluno::create($dados->all());
 
-        $alunos = new \App\Models\ProfessorModel();
+        $alunos = new \App\Models\AlunoModel();
 
-        return view('professor.index', ['success'=>'Cadastrado!', 'professor'=>$professor::all()]);
+        return view('aluno.index', ['success'=>'Cadastrado!', 'aluno'=>$aluno::all()]);
     }
 
 

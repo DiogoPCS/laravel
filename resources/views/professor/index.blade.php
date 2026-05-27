@@ -1,3 +1,4 @@
+<link rel="stylesheet" href="{{ asset('css/style.css') }}">
 <div class="container">
 
     <h1 class="titulo">Cadastrar</h1>
@@ -9,10 +10,10 @@
         <input type="text" name="nome" id="nome" placeholder="Digite o nome do aluno">
 
         <label for="telefone">Telefone</label>
-        <input type="text" name="nome" id="nome" placeholder="Digite seu numero">
+        <input type="text" name="telefone" id="telefone" placeholder="Digite seu numero">
 
         <label for="email">Email</label>
-        <input type="text" name="nome" id="nome" placeholder="Digite seu email">
+        <input type="text" name="email" id="email" placeholder="Digite seu email">
 
         <button type="submit">Salvar</button>
     </form>

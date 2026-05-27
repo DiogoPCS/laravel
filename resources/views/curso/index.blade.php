@@ -1,3 +1,4 @@
+<link rel="stylesheet" href="{{ asset('css/style.css') }}">
 <div class="container">
 
     <h1 class="titulo">Cadastrar Curso</h1>
@@ -9,7 +10,7 @@
         <input type="text" name="nome" id="nome" placeholder="Digite o nome do aluno">
 
         <label for="periodo">periodo</label>
-        <input type="text" name="nome" id="periodo">
+        <input type="text" name="periodo" id="periodo">
 
         <button type="submit">Salvar</button>
     </form>
