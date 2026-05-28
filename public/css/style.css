@@ -2,9 +2,9 @@
 body {
     margin: 0;
     padding: 0;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background: #f8f9fc;
-    color: #555;
+    font-family: 'Poppins', sans-serif;
+    background: linear-gradient(135deg, #fff0f5, #ffe6ee);
+    color: #6b5b66;
 }
 
 /* Container principal */
@@ -17,51 +17,58 @@ body {
 /* Títulos */
 .titulo {
     text-align: center;
-    font-size: 36px;
-    color: #7b8fa1;
+    font-size: 38px;
+    color: #d67b9a;
     margin-bottom: 30px;
+    font-weight: 700;
 }
 
 .subtitulo {
     margin-top: 50px;
     margin-bottom: 20px;
-    color: #8d99ae;
+    color: #c98aa5;
     text-align: center;
+    font-size: 24px;
 }
 
 /* Formulário */
 .form-box {
     background: #ffffff;
-    padding: 30px;
-    border-radius: 18px;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+    padding: 35px;
+    border-radius: 24px;
+    box-shadow: 0 8px 25px rgba(255, 182, 193, 0.18);
 
     display: flex;
     flex-direction: column;
-    gap: 15px;
+    gap: 18px;
+
+    border: 1px solid #ffd6e2;
 }
 
 /* Labels */
 .form-box label {
     font-weight: 600;
-    color: #7d8597;
+    color: #c06c84;
+    font-size: 15px;
 }
 
 /* Inputs */
 .form-box input {
-    padding: 12px;
-    border: 1px solid #dde1e7;
-    border-radius: 12px;
-    background: #fdfdfd;
+    padding: 14px;
+    border: 2px solid #ffd6e2;
+    border-radius: 14px;
+    background: #fff8fb;
     outline: none;
     transition: 0.3s;
     font-size: 15px;
+    color: #555;
 }
 
 /* Efeito focus */
 .form-box input:focus {
-    border-color: #b8c1ec;
-    box-shadow: 0 0 8px rgba(184, 193, 236, 0.4);
+    border-color: #f4a6c1;
+    box-shadow: 0 0 10px rgba(244, 166, 193, 0.25);
+    background: #fff;
 }
 
 /* Botão */
@@ -69,52 +76,56 @@ body {
     margin-top: 10px;
     padding: 14px;
     border: none;
-    border-radius: 12px;
-    background: #cdb4db;
+    border-radius: 14px;
+    background: linear-gradient(135deg, #f7a8c0, #f48fb1);
     color: white;
     font-size: 16px;
     font-weight: bold;
     cursor: pointer;
     transition: 0.3s;
+    box-shadow: 0 6px 18px rgba(244, 143, 177, 0.25);
 }
 
 /* Hover botão */
 .form-box button:hover {
-    background: #b8c1ec;
+    background: linear-gradient(135deg, #f48fb1, #ec7fa4);
+    transform: translateY(-2px);
 }
 
 /* Container dos cards */
 .cards-container {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-    gap: 20px;
+    gap: 22px;
 }
 
 /* Card administrador */
 .card-admin {
     background: #ffffff;
-    padding: 20px;
-    border-radius: 18px;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+    padding: 22px;
+    border-radius: 22px;
+    box-shadow: 0 6px 20px rgba(255, 182, 193, 0.15);
     transition: 0.3s;
-    border: 1px solid #edf2f4;
+    border: 1px solid #ffe0ea;
 }
 
 /* Hover card */
 .card-admin:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 6px 18px rgba(0,0,0,0.08);
+    transform: translateY(-6px);
+    box-shadow: 0 10px 24px rgba(255, 182, 193, 0.22);
 }
 
 /* Nome do admin */
 .card-admin h3 {
-    color: #6d6875;
-    margin-bottom: 12px;
+    color: #c06c84;
+    margin-bottom: 14px;
+    font-size: 20px;
 }
 
 /* Textos */
 .card-admin p {
-    margin: 6px 0;
-    color: #666;
+    margin: 8px 0;
+    color: #7b6d75;
     font-size: 14px;
+    line-height: 1.5;
 }

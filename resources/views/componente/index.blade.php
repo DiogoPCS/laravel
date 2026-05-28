@@ -18,20 +18,41 @@
         <button type="submit">Salvar</button>
     </form>
 <br>
+@isset($success)
+    <h1>{{ $success }}</h1>
+@endisset
+
+<table border="1">
+    <tr>
+        <td>Nome do Componente</td>
+        <td>Período</td>
+        <td colspan="2">Ações</td>
+    </tr>
+
     @isset($componente)
-
-        <h2 class="subtitulo">Lista de componentes</h2>
-
-        <div class="cards-container">
-            @foreach($componente as $componente)
-            
+        @foreach($componente as $componente)
+            <tr>
+                <td>
                     <h3>{{ $componente->nome }}</h3>
+                </td>
+
+                <td>
                     <h3>{{ $componente->periodo }}</h3>
-                    
-                </div>
-            @endforeach
-        </div>
+                </td>
 
+                <td>
+                    <form action="{{ route('componente.remove', ['id' => $componente->id]) }}" method="GET">
+                        <button type="submit">Remover</button>
+                    </form>
+                </td>
+
+                <td>
+                    <form action="{{ route('componente.atualizar', ['id' => $componente->id]) }}" method="GET">
+                        <button type="submit">Atualizar</button>
+                    </form>
+                </td>
+            </tr>
+        @endforeach
     @endisset
-
+</table>
 </div>

@@ -18,20 +18,48 @@
         <button type="submit">Salvar</button>
     </form>
 <br>
+  
+@isset($success)
+    <h1>{{ $success }}</h1>
+@endisset
+
+<table border="1">
+    <tr>
+        <td>Nome do Professor</td>
+        <td>Telefone</td>
+        <td>Email</td>
+        <td colspan="2">Ações</td>
+    </tr>
+
     @isset($professor)
-
-        <h2 class="subtitulo">Lista de Professores</h2>
-
-        <div class="cards-container">
-            @foreach($professor as $professor)
-                <div class="card-professor">
+        @foreach($professor as $professor)
+            <tr>
+                <td>
                     <h3>{{ $professor->nome }}</h3>
-                    <h3>{{ $professor->telefone }}</h3>
-                    <h3>{{ $professor->email }}</h3>
-                </div>
-            @endforeach
-        </div>
+                </td>
 
+                <td>
+                    <h3>{{ $professor->telefone }}</h3>
+                </td>
+
+                <td>
+                    <h3>{{ $professor->email }}</h3>
+                </td>
+
+                <td>
+                    <form action="{{ route('professor.remove', ['id' => $professor->id]) }}" method="GET">
+                        <button type="submit">Remover</button>
+                    </form>
+                </td>
+
+                <td>
+                    <form action="{{ route('professor.atualizar', ['id' => $professor->id]) }}" method="GET">
+                        <button type="submit">Atualizar</button>
+                    </form>
+                </td>
+            </tr>
+        @endforeach
     @endisset
+</table>
 
 </div>

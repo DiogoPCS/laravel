@@ -31,28 +31,62 @@
     </form>
 
     <br>
+    @isset($success)
+    <h1>{{ $success }}</h1>
+@endisset
+
+<table border="1">
+    <tr>
+        <td>Nome do Admin</td>
+        <td>Telefone</td>
+        <td>Email</td>
+        <td>CPF</td>
+        <td>Usuário</td>
+        <td>Status</td>
+        <td colspan="2">Ações</td>
+    </tr>
 
     @isset($admin)
-
-        <h2 class="subtitulo">Lista de Administradores</h2>
-
-        <div class="cards-container">
-
-            @foreach($admin as $admin)
-
-                <div class="card-admin">
+        @foreach($admin as $admin)
+            <tr>
+                <td>
                     <h3>{{ $admin->nome }}</h3>
-                    <p>Telefone: {{ $admin->telefone }}</p>
-                    <p>Email: {{ $admin->email }}</p>
-                    <p>CPF: {{ $admin->cpf }}</p>
-                    <p>Usuário: {{ $admin->usuario }}</p>
-                    <p>Status: {{ $admin->status }}</p>
-                </div>
+                </td>
 
-            @endforeach
+                <td>
+                    <p>{{ $admin->telefone }}</p>
+                </td>
 
-        </div>
+                <td>
+                    <p>{{ $admin->email }}</p>
+                </td>
 
+                <td>
+                    <p>{{ $admin->cpf }}</p>
+                </td>
+
+                <td>
+                    <p>{{ $admin->usuario }}</p>
+                </td>
+
+                <td>
+                    <p>{{ $admin->status }}</p>
+                </td>
+
+                <td>
+                    <form action="{{ route('admin.remove', ['id' => $admin->id]) }}" method="GET">
+                        <button type="submit">Remover</button>
+                    </form>
+                </td>
+
+                <td>
+                    <form action="{{ route('admin.atualizar', ['id' => $admin->id]) }}" method="GET">
+                        <button type="submit">Atualizar</button>
+                    </form>
+                </td>
+            </tr>
+        @endforeach
     @endisset
+</table>
 
 </div>
