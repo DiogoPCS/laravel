@@ -3,25 +3,19 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\AlunoModel as Aluno;
 
 class AlunoController extends Controller
 {
-    function index(){ 
-        return view('aluno.index');
+    function adicionar() { }
+
+    function remover() { }
+
+    function editar() { }
+
+    function listar() {
+        $alunos = Alunos::all();
+
+        return response()->json($alunos);
     }
-
-    function add(Request $dados) { 
-        $aluno = new \App\Models\AlunoModel();
-        $aluno::create($dados->all());
-
-        $alunos = new \App\Models\AlunoModel();
-
-        return view('aluno.index', ['success'=>'Cadastrado!', 'alunos'=>$alunos::all()]);
-    }
-
-    function remove() { }
-
-    function edit() { }
-
-    function list() { }
 }
