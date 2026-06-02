@@ -1,0 +1,169 @@
+/* =======================
+   GERAL
+======================= */
+
+body {
+    margin: 0;
+    padding: 30px;
+    font-family: Arial, Helvetica, sans-serif;
+    background: #f5f3ef;
+    color: #3d3d3d;
+}
+
+.container {
+    max-width: 1400px;
+    margin: auto;
+}
+
+.titulo {
+    text-align: center;
+    margin-bottom: 30px;
+    font-size: 35px;
+    color: #4b4b4b;
+}
+
+/* =======================
+   LAYOUT
+======================= */
+
+.layout {
+    display: flex;
+    gap: 30px;
+    align-items: flex-start;
+}
+
+/* =======================
+   FORMULÁRIO
+======================= */
+
+.formulario {
+    width: 30%;
+}
+
+.form-box {
+    background: white;
+    padding: 30px;
+    border-radius: 20px;
+    border: 1px solid #ddd;
+}
+
+.form-box label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: bold;
+    color: #555;
+}
+
+.form-box input {
+    width: 100%;
+    padding: 14px;
+    border: 1px solid #d8d8d8;
+    border-radius: 10px;
+    margin-bottom: 20px;
+    box-sizing: border-box;
+}
+
+.form-box input:focus {
+    outline: none;
+    border-color: #9c9c9c;
+}
+
+.form-box button {
+    width: 100%;
+    padding: 14px;
+    border: none;
+    border-radius: 10px;
+    background: #5f5f5f;
+    color: white;
+    font-size: 15px;
+    cursor: pointer;
+}
+
+.form-box button:hover {
+    background: #444;
+}
+
+/* =======================
+   TABELA
+======================= */
+
+.listagem {
+    width: 70%;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    background: white;
+    border-radius: 20px;
+    overflow: hidden;
+}
+
+table tr:first-child {
+    background: #7a746e;
+    color: white;
+}
+
+table tr:first-child td {
+    padding: 18px;
+    font-weight: bold;
+}
+
+table td {
+    padding: 15px;
+    border-bottom: 1px solid #ececec;
+    text-align: center;
+}
+
+table tr:hover:not(:first-child) {
+    background: #faf8f5;
+}
+
+table h3 {
+    margin: 0;
+    color: #444;
+}
+
+/* =======================
+   BOTÕES
+======================= */
+
+table button {
+    border: none;
+    padding: 10px 15px;
+    border-radius: 8px;
+    cursor: pointer;
+    color: white;
+}
+
+table tr td:nth-child(2) button {
+    background: #8c6f5a;
+}
+
+table tr td:nth-child(2) button:hover {
+    background: #725846;
+}
+
+table tr td:nth-child(3) button {
+    background: #6d7d68;
+}
+
+table tr td:nth-child(3) button:hover {
+    background: #596653;
+}
+
+/* =======================
+   RESPONSIVO
+======================= */
+
+@media (max-width: 900px) {
+
+    .layout {
+        flex-direction: column;
+    }
+
+    .formulario,
+    .listagem {
+        width: 100%;
+    }
+}
