@@ -7,10 +7,10 @@
         @csrf
 
         <label for="nome">Nome</label>
-        <input type="text" name="nome" id="nome" placeholder="Digite o nome do aluno">
+        <input type="text" name="nome" id="nome" placeholder="Digite o Nome do Aluno">
 
         <label for="periodo">periodo</label>
-        <input type="text" name="periodo" id="periodo">
+        <input type="text" name="periodo" id="periodo" placeholder="Digite o Periodo do Aluno">
 
         <button type="submit">Salvar</button>
     </form>
@@ -19,7 +19,7 @@
     <h1>{{ $success }}</h1>
 @endisset
 
-<table border="1">
+<table>
     <tr>
         <td>Nome do Curso</td>
         <td>Período</td>

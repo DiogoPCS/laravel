@@ -1,13 +1,11 @@
-/* =======================
-   GERAL
-======================= */
+
 
 body {
     margin: 0;
     padding: 30px;
     font-family: Arial, Helvetica, sans-serif;
-    background: #f5f3ef;
-    color: #3d3d3d;
+    background: #8d8d8d;
+    color: #ffffff;
 }
 
 .container {
@@ -22,9 +20,7 @@ body {
     color: #4b4b4b;
 }
 
-/* =======================
-   LAYOUT
-======================= */
+
 
 .layout {
     display: flex;
@@ -32,9 +28,6 @@ body {
     align-items: flex-start;
 }
 
-/* =======================
-   FORMULÁRIO
-======================= */
 
 .formulario {
     width: 30%;
@@ -83,9 +76,8 @@ body {
     background: #444;
 }
 
-/* =======================
-   TABELA
-======================= */
+
+
 
 .listagem {
     width: 70%;
@@ -124,16 +116,15 @@ table h3 {
     color: #444;
 }
 
-/* =======================
-   BOTÕES
-======================= */
+
+
 
 table button {
     border: none;
     padding: 10px 15px;
     border-radius: 8px;
     cursor: pointer;
-    color: white;
+    color: rgb(63, 59, 59);
 }
 
 table tr td:nth-child(2) button {
@@ -152,9 +143,9 @@ table tr td:nth-child(3) button:hover {
     background: #596653;
 }
 
-/* =======================
-   RESPONSIVO
-======================= */
+
+
+
 
 @media (max-width: 900px) {
 

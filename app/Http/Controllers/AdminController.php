@@ -22,10 +22,10 @@ class AdminController extends Controller
     }
 
     function remove(string $id) {
-        $aluno = new \App\Models\AlunoModel();
-        $aluno::destroy($id);
+        $admin = new \App\Models\AdminModel();
+        $admin::destroy($id);
 
-        return view('aluno.index', ['success'=>'Removido!', 'aluno'=>$aluno::all()]);
+        return view('admin.index', ['success'=>'Removido!', 'admin'=>$admin::all()]);
 
     }
 
@@ -34,13 +34,13 @@ class AdminController extends Controller
         $admin = $admin::find($id);
 
         return view('admin.atualizar', ['admin'=>$admin]);
-    }
+    }   
 
     function save(Request $dados) {
         $admin = new \App\Models\AdminModel();
         $admin = $admin::find($dados->id);
         $admin->update($dados->all());
 
-        return view('admin.atualizar', ['success'=>'Atualizado!', 'admin'=>$aluno]);
+        return view('admin.atualizar', ['success'=>'Atualizado!', 'admin'=>$admin]);
     }
 }
