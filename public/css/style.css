@@ -129,3 +129,116 @@ body {
     font-size: 14px;
     line-height: 1.5;
 }
+
+/* Tabela */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    background: #ffffff;
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 8px 25px rgba(255, 182, 193, 0.18);
+    border: 1px solid #ffd6e2;
+}
+
+/* Cabeçalho */
+table tr:first-child {
+    background: linear-gradient(135deg, #f7a8c0, #f48fb1);
+    color: white;
+}
+
+table tr:first-child td {
+    font-weight: bold;
+    font-size: 15px;
+    padding: 16px;
+    text-align: center;
+}
+
+/* Linhas */
+table tr:not(:first-child) {
+    transition: 0.3s;
+}
+
+table tr:not(:first-child):hover {
+    background: #fff5f8;
+}
+
+/* Células */
+table td {
+    padding: 14px;
+    text-align: center;
+    border-bottom: 1px solid #ffe0ea;
+    color: #6b5b66;
+}
+
+/* Nome */
+table h3 {
+    margin: 0;
+    color: #c06c84;
+    font-size: 18px;
+}
+
+/* Textos */
+table p {
+    margin: 0;
+    font-size: 14px;
+    color: #7b6d75;
+}
+
+/* Formulários dos botões */
+table form {
+    margin: 0;
+}
+
+/* Botões */
+table button {
+    padding: 10px 18px;
+    border: none;
+    border-radius: 12px;
+    color: white;
+    font-weight: 600;
+    cursor: pointer;
+    transition: 0.3s;
+    font-size: 14px;
+}
+
+/* Botão Atualizar */
+table td:last-child button {
+    background: linear-gradient(135deg, #f7a8c0, #f48fb1);
+    box-shadow: 0 4px 12px rgba(244, 143, 177, 0.25);
+}
+
+table td:last-child button:hover {
+    background: linear-gradient(135deg, #f48fb1, #ec7fa4);
+    transform: translateY(-2px);
+}
+
+/* Botão Remover */
+table td:nth-last-child(2) button {
+    background: linear-gradient(135deg, #ff9aa2, #ff6f91);
+    box-shadow: 0 4px 12px rgba(255, 111, 145, 0.25);
+}
+
+table td:nth-last-child(2) button:hover {
+    background: linear-gradient(135deg, #ff6f91, #ff4f7b);
+    transform: translateY(-2px);
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+    table {
+        display: block;
+        overflow-x: auto;
+        white-space: nowrap;
+    }
+
+    table td {
+        font-size: 13px;
+        padding: 10px;
+    }
+
+    table button {
+        padding: 8px 12px;
+        font-size: 13px;
+    }
+}

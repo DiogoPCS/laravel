@@ -1,7 +1,9 @@
 <link rel="stylesheet" href="{{ asset('css/style.css') }}">
 
 <div class="container">
-    <form action="{{ route('aluno.add') }}" method="post">
+     <h1 class="titulo">Aluno</h1>
+
+    <form action="{{ route('aluno.add') }}" method="post"class="form-box">
         @csrf
         <label for="nome">Nome</label>
         <input type="text" name="nome" id="nome">
