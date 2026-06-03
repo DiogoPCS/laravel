@@ -9,5 +9,5 @@ class AlunoModel extends Model
 {
     use HasFactory;
     protected $table = 'aluno';
-    protected $fillable = ['id', 'nome'];
+    protected $fillable = ['nome'];
 }

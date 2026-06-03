@@ -18,4 +18,9 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::get('teste', function() {});
+Route::prefix('/aluno')->group(function(){
+    Route::post('/add', [App\Http\Controllers\AlunoController::class, 'add']);
+    Route::get('/remove/{id}', [App\Http\Controllers\AlunoController::class, 'remove']);
+    Route::post('/update', [App\Http\Controllers\AlunoController::class, 'update']);
+});
+
