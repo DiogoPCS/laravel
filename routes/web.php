@@ -23,3 +23,4 @@ Route::prefix('/aluno')->group(function(){
     Route::post('/edit', [App\Http\Controllers\AlunoController::class, 'edit'])->name('aluno.edit');
     Route::get('/list', [App\Http\Controllers\AlunoController::class, 'list'])->name('aluno.list');
 }); 
+
