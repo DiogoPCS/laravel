@@ -7,7 +7,7 @@
         @csrf
 
         <label for="nome">Nome</label>
-        <input type="text" name="nome" id="nome" placeholder="Digite o nome do aluno">
+        <input type="text" name="nome" id="nome" placeholder="Digite o Seu Nome">
 
         <label for="telefone">Telefone</label>
         <input type="text" name="telefone" id="telefone" placeholder="Digite seu numero">

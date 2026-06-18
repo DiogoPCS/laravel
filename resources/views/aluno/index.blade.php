@@ -3,7 +3,7 @@
 <div class="container">
      <h1 class="titulo">Aluno</h1>
 
-    <form action="{{ route('aluno.add') }}" method="post"class="form-box">
+    <form action="{{ route('aluno.add') }}" method="POST"class="form-box">
         @csrf
         <label for="nome">Nome</label>
         <input type="text" name="nome" id="nome">

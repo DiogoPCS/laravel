@@ -7,10 +7,10 @@
         @csrf
 
         <label for="nome">Nome</label>
-        <input type="text" name="nome" id="nome" placeholder="Digite o Nome do Aluno">
+        <input type="text" name="nome" id="nome" placeholder="Digite o Curso">
 
         <label for="periodo">periodo</label>
-        <input type="text" name="periodo" id="periodo" placeholder="Digite o Periodo do Aluno">
+        <input type="text" name="periodo" id="periodo" placeholder="Digite o Periodo">
 
         <button type="submit">Salvar</button>
     </form>

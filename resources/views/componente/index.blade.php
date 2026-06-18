@@ -7,13 +7,14 @@
         @csrf
 
         <label for="nome">Nome</label>
-        <input type="text" name="nome" id="nome" placeholder="Digite o nome do aluno">
+        <input type="text" name="nome" id="nome" placeholder="Digite o nome do Componente">
 
         <label for="hora_inicio">Horario de Inicio</label>
-        <input type="dataTime" name="hora_inicio" id="hora_inicio">
+        <input type="datetime" name="hora_inicio" id="hora_inicio">
         
         <label for="hora_fim">Horario de Fim</label>
-        <input type="dataTime" name="hora_fim" id="hora_fim">
+        <input type="datetime" name="hora_fim" id="hora_fim">
+       
 
         <button type="submit">Salvar</button>
     </form>
@@ -25,7 +26,8 @@
 <table border="1">
     <tr>
         <td>Nome do Componente</td>
-        <td>Período</td>
+        <td>Período Inicio</td>
+        <td>Período Fim</td>
         <td colspan="2">Ações</td>
     </tr>
 
@@ -37,7 +39,11 @@
                 </td>
 
                 <td>
-                    <h3>{{ $componente->periodo }}</h3>
+                    <h3>{{ $componente->hora_inicio }}</h3>
+                </td>
+
+                <td>
+                    <h3>{{ $componente->hora_fim }}</h3>
                 </td>
 
                 <td>
