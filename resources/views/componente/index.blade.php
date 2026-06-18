@@ -7,7 +7,7 @@
         @csrf
 
         <label for="nome">Nome</label>
-        <input type="text" name="nome" id="nome" placeholder="Digite o nome do aluno">
+        <input type="text" name="nome" id="nome" placeholder="Digite o nome do aluno" value="{{ old('nome') }}">
 
         <label for="hora_inicio">Horario de Inicio</label>
         <input type="dataTime" name="hora_inicio" id="hora_inicio">
@@ -21,6 +21,14 @@
 @isset($success)
     <h1>{{ $success }}</h1>
 @endisset
+
+@if($errors->any())
+            <ul>
+                @foreach($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        @endif
 
 <table border="1">
     <tr>

@@ -7,11 +7,10 @@
         @csrf
 
         <label for="nome">Nome</label>
-        <input type="text" name="nome" id="nome" placeholder="Digite o nome do aluno">
+        <input type="text" name="nome" id="nome" placeholder="Digite o nome do aluno" value="{{ old('nome') }}">
 
         <label for="telefone">Telefone</label>
-        <input type="text" name="telefone" id="telefone" placeholder="Digite seu numero">
-
+        <input type="text" name="telefone" id="telefone" placeholder="Digite seu numero" >
         <label for="email">Email</label>
         <input type="text" name="email" id="email" placeholder="Digite seu email">
 
@@ -22,6 +21,15 @@
 @isset($success)
     <h1>{{ $success }}</h1>
 @endisset
+
+
+@if($errors->any())
+            <ul>
+                @foreach($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        @endif
 
 <table border="1">
     <tr>

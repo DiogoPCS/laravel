@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 class AdminController extends Controller
 {
@@ -13,6 +14,25 @@ class AdminController extends Controller
     }
 
     function add(Request $dados) { 
+
+        $validator = Validator::make(
+            $dados->all(),
+              [
+                  'nome' => 'required|min:3|max:255',
+              ],
+              [
+                  'nome.required' => 'O campo nome é obrigatório.',
+                  'nome.min' => 'O campo nome deve conter no mínimo 3 caracteres.',
+                  'nome.max' => 'O campo nome deve conter no máximo 255 caracteres.',
+              ]
+      );
+
+      if ($validator->fails()) {
+          return redirect()
+              ->route('admin.index')
+              ->withErrors($validator)
+              ->withInput();}
+
         $admin = new \App\Models\AdminModel();
         $admin::create($dados->all());
 
@@ -22,10 +42,10 @@ class AdminController extends Controller
     }
 
     function remove(string $id) {
-        $aluno = new \App\Models\AlunoModel();
-        $aluno::destroy($id);
+        $admin = new \App\Models\adminModel();
+        $admin::destroy($id);
 
-        return view('aluno.index', ['success'=>'Removido!', 'aluno'=>$aluno::all()]);
+        return view('admin.index', ['success'=>'Removido!', 'admin'=>$admin::all()]);
 
     }
 
@@ -41,6 +61,6 @@ class AdminController extends Controller
         $admin = $admin::find($dados->id);
         $admin->update($dados->all());
 
-        return view('admin.atualizar', ['success'=>'Atualizado!', 'admin'=>$aluno]);
+        return view('admin.atualizar', ['success'=>'Atualizado!', 'admin'=>$admin]);
     }
 }
