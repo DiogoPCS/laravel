@@ -9,10 +9,12 @@
         <input type="text" name="nome" id="nome">
 
         <button type="submit">Salvar</button>
-        @isset($success)
-            <h1>{{ $success }}</h1>
-        @endisset
+       
     </form>
+
+    @isset($success)
+    <h1>{{ $success }}</h1>
+@endisset
 
     <table border="1">
         <tr>
