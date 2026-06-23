@@ -6,7 +6,7 @@
     <form action="{{ route('curso.add') }}" method="post" class="form-box">
         @csrf
         <label for="nome">Nome</label>
-        <input type="text" name="nome" id="nome" placeholder="Digite o Curso">
+        <input type="text" name="nome" id="nome" placeholder="Digite o Curso" value="{{ old('nome') }}">
 
         <label class="titulo-periodo">Período</label>
         <div class="grupo-radios">
@@ -32,6 +32,14 @@
     @isset($success)
         <h1>{{ $success }}</h1>
     @endisset
+
+    @if($errors->any())
+            <ul>
+                @foreach($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        @endif
 
     <table>
         <tr>

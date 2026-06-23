@@ -5,6 +5,16 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
+
+    class ComponenteController extends Controller
+    {
+        function index(){ 
+            $componente = new \App\Models\ComponenteModel();
+
+            return view('componente.index', ['componente'=>$componente::all()]);
+        }
+
+        
 function add(Request $dados) { 
 
     $validator = Validator::make(
@@ -31,24 +41,6 @@ function add(Request $dados) {
           
             $componente = new \App\Models\ComponenteModel();
     
-            return view('componente.index', ['success'=>'Cadastrado!', 'componente'=>$componente::all()]);
-        }
-
-    class ComponenteController extends Controller
-    {
-        function index(){ 
-            $componente = new \App\Models\ComponenteModel();
-
-            return view('componente.index', ['componente'=>$componente::all()]);
-        }
-
-        function add(Request $dados) { 
-            $componente = new \App\Models\ComponenteModel();
-            $componente::create($dados->all());
-
-        
-            $componente = new \App\Models\ComponenteModel();
-
             return view('componente.index', ['success'=>'Cadastrado!', 'componente'=>$componente::all()]);
         }
 

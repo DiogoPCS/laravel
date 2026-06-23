@@ -5,9 +5,19 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
+
+class AlunoController extends Controller
+{
+
+    function index(){ 
+        $aluno = new \App\Models\AlunoModel();
+
+        return view('aluno.index', ['aluno'=>$aluno::all()]);
+    }   
+
     function add(Request $dados) { 
         $validator = Validator::make(
-            $dados->all(),
+              $dados->all(),
                 [
                     'nome' => 'required|min:3|max:255',
                 ],
@@ -23,23 +33,7 @@ use Illuminate\Support\Facades\Validator;
                 ->route('aluno.index')
                 ->withErrors($validator)
                 ->withInput();}
-    $aluno = new \App\Models\AlunoModel();
-    $aluno::create($dados->all());
-
-    $aluno = new \App\Models\AlunoModel();
-
-return view('aluno.index', ['success'=>'Cadastrado!', 'aluno'=>$aluno::all()]);}
-
-class AlunoController extends Controller
-{
-
-    function index(){ 
-        $aluno = new \App\Models\AlunoModel();
-
-        return view('aluno.index', ['aluno'=>$aluno::all()]);
-    }
-
-    function add(Request $dados) { 
+        
         $aluno = new \App\Models\AlunoModel();
         $aluno::create($dados->all());
 
@@ -47,7 +41,8 @@ class AlunoController extends Controller
         $aluno = new \App\Models\AlunoModel();
 
         return view('aluno.index', ['success'=>'Cadastrado!', 'aluno'=>$aluno::all()]);
-    }
+
+}
 
     function remove(string $id) {
         $aluno = new \App\Models\AlunoModel();

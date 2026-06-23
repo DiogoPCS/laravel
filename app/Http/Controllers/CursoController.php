@@ -5,6 +5,15 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
+    class CursoController extends Controller
+    {
+    function index(){ 
+            $curso = new \App\Models\CursoModel();
+
+            return view('curso.index', ['curso'=>$curso::all()]);
+        }
+
+       
 function add(Request $dados) { 
 
     $validator = Validator::make(
@@ -34,23 +43,6 @@ function add(Request $dados) {
         return view('curso.index', ['success'=>'Cadastrado!', 'curso'=>$curso::all()]);
     }
 
-    class CursoController extends Controller
-    {
-    function index(){ 
-            $curso = new \App\Models\CursoModel();
-
-            return view('curso.index', ['curso'=>$curso::all()]);
-        }
-
-        function add(Request $dados) { 
-            $curso = new \App\Models\CursoModel();
-            $curso::create($dados->all());
-
-        
-            $curso = new \App\Models\CursoModel();
-
-            return view('curso.index', ['success'=>'Cadastrado!', 'curso'=>$curso::all()]);
-        }
 
         function remove(string $id) {
             $curso = new \App\Models\CursoModel();

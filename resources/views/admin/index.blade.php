@@ -7,7 +7,7 @@
         @csrf
 
         <label for="nome">Nome</label>
-        <input type="text" name="nome" id="nome" placeholder="Digite o nome" required>
+        <input type="text" name="nome" id="nome" placeholder="Digite o nome" required  value="{{ old('nome') }}">
 
         <label for="telefone">Telefone</label>
         <input type="text" name="telefone" id="telefone" placeholder="Digite seu número">
@@ -35,6 +35,14 @@
     <h1>{{ $success }}</h1>
 @endisset
 
+@if($errors->any())
+            <ul>
+                @foreach($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        @endif
+        
 <table border="1">
     <tr>
         <td>Nome do Admin</td>
