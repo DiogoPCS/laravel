@@ -43,6 +43,6 @@ class AlunoController extends Controller
         $aluno = $aluno::find($dados->id);
         $aluno->update($dados->all());
 
-        return view('aluno.atualizar', ['success'=>'Atualizado!', 'aluno'=>$aluno]);
-    }
+        return view('aluno.index', ['success'=>'Atualizado!', 'nome'=>$aluno]);
+}
 }

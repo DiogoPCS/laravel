@@ -10,10 +10,10 @@
         <input type="text" name="nome" id="nome" placeholder="Digite o nome do Componente">
 
         <label for="hora_inicio">Horario de Inicio</label>
-        <input type="datetime" name="hora_inicio" id="hora_inicio">
+        <input type="time" name="hora_inicio" id="hora_inicio">
         
         <label for="hora_fim">Horario de Fim</label>
-        <input type="datetime" name="hora_fim" id="hora_fim">
+        <input type="time" name="hora_fim" id="hora_fim">
        
 
         <button type="submit">Salvar</button>

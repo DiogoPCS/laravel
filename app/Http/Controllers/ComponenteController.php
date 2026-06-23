@@ -42,6 +42,6 @@ class ComponenteController extends Controller
         $componente = $componente::find($dados->id);
         $componente->update($dados->all());
 
-        return view('componente.atualizar', ['success'=>'Atualizado!', 'componente'=>$componente]);
+        return view('componente.index', ['success'=>'Atualizado!', 'nome'=>$componente]);
     }
 }

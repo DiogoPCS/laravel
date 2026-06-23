@@ -42,6 +42,6 @@ class ProfessorController extends Controller
         $professor = $professor::find($dados->id);
         $professor->update($dados->all());
 
-        return view('professor.atualizar', ['success'=>'Atualizado!', 'professor'=>$professor]);
+        return view('professor.index', ['success'=>'Atualizado!', 'nome'=>$professor]);
     }
 }

@@ -41,6 +41,6 @@ class AdminController extends Controller
         $admin = $admin::find($dados->id);
         $admin->update($dados->all());
 
-        return view('admin.atualizar', ['success'=>'Atualizado!', 'admin'=>$admin]);
+        return view('admin.atualizar', ['success'=>'Atualizado!', 'nome'=>$admin]);
     }
 }

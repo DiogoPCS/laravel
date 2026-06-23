@@ -42,7 +42,7 @@ class CursoController extends Controller
         $curso = $curso::find($dados->id);
         $curso->update($dados->all());
 
-        return view('curso.atualizar', ['success'=>'Atualizado!', 'curso'=>$curso]);
+        return view('curso.index', ['success'=>'Atualizado!', 'nome'=>$curso]);
     }
 
 }
