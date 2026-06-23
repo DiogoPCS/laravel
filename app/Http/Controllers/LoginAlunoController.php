@@ -2,28 +2,66 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request; //request é responsavel por receber os dados do formulario
+use Illuminate\Http\Request;
+use App\Models\LoginAlunoModel;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 
 class LoginAlunoController extends Controller
 {
-    function index() {
+    public function index() {
         return view('loginaluno.index');
     }
 
-    function cadastro() {
+    public function cadastro() {
         return view('loginaluno.cadastro');
     }
 
-    function adicionar(Request $dados) { 
-        $aluno = new \App\Models\LoginAlunoModel();
-        $aluno::create($dados->all());
+    public function adicionar(Request $request) { 
+        // Validação dos dados enviados pelo formulário
+        $request->validate([
+            'nome'            => 'required|string|max:255',
+            'email'           => 'required|email|unique:alunos,email',
+            'senha'           => 'required|min:6',
+            'area_cientifica' => 'required|string' // ADICIONADO: Validação do campo
+        ]);
 
-        return view('loginaluno.index', ['sucesso'=>'Aluno cadastrado!']);
-     }
+        // Cria o aluno no banco de dados
+        $aluno = LoginAlunoModel::create([
+            'nome'            => $request->nome,
+            'email'           => $request->email,
+            'senha'           => Hash::make($request->senha),
+            'area_cientifica' => $request->area_cientifica // ADICIONADO: Gravando no banco
+        ]);
 
-    function remover(Request $dados) {  }
+        // Faz o login automático e salva a sessão (Remember Me)
+        Auth::guard('alunos')->login($aluno, true);
 
-    function atualizar(Request $dados) {  }
+        return redirect()->route('dashboard')->with('sucesso', 'Aluno cadastrado e logado!');
+    }
 
-    function consultar() {  }
+    public function logar(Request $request) {
+        $credenciais = $request->validate([
+            'email' => 'required|email',
+            'senha' => 'required'
+        ]);
+
+        if (Auth::guard('alunos')->attempt(['email' => $credenciais['email'], 'password' => $credenciais['senha']], true)) {
+            $request->session()->regenerate();
+            return redirect()->intended('/dashboard');
+        }
+
+        return back()->withErrors(['email' => 'E-mail ou senha incorretos.']);
+    }
+
+    public function logout(Request $request) {
+        Auth::guard('alunos')->logout();
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
+        return redirect()->route('loginaluno.index');
+    }
+
+    public function remover(Request $dados) {  }
+    public function atualizar(Request $dados) {  }
+    public function consultar() {  }
 }

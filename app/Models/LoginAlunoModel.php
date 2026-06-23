@@ -3,11 +3,19 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
+use Illuminate\Foundation\Auth\User as Authenticatable;
 
-class LoginAlunoModel extends Model
+class LoginAlunoModel extends Authenticatable
 {
     use HasFactory;
+
     protected $table = 'alunos';
-    protected $fillable = ['id', 'nome', 'email', 'senha'];
+    
+    // ADICIONADO: 'area_cientifica' liberado para preenchimento
+    protected $fillable = ['nome', 'email', 'senha', 'area_cientifica']; 
+
+    public function getAuthPassword()
+    {
+        return $this->senha;
+    }
 }

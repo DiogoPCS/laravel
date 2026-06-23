@@ -209,33 +209,32 @@
       <button class="teacher">Professor</button>
     </div>
 
-<form action="{{ route('loginaluno.adicionar') }}" method="post">
-    @csrf 
-    <label for="email">E-mail</label>
-    <input type="email" name="email" id="email" placeholder="seu.email@exemplo.com">
-
-    <label for="senha">Senha</label>
-    <input type="password" name="senha" id="senha" placeholder="******">
-
-    <button class="login-btn">
-      ↗ Entrar
-      aaa
-    </button>
-
-    @isset($sucesso)
-        <h1>{{ $sucesso }}</h1>
-    @endisset
-</form>
-
-
-    <div class="demo">
-      <p>Demo: use qualquer email e senha</p>
-      <p>
-        Aluno: acessa área de publicações | 
-        Professor: acessa área administrativa
-      </p>
-    </div>
-
+    
+    <form action="{{ route('loginaluno.adicionar') }}" method="post">
+        @csrf 
+        <label for="email">E-mail</label>
+        <input type="email" name="email" id="email" placeholder="seu.email@exemplo.com">
+    
+        <label for="senha">Senha</label>
+        <input type="password" name="senha" id="senha" placeholder="******">
+    
+        <button class="login-btn">
+          ↗ Entrar
+        </button>
+    
+        @isset($sucesso)
+            <h1>{{ $sucesso }}</h1>
+        @endisset
+    </form>
+    
+    
+        <div class="demo">
+          <p>Demo: use qualquer email e senha</p>
+          <p>
+            Aluno: acessa área de publicações | 
+            Professor: acessa área administrativa
+          </p>
+        </div>
   </div>
 
 </body>

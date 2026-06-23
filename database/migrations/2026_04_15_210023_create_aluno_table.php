@@ -6,24 +6,20 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
-    /**
-     * Run the migrations.
-     */
-    public function up(): void //up = criar
+    public function up(): void
     {
         Schema::create('alunos', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
             $table->string('nome');
-            $table->string('email');
+            $table->string('email')->unique(); // Evita e-mails duplicados
             $table->string('senha');
+            $table->string('area_cientifica'); // ADICIONADO: Campo da área científica
+            $table->rememberToken(); // ADICIONADO: Necessário para salvar o login
         });
     }
 
-    /**
-     * Reverse the migrations.
-     */
-    public function down(): void //down = excluir
+    public function down(): void
     {
         Schema::dropIfExists('alunos');
     }

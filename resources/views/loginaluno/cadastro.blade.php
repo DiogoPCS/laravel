@@ -214,133 +214,72 @@ select:focus{
 <body>
 
 <div class="register-box">
-
-    <!-- AVATAR -->
-
     <div class="avatar">
-        <img src="https://i.imgur.com/ZQZSWrt.png">
+        <img src="https://imgur.com">
     </div>
 
-    <!-- TÍTULO -->
+    <h1 class="title">BETH CIENTISTA</h1>
+    <div class="subtitle">Crie sua conta na plataforma</div>
 
-    <h1 class="title">
-        BETH CIENTISTA
-    </h1>
+    <!-- Bloco para exibir mensagens de erro caso o e-mail já exista ou a senha seja curta -->
+    @if ($errors->any())
+        <div class="error-box">
+            @foreach ($errors->all() as $error)
+                <p>⚠️ {{ $error }}</p>
+            @endforeach
+        </div>
+    @endif
 
-    <div class="subtitle">
-        Crie sua conta na plataforma
-    </div>
-
-    <!-- FORM -->
-
-    <form id="cadastroForm">
+    <!-- FORMULÁRIO CORRIGIDO COM ROTAS DO LARAVEL -->
+    <form action="{{ route('loginaluno.adicionar') }}" method="POST">
+        @csrf <!-- Segurança obrigatória do Laravel -->
 
         <!-- TIPO -->
-
         <div>
-
             <label>Tipo de Conta</label>
-
             <div class="access">
-
-                <button 
-                    type="button"
-                    class="student"
-                    onclick="selecionarAluno()"
-                >
-                    Aluno
-                </button>
-
-                <button 
-                    type="button"
-                    class="teacher"
-                    onclick="selecionarProfessor()"
-                >
-                    Professor
-                </button>
-
+                <button type="button" class="student">Aluno</button>
+                <button type="button" class="teacher">Professor</button>
             </div>
-
         </div>
 
-        <!-- NOME -->
-
+        <!-- NOME (Adicionado o atributo 'name') -->
         <div>
             <label>Nome Completo</label>
-            <input 
-                type="text"
-                id="nome"
-                placeholder="Digite seu nome"
-                required
-            >
+            <input type="text" name="nome" value="{{ old('nome') }}" placeholder="Digite seu nome" required>
         </div>
 
-        <!-- EMAIL -->
-
+        <!-- EMAIL (Adicionado o atributo 'name') -->
         <div>
             <label>Email</label>
-            <input 
-                type="email"
-                id="email"
-                placeholder="seu.email@exemplo.com"
-                required
-            >
+            <input type="email" name="email" value="{{ old('email') }}" placeholder="seu.email@exemplo.com" required>
         </div>
 
-        <!-- SENHA -->
-
+        <!-- SENHA (Adicionado o atributo 'name') -->
         <div>
             <label>Senha</label>
-            <input 
-                type="password"
-                id="senha"
-                placeholder="********"
-                required
-            >
+            <input type="password" name="senha" placeholder="********" required>
         </div>
 
-        <!-- ÁREA -->
-
+        <!-- ÁREA CIENTÍFICA (Adicionado o atributo 'name') -->
         <div>
             <label>Área Científica</label>
-
-            <select id="area">
-
-                <option>Biologia</option>
-                <option>Química</option>
-                <option>Física</option>
-                <option>Astronomia</option>
-                <option>Anatomia</option>
-
+            <select name="area_cientifica" required>
+                <option value="Biologia" {{ old('area_cientifica') == 'Biologia' ? 'selected' : '' }}>Biologia</option>
+                <option value="Química" {{ old('area_cientifica') == 'Química' ? 'selected' : '' }}>Química</option>
+                <option value="Física" {{ old('area_cientifica') == 'Física' ? 'selected' : '' }}>Física</option>
+                <option value="Astronomia" {{ old('area_cientifica') == 'Astronomia' ? 'selected' : '' }}>Astronomia</option>
+                <option value="Anatomia" {{ old('area_cientifica') == 'Anatomia' ? 'selected' : '' }}>Anatomia</option>
             </select>
         </div>
 
-        <!-- BOTÃO -->
-
-        <button 
-            type="submit"
-            class="register-btn"
-        >
-            ↗ Criar Conta
-        </button>
-
+        <button type="submit" class="register-btn">↗ Criar Conta</button>
     </form>
-
-    <!-- SUCESSO -->
-
-    <div class="success" id="successBox">
-        Cadastro realizado com sucesso!
-    </div>
-
-    <!-- LOGIN -->
 
     <div class="footer">
         Já possui conta?
-        <a href="login.html">
-            Entrar
-        </a>
+        <a href="{{ route('loginaluno.index') }}">Entrar</a>
     </div>
-
 </div>
 
 </body>
