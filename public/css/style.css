@@ -158,3 +158,6 @@ table tr td:nth-child(3) button:hover {
         width: 100%;
     }
 }
+p{
+    color: #000000;
+}
