@@ -142,6 +142,9 @@ table tr td:nth-child(3) button {
 table tr td:nth-child(3) button:hover {
     background: #596653;
 }
+/* nth-child() seleciona o item que ta dentro do () */
+/* :first-child seleciona apenas o primeiro item da lista */
+/* input:focus estiliza o input quando ele é clicado ou focado pelo teclado */
 
 
 @media (max-width: 900px) {
