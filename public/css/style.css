@@ -143,45 +143,6 @@ table tr td:nth-child(3) button:hover {
     background: #596653;
 }
 
-.grupo-radios {
-    display: flex;
-    gap: 10px;
-    margin-bottom: 15px;
-    margin-top: 5px;
-}
-
-.opcao-radio {
-    flex: 1;
-}
-
-.opcao-radio input[type="radio"] {
-    display: none;
-}
-
-.opcao-radio label {
-    display: block;
-    padding: 10px;
-    background-color: #fff;
-    border: 2px solid #ccc;
-    border-radius: 20px;
-    text-align: center;
-    cursor: pointer;
-    font-weight: 500;
-    transition: all 0.2s ease-in-out;
-}
-
-.opcao-radio label:hover {
-    border-color: #999;
-}
-
-.opcao-radio input[type="radio"]:checked + label {
-    background-color: #444;
-    border-color: #444;
-    color: white;
-}
-
-
-
 
 @media (max-width: 900px) {
 
