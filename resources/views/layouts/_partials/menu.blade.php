@@ -13,7 +13,7 @@
         </div>
         
         <div class="col-2">
-            <a href="{{ route('contato') }}">Contato</a>
+            <a href="{{ route('contato') }}">Contato.</a>
         </div>
     </div>
 </div>
