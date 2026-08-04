@@ -15,9 +15,10 @@ return new class extends Migration
             $table->id();
             $table->timestamps();
             $table->string('nome');
+            $table->string('email');
         });
     }
-
+    
     /**
      * Reverse the migrations.
      */
