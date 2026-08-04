@@ -31,14 +31,29 @@ return new class extends Migration
             $table->id();
             $table->string('nome');
             $table->integer('quantidade');
-        
-            $table->foreignId('id_plataforma')->constrained('plataforma');
-            $table->foreignId('id_estado')->constrained('usado');
-            $table->foreignId('id_retro')->constrained('retro');
-            $table->foreignId('id_colecionador')->constrained('colecionador');
+
+            //teste de chave estrangeira
+    
+            $table->foreignId('id_plataforma')
+            ->constrained('plataforma')
+            ->onUpdate('cascade')
+            ->onDelete('cascade');
+            // o onDelete serve para que quando o for deletado tudo relacionado a ele será deletado
+
+            $table->foreignId('id_estado')->constrained('usado')
+            ->onUpdate('cascade')
+            ->onDelete('cascade');
+
+            $table->foreignId('id_retro')->constrained('retro')
+            ->onUpdate('cascade')
+            ->onDelete('cascade');
+
+            $table->foreignId('id_colecionador')->constrained('colecionador')
+            ->onUpdate('cascade')
+            ->onDelete('cascade');
         
             $table->timestamps();
-            $table->softDeletes();
+            //$table->softDeletes();
         });
     }
 

@@ -22,21 +22,21 @@ class jogoModel extends Model
 
     public function plataforma()
     {
-        return $this->belongsTo(Plataforma::class, 'id_plataforma');
+        return $this->belongsTo(plataformaModel::class, 'id_plataforma');
     }
 
     public function estado()
     {
-        return $this->belongsTo(Usado::class, 'id_estado');
+        return $this->belongsTo(usadoModel::class, 'id_estado');
     }
 
     public function retro()
     {
-        return $this->belongsTo(Retro::class, 'id_retro');
+        return $this->belongsTo(retroModel::class, 'id_retro');
     }
 
     public function colecionador()
     {
-        return $this->belongsTo(Colecionador::class, 'id_colecionador');
+        return $this->belongsTo(colecionadorModel::class, 'id_colecionador');
     }
 }

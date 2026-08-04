@@ -20,10 +20,10 @@ class JogoController extends Controller
     public function create()
 {
     return view('jogo.create', [
-        'plataformas' => Plataforma::all(),
-        'estados' => Usado::all(),
-        'retros' => Retro::all(),
-        'colecionadores' => Colecionador::all(),
+        'plataformas' => plataformaModel::all(),
+        'estados' => usadoModel::all(),
+        'retros' => retroModel::all(),
+        'colecionadores' => colecionadorModel::all(),
     ]);
 }
 
