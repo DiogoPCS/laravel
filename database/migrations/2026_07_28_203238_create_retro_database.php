@@ -12,7 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('retro_database', function (Blueprint $table) {
-            $table->id();
+            $table->bigIncrements('id');
             $table->string('nome');
             $table->timestamps();
         });

@@ -16,13 +16,15 @@ class plataformaController extends Controller
             $plataforma::create($dados->all());
         
 
-        //RECUPERANDO TODOS ALUNOS DO BANCO E ENVIANDO PARA A VIEW
+        //RECUPERANDO TODOS plataformaS DO BANCO E ENVIANDO PARA A VIEW
 				
-        $alunos = new \App\Models\AlunoModel();
+        $plataformas = new \App\Models\plataformaModel();
 
-        return view('aluno.index', ['success'=>'Cadastrado!', 'alunos'=>$alunos::all()]);
+        return view('plataforma.index', ['success'=>'Cadastrado!', 'plataformas'=>$plataformas::all()]);
 
         }
+
+        
     }
     
 

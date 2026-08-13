@@ -12,7 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('plataforma_database', function (Blueprint $table) {
-            $table->id();
+            $table->bigIncrements('id'); // bigInteger unsigned auto_increment
             $table->string('nome');
             $table->timestamps();
         });
