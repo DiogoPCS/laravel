@@ -1,0 +1,81 @@
+// public/js/offline.js
+class OfflineManager {
+    constructor() {
+        this.db = null;
+        this.initDB();
+    }
+    
+    async initDB() {
+        // Usar IndexedDB para armazenamento local
+        const request = indexedDB.open('LaravelOfflineDB', 1);
+        
+        request.onupgradeneeded = (event) => {
+            const db = event.target.result;
+            db.createObjectStore('todos', { keyPath: 'id' });
+            db.createObjectStore('pendingChanges', { 
+                keyPath: 'id', 
+                autoIncrement: true 
+            });
+        };
+        
+        request.onsuccess = (event) => {
+            this.db = event.target.result;
+        };
+    }
+    
+    async saveTodo(todo) {
+        // Salvar localmente
+        const transaction = this.db.transaction(['todos', 'pendingChanges'], 'readwrite');
+        
+        // Salvar no store de todos
+        transaction.objectStore('todos').put(todo);
+        
+        // Registrar mudança pendente
+        transaction.objectStore('pendingChanges').add({
+            todo_id: todo.id,
+            operation: 'create',
+            data: todo,
+            timestamp: Date.now()
+        });
+        
+        // Tentar sincronizar se online
+        if (navigator.onLine) {
+            this.syncWithServer();
+        }
+    }
+    
+    async syncWithServer() {
+        const pendingChanges = await this.getPendingChanges();
+        
+        if (pendingChanges.length === 0) return;
+        
+        try {
+            const response = await fetch('/api/sync/push', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').content
+                },
+                body: JSON.stringify({ changes: pendingChanges })
+            });
+            
+            if (response.ok) {
+                // Limpar mudanças sincronizadas
+                this.clearPendingChanges();
+            }
+        } catch (error) {
+            console.log('Offline - mudanças serão sincronizadas depois');
+        }
+    }
+}
+
+// Eventos de conectividade
+window.addEventListener('online', () => {
+    console.log('Online - sincronizando...');
+    const manager = new OfflineManager();
+    manager.syncWithServer();
+});
+
+window.addEventListener('offline', () => {
+    console.log('Offline - usando dados locais');
+});

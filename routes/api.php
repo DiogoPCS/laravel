@@ -18,4 +18,10 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::get('teste', function() {});
+// routes/api.php
+Route::prefix('sync')->group(function () {
+    Route::post('/push', [SyncController::class, 'push']);
+    Route::get('/pull', [SyncController::class, 'pull']);
+    Route::post('/batch', [SyncController::class, 'batchSync']);
+});
+
