@@ -20,19 +20,27 @@ Route::get('/index', [App\Http\Controllers\JogoController::class, 'index'])->nam
 });
 
 Route::prefix('/plataforma')->group(function(){
-    Route::get('/index', [App\Http\Controllers\plataformaController::class, 'index'])->name('plataforma.index');
+    Route::get('/index', [App\Http\Controllers\PlataformaController::class, 'index'])->name('plataforma.index');
+    Route::post('/add', [App\Http\Controllers\PlataformaController::class, 'add'])->name('plataforma.add');
+    Route::post('/remove', [App\Http\Controllers\PlataformaController::class, 'remove'])->name('plataforma.remove');
     });
 
 
-    Route::prefix('/usadp')->group(function(){
-        Route::get('/index', [App\Http\Controllers\usadpController::class, 'index'])->name('usadp.index');
-        });
+Route::prefix('/usado')->group(function(){
+    Route::get('/index', [App\Http\Controllers\usadoController::class, 'index'])->name('usado.index');
+    Route::post('/add', [App\Http\Controllers\usadoController::class, 'add'])->name('usado.add');
+    Route::post('/remove', [App\Http\Controllers\usadoController::class, 'remove'])->name('usado.remove');
+    });
 
-        Route::prefix('/retro')->group(function(){
-            Route::get('/index', [App\Http\Controllers\retroController::class, 'index'])->name('retro.index');
-            });
+Route::prefix('/retro')->group(function(){
+    Route::get('/index', [App\Http\Controllers\retroController::class, 'index'])->name('retro.index');
+    Route::post('/add', [App\Http\Controllers\retroController::class, 'add'])->name('retro.add');
+    Route::post('/remove', [App\Http\Controllers\retroController::class, 'remove'])->name('retro.remove');
+    });
 
-            Route::prefix('/colecionador')->group(function(){
-                Route::get('/index', [App\Http\Controllers\colecionadorController::class, 'index'])->name('colecionador.index');
-                });
+Route::prefix('/colecionador')->group(function(){
+    Route::get('/index', [App\Http\Controllers\colecionadorController::class, 'index'])->name('colecionador.index');
+    Route::post('/add', [App\Http\Controllers\colecionadorController::class, 'add'])->name('colecionador.add');
+    Route::post('/remove', [App\Http\Controllers\colecionadorController::class, 'remove'])->name('colecionador.remove');
+    });
 

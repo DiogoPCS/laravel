@@ -13,5 +13,21 @@ class usadoController extends Controller
     function add(Request $dados) { 
         $usado = new \App\Models\usadoModel();
         $usado::create($dados->all());
+    
+    //RECUPERANDO TODOS usadoS DO BANCO E ENVIANDO PARA A VIEW
+				
+    $usados = new \App\Models\usadoModel();
+
+    return view('usado.index', ['success'=>'Cadastrado!', 'usados'=>$usados::all()]);
+
     }
+
+    function remove(string $id) {
+        $usado = new \App\Models\usadoModel();
+        $usado::destroy($id);
+
+        return view('usado.index', ['success'=>'Removido!', 'usados'=>$usado::all()]);
+
+    }
+
 }

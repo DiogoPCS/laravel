@@ -8,13 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class retroModel extends Model
 {
     use HasFactory;
-    protected $table = 'jogos';
-
+    protected $table = 'retro_database';
     protected $fillable = ['nome'];
-
-    public function jogos()
-    {
-        return $this->hasMany(Jogo::class, 'id_retro');
-    }
-    
 }
+
