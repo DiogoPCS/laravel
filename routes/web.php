@@ -2,6 +2,11 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Middleware\LogAcessoMiddleware;
+use App\Http\Controllers\JogoController;
+use App\Http\Controllers\PlataformaController;
+use App\Http\Controllers\usadoController;
+use App\Http\Controllers\retroController;
+use App\Http\Controllers\colecionadorController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -16,7 +21,9 @@ use App\Http\Middleware\LogAcessoMiddleware;
 Route::get('/', [App\Http\Controllers\Principal::class, 'principal']);
 
 Route::prefix('/jogo')->group(function(){
-Route::get('/index', [App\Http\Controllers\JogoController::class, 'index'])->name('jogo.index');
+    Route::get('/index', [JogoController::class, 'index'])->name('jogo.index');
+    Route::post('/add', [JogoController::class, 'add'])->name('jogo.add');
+    Route::delete('/remove', [JogoController::class, 'remove'])->name('jogo.remove');
 });
 
 Route::prefix('/plataforma')->group(function(){

@@ -11,21 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        // Schema::create('jogos_database', function (Blueprint $table) {
-        //     $table->id();
-        //     $table->string('nome');
-        //     $table->integer('quantidade');
-        //     $table->integer('id_plataforma')->unsigned();
-        //     $table->foreign('id_plataforma')->references('id')->on('plataforma');
-        //     $table->integer('id_estado')->unsigned();
-        //     $table->foreign('id_estado')->references('id')->on('usado');
-        //     $table->integer('id_retro')->unsigned();
-        //     $table->foreign('id_retro')->references('id')->on('retro');
-        //     $table->integer('id_colecionador')->unsigned();
-        //     $table->foreign('id_colecionador')->references('id')->on('colecionador');
-        //     $table->timestamps();
-        //     $table->softDeletes();
-        // });
+
 
         Schema::create('jogos', function (Blueprint $table) {
             $table->id();
@@ -65,6 +51,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('jogo_database');
+        Schema::dropIfExists('jogo'); //_database
     }
 };
