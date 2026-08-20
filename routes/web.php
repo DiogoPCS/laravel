@@ -2,6 +2,11 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Middleware\LogAcessoMiddleware;
+use App\Http\Controllers\JogoController;
+use App\Http\Controllers\PlataformaController;
+use App\Http\Controllers\usadoController;
+use App\Http\Controllers\retroController;
+use App\Http\Controllers\colecionadorController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -15,11 +20,36 @@ use App\Http\Middleware\LogAcessoMiddleware;
 
 Route::get('/', [App\Http\Controllers\Principal::class, 'principal']);
 
+Route::prefix('/jogo')->group(function(){
+    Route::get('/index', [JogoController::class, 'index'])->name('jogo.index');
+    Route::post('/add', [JogoController::class, 'add'])->name('jogo.add');
+    Route::delete('/remove/{id}', [JogoController::class, 'remove'])->name('jogo.remove');
+    Route::get('/atualizar/{id}', [App\Http\Controllers\JogoController::class, 'atualizar'])->name('jogo.atualizar');
+    Route::post('/save', [App\Http\Controllers\JogoController::class, 'save'])->name('jogo.save');
+});
 
-Route::prefix('/aluno')->group(function(){
-    Route::get('/index', [App\Http\Controllers\AlunoController::class, 'index'])->name('aluno.index');
-    Route::post('/add', [App\Http\Controllers\AlunoController::class, 'add'])->name('aluno.add');
-    Route::post('/remove', [App\Http\Controllers\AlunoController::class, 'remove'])->name('aluno.remove');
-    Route::post('/edit', [App\Http\Controllers\AlunoController::class, 'edit'])->name('aluno.edit');
-    Route::get('/list', [App\Http\Controllers\AlunoController::class, 'list'])->name('aluno.list');
-}); 
+Route::prefix('/plataforma')->group(function(){
+    Route::get('/index', [App\Http\Controllers\PlataformaController::class, 'index'])->name('plataforma.index');
+    Route::post('/add', [App\Http\Controllers\PlataformaController::class, 'add'])->name('plataforma.add');
+    Route::post('/remove', [App\Http\Controllers\PlataformaController::class, 'remove'])->name('plataforma.remove');
+    });
+
+
+Route::prefix('/usado')->group(function(){
+    Route::get('/index', [App\Http\Controllers\usadoController::class, 'index'])->name('usado.index');
+    Route::post('/add', [App\Http\Controllers\usadoController::class, 'add'])->name('usado.add');
+    Route::post('/remove', [App\Http\Controllers\usadoController::class, 'remove'])->name('usado.remove');
+    });
+
+Route::prefix('/retro')->group(function(){
+    Route::get('/index', [App\Http\Controllers\retroController::class, 'index'])->name('retro.index');
+    Route::post('/add', [App\Http\Controllers\retroController::class, 'add'])->name('retro.add');
+    Route::post('/remove', [App\Http\Controllers\retroController::class, 'remove'])->name('retro.remove');
+    });
+
+Route::prefix('/colecionador')->group(function(){
+    Route::get('/index', [App\Http\Controllers\colecionadorController::class, 'index'])->name('colecionador.index');
+    Route::post('/add', [App\Http\Controllers\colecionadorController::class, 'add'])->name('colecionador.add');
+    Route::post('/remove', [App\Http\Controllers\colecionadorController::class, 'remove'])->name('colecionador.remove');
+    });
+
