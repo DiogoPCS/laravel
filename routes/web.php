@@ -23,7 +23,9 @@ Route::get('/', [App\Http\Controllers\Principal::class, 'principal']);
 Route::prefix('/jogo')->group(function(){
     Route::get('/index', [JogoController::class, 'index'])->name('jogo.index');
     Route::post('/add', [JogoController::class, 'add'])->name('jogo.add');
-    Route::delete('/remove', [JogoController::class, 'remove'])->name('jogo.remove');
+    Route::delete('/remove/{id}', [JogoController::class, 'remove'])->name('jogo.remove');
+    Route::get('/atualizar/{id}', [App\Http\Controllers\JogoController::class, 'atualizar'])->name('jogo.atualizar');
+    Route::post('/save', [App\Http\Controllers\JogoController::class, 'save'])->name('jogo.save');
 });
 
 Route::prefix('/plataforma')->group(function(){

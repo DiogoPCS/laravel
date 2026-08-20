@@ -52,8 +52,6 @@ class JogoController extends Controller
     // =============================================
     public function remove(Request $request)
     {
-        // Pega o ID da query string (?id=1)
-        $id = $request->query('id');
 
         if (!$id) {
             return redirect()->route('jogo.index')
