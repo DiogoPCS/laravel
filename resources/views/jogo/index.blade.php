@@ -15,6 +15,8 @@
         th { background: #f4f4f4; }
         .btn-danger { background: #dc3545; }
         .btn-danger:hover { background: #c82333; }
+        .btn-success { background: #28a745; }
+        .btn-success:hover { background: #218838; }
     </style>
 </head>
 <body>
@@ -119,6 +121,14 @@
                         <td>{{ $jogo->retro->nome ?? 'N/A' }}</td>
                         <td>{{ $jogo->colecionador->nome ?? 'N/A' }}</td>
                         <td>
+
+    <!-- Botão Atualizar -->
+    <a href="{{ route('jogo.atualizar', $jogo->id) }}">
+        <button type="button" style="background: #28a745; color: white; padding: 5px 10px; border: none; border-radius: 4px; cursor: pointer; margin-right: 5px;">
+            Atualizar
+        </button>
+    </a>
+                    <td>  <!-- Botão Remover -->
                             <form action="{{ route('jogo.remove', $jogo->id) }}" method="POST" style="display:inline;">
                                 @csrf
                                 @method('DELETE')

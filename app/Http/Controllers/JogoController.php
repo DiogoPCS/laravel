@@ -64,4 +64,57 @@ class JogoController extends Controller
         return redirect()->route('jogo.index')
                          ->with('success', 'Jogo removido com sucesso!');
     }
+
+    // =============================================
+    // 4. atualiza - atualiza um jogo (atualiza /jogo/atualiza?id=1)
+    // =============================================
+
+public function atualizar($id)
+    {
+        // Buscar o jogo específico
+        $jogo = jogoModel::find($id);
+        
+        if (!$jogo) {
+            return redirect()->route('jogo.index')->with('error', 'Jogo não encontrado!');
+        }
+
+        // Buscar os dados para os selects
+        $plataformas = plataformaModel::all();
+        $estados = estadoModel::all();
+        $retros = retroModel::all();
+        $colecionadores = colecionadorModel::all();
+
+        return view('jogo.atualizar', compact('jogo', 'plataformas', 'estados', 'retros', 'colecionadores'));
+    }
+
+    public function save(Request $request)
+    {
+        // Validação
+        $request->validate([
+            'id' => 'required|exists:jogos,id',
+            'nome' => 'required|string|max:255',
+            'quantidade' => 'required|integer|min:1',
+            'id_plataforma' => 'required|exists:plataformas,id',
+            'id_estado' => 'required|exists:estados,id',
+            'id_retro' => 'required|exists:retros,id',
+            'id_colecionador' => 'required|exists:colecionadores,id',
+        ]);
+
+        // Buscar e atualizar o jogo
+        $jogo = jogoModel::find($request->id);
+        
+        if (!$jogo) {
+            return redirect()->route('jogo.index')->with('error', 'Jogo não encontrado!');
+        }
+
+        $jogo->nome = $request->nome;
+        $jogo->quantidade = $request->quantidade;
+        $jogo->id_plataforma = $request->id_plataforma;
+        $jogo->id_estado = $request->id_estado;
+        $jogo->id_retro = $request->id_retro;
+        $jogo->id_colecionador = $request->id_colecionador;
+        $jogo->save();
+
+        return redirect()->route('jogo.index')->with('success', 'Jogo atualizado com sucesso!');
+    }
 }
