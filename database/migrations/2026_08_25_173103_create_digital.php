@@ -11,8 +11,9 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('digital', function (Blueprint $table) {
-            $table->id();
+        Schema::create('digital_database', function (Blueprint $table) {
+            $table->bigIncrements('id');
+            $table->string('nome');
             $table->timestamps();
         });
     }
@@ -22,6 +23,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('digital');
+        Schema::dropIfExists('digital_database');
     }
 };

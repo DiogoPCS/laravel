@@ -34,6 +34,23 @@ Route::prefix('/plataforma')->group(function(){
     Route::post('/remove', [App\Http\Controllers\PlataformaController::class, 'remove'])->name('plataforma.remove');
     });
 
+    Route::prefix('/digital')->group(function(){
+    Route::get('/index', [App\Http\Controllers\digitalController::class, 'index'])->name('digital.index');
+    Route::post('/add', [App\Http\Controllers\digitalController::class, 'add'])->name('digital.add');
+    Route::post('/remove', [App\Http\Controllers\digitalController::class, 'remove'])->name('digital.remove');
+    });
+
+    Route::prefix('/cor')->group(function(){
+    Route::get('/index', [App\Http\Controllers\corController::class, 'index'])->name('cor.index');
+    Route::post('/add', [App\Http\Controllers\corController::class, 'add'])->name('cor.add');
+    Route::post('/remove', [App\Http\Controllers\corController::class, 'remove'])->name('cor.remove');
+    });
+
+    Route::prefix('/desbloueado')->group(function(){
+    Route::get('/index', [App\Http\Controllers\desbloueadoController::class, 'index'])->name('desbloueado.index');
+    Route::post('/add', [App\Http\Controllers\desbloueadoController::class, 'add'])->name('desbloueado.add');
+    Route::post('/remove', [App\Http\Controllers\desbloueadoController::class, 'remove'])->name('desbloueado.remove');
+    });
 
 Route::prefix('/usado')->group(function(){
     Route::get('/index', [App\Http\Controllers\usadoController::class, 'index'])->name('usado.index');
