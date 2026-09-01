@@ -1,0 +1,6 @@
+{
+  "artboards": [
+    { "file": "Main.dc.html", "x": 0, "y": 0, "w": 1440, "h": 900, "expand": "fill" }
+  ],
+  "launch": { "view": "focused", "file": "Main.dc.html" }
+}

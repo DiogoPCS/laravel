@@ -1,0 +1,753 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bangers&family=Poppins:ital,wght@0,400;0,600;0,700;0,800;1,600&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --red:#E4231C;
+      --red-dark:#A5150F;
+      --blue:#0B3D91;
+      --blue-2:#144FA6;
+      --yellow:#FFC400;
+      --cream:#FFF3DD;
+      --ink:#121212;
+      --paper:#FFF9EE;
+    }
+    *{box-sizing:border-box;}
+    html,body{margin:0;padding:0;}
+    body{
+      font-family:'Poppins', system-ui, sans-serif;
+      background:var(--paper);
+      color:var(--ink);
+    }
+    h1,h2,h3,.comic-font{
+      font-family:'Bangers', 'Poppins', system-ui, sans-serif;
+      letter-spacing:1px;
+      font-weight:400;
+      text-wrap:pretty;
+      margin:0;
+    }
+    a{color:var(--red-dark);text-decoration:none;}
+    a:hover{color:var(--blue);}
+    p{margin:0;line-height:1.55;}
+    .halftone-dark{
+      background-image:radial-gradient(circle, rgba(0,0,0,.55) 1.6px, transparent 1.7px);
+      background-size:11px 11px;
+    }
+    .halftone-light{
+      background-image:radial-gradient(circle, rgba(255,255,255,.55) 1.6px, transparent 1.7px);
+      background-size:11px 11px;
+    }
+    .frame{
+      max-width:1180px;
+      margin:0 auto;
+      padding:0 28px;
+    }
+    .panel{
+      background:#fff;
+      border:5px solid var(--ink);
+      border-radius:10px;
+      box-shadow:9px 9px 0 var(--ink);
+    }
+    .btn{
+      display:inline-flex;
+      align-items:center;
+      gap:10px;
+      font-family:'Bangers', sans-serif;
+      font-size:clamp(20px,2.4vw,26px);
+      letter-spacing:1px;
+      color:var(--ink);
+      background:var(--yellow);
+      border:5px solid var(--ink);
+      border-radius:999px;
+      padding:16px 34px;
+      box-shadow:7px 7px 0 var(--ink);
+      transition:transform .12s ease, box-shadow .12s ease;
+      cursor:pointer;
+    }
+    .btn:hover{
+      color:var(--ink);
+      transform:translate(3px,3px);
+      box-shadow:4px 4px 0 var(--ink);
+    }
+    .badge{
+      display:inline-block;
+      font-family:'Bangers', sans-serif;
+      background:var(--red);
+      color:#fff;
+      border:4px solid var(--ink);
+      border-radius:8px;
+      padding:6px 16px;
+      font-size:clamp(14px,1.6vw,18px);
+      letter-spacing:2px;
+      transform:rotate(-3deg);
+    }
+    .kicker{
+      font-family:'Bangers', sans-serif;
+      color:var(--ink);
+      background:var(--yellow);
+      display:inline-block;
+      padding:4px 14px;
+      border:3px solid var(--ink);
+      transform:rotate(-2deg);
+      font-size:clamp(13px,1.5vw,16px);
+      letter-spacing:2px;
+    }
+
+    /* ===== HERO ===== */
+    .hero{
+      position:relative;
+      overflow:hidden;
+      background:
+        linear-gradient(115deg, var(--blue) 0 46%, var(--red) 46% 100%);
+      border-bottom:8px solid var(--ink);
+      padding:56px 0 72px;
+    }
+    .hero::before{
+      content:'';
+      position:absolute;
+      inset:0;
+      background-image:radial-gradient(circle, rgba(255,255,255,.16) 1.6px, transparent 1.7px);
+      background-size:13px 13px;
+      pointer-events:none;
+    }
+    .hero-inner{
+      position:relative;
+      z-index:2;
+      display:grid;
+      grid-template-columns:1.15fr .85fr;
+      gap:40px;
+      align-items:center;
+    }
+    .ribbon{
+      position:absolute;
+      top:34px;
+      right:-64px;
+      background:var(--ink);
+      color:var(--yellow);
+      font-family:'Bangers', sans-serif;
+      font-size:16px;
+      letter-spacing:2px;
+      padding:8px 80px;
+      transform:rotate(35deg);
+      box-shadow:0 4px 0 rgba(0,0,0,.35);
+      z-index:3;
+    }
+    .hero h1{
+      color:#fff;
+      -webkit-text-stroke:2.5px var(--ink);
+      paint-order:stroke fill;
+      font-size:clamp(40px,6.4vw,74px);
+      line-height:.98;
+    }
+    .hero h1 span{color:var(--yellow);}
+    .hero-sub{
+      color:#fff;
+      font-weight:600;
+      font-size:clamp(16px,1.9vw,20px);
+      max-width:52ch;
+      margin-top:18px;
+      text-shadow:1px 1px 0 rgba(0,0,0,.35);
+    }
+    .hero-cta-row{
+      margin-top:30px;
+      display:flex;
+      align-items:center;
+      gap:18px;
+      flex-wrap:wrap;
+    }
+    .hero-note{
+      color:#fff;
+      font-weight:700;
+      font-size:14px;
+      opacity:.92;
+    }
+    .burst{
+      position:absolute;
+      width:230px;
+      height:230px;
+      background:var(--yellow);
+      clip-path:polygon(50% 0%,61% 34%,97% 30%,72% 55%,88% 89%,50% 68%,12% 89%,28% 55%,3% 30%,39% 34%);
+      z-index:1;
+      opacity:.9;
+    }
+    .hero-art{
+      position:relative;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      min-height:320px;
+    }
+    .hero-badge-num{
+      position:absolute;
+      top:-14px;
+      left:-14px;
+      background:#fff;
+      border:5px solid var(--ink);
+      border-radius:50%;
+      width:74px;
+      height:74px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      font-family:'Bangers', sans-serif;
+      font-size:15px;
+      text-align:center;
+      line-height:1.05;
+      transform:rotate(-8deg);
+      z-index:4;
+      box-shadow:5px 5px 0 var(--ink);
+    }
+
+    /* ===== VILLAINS ===== */
+    .villains{
+      padding:80px 0;
+      background:var(--cream);
+    }
+    .section-head{
+      text-align:center;
+      max-width:780px;
+      margin:0 auto 46px;
+    }
+    .section-head h2{
+      font-size:clamp(32px,4.6vw,52px);
+      color:var(--ink);
+    }
+    .section-head p{
+      margin-top:14px;
+      font-size:clamp(15px,1.6vw,18px);
+      font-weight:600;
+      color:#333;
+    }
+    .villain-grid{
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
+      gap:30px;
+    }
+    .villain-card{
+      padding:26px 22px 24px;
+      display:flex;
+      flex-direction:column;
+      gap:14px;
+      transform:rotate(-1deg);
+    }
+    .villain-card:nth-child(2n){transform:rotate(1deg);}
+    .villain-icon{
+      width:56px;
+      height:56px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      background:var(--ink);
+      border-radius:50%;
+      flex-shrink:0;
+    }
+    .villain-card h3{
+      font-size:22px;
+      color:var(--red-dark);
+    }
+    .villain-card p{
+      font-size:14.5px;
+      color:#333;
+      font-weight:500;
+    }
+    .sfx{
+      font-family:'Bangers', sans-serif;
+      color:var(--yellow);
+      -webkit-text-stroke:2px var(--ink);
+      paint-order:stroke fill;
+      font-size:clamp(30px,5vw,48px);
+      text-align:center;
+      margin:44px 0 0;
+      transform:rotate(-4deg);
+    }
+
+    /* ===== EMENTA ===== */
+    .ementa{
+      padding:84px 0;
+      background:var(--blue);
+      background-image:radial-gradient(circle, rgba(255,255,255,.10) 1.6px, transparent 1.7px);
+      background-size:13px 13px;
+      border-top:8px solid var(--ink);
+      border-bottom:8px solid var(--ink);
+      position:relative;
+    }
+    .issue-cover{
+      max-width:640px;
+      margin:0 auto 50px;
+      text-align:center;
+    }
+    .issue-cover .badge{margin-bottom:16px;}
+    .issue-cover h2{
+      color:#fff;
+      font-size:clamp(30px,5vw,50px);
+      -webkit-text-stroke:2px var(--ink);
+      paint-order:stroke fill;
+    }
+    .issue-cover p{
+      color:var(--yellow);
+      font-weight:700;
+      margin-top:12px;
+      font-size:clamp(14px,1.6vw,17px);
+    }
+    .ementa-panel{
+      background:#fff;
+      border:5px solid var(--ink);
+      border-radius:12px;
+      box-shadow:10px 10px 0 var(--ink);
+      padding:36px clamp(20px,4vw,44px);
+    }
+    .ementa-list{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:16px 34px;
+    }
+    .ementa-item{
+      display:flex;
+      align-items:flex-start;
+      gap:14px;
+      padding:10px 0;
+      border-bottom:2px dashed #ddd;
+    }
+    .ementa-num{
+      flex-shrink:0;
+      width:38px;
+      height:38px;
+      border-radius:50%;
+      background:var(--red);
+      color:#fff;
+      border:3px solid var(--ink);
+      font-family:'Bangers', sans-serif;
+      font-size:15px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+    }
+    .ementa-item span{
+      font-weight:700;
+      font-size:15.5px;
+      padding-top:6px;
+    }
+
+    /* ===== FOR WHO ===== */
+    .for-who{
+      padding:80px 0;
+      background:var(--paper);
+    }
+    .fw-grid{
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+      gap:20px;
+      max-width:920px;
+      margin:0 auto;
+    }
+    .fw-item{
+      display:flex;
+      gap:14px;
+      align-items:flex-start;
+      background:#fff;
+      border:4px solid var(--ink);
+      border-radius:10px;
+      padding:18px 20px;
+      box-shadow:6px 6px 0 var(--ink);
+    }
+    .check{
+      flex-shrink:0;
+      width:34px;
+      height:34px;
+      border-radius:50%;
+      background:var(--yellow);
+      border:3px solid var(--ink);
+      display:flex;
+      align-items:center;
+      justify-content:center;
+    }
+    .fw-item p{font-weight:600;font-size:15px;}
+
+    /* ===== MENTOR ===== */
+    .mentor{
+      padding:84px 0;
+      background:var(--ink);
+      color:#fff;
+    }
+    .mentor-inner{
+      display:grid;
+      grid-template-columns:auto 1fr;
+      gap:44px;
+      align-items:center;
+      max-width:920px;
+      margin:0 auto;
+    }
+    .mentor-avatar{
+      width:180px;
+      height:180px;
+      border-radius:50%;
+      background:var(--yellow);
+      background-image:radial-gradient(circle, rgba(0,0,0,.35) 1.6px, transparent 1.7px);
+      background-size:10px 10px;
+      border:6px solid #fff;
+      box-shadow:0 0 0 6px var(--ink), 10px 10px 0 var(--red);
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      flex-shrink:0;
+    }
+    .mentor h2{
+      font-size:clamp(26px,3.4vw,36px);
+      color:var(--yellow);
+    }
+    .mentor h3{
+      font-size:20px;
+      margin-top:6px;
+      color:#fff;
+    }
+    .mentor p.role{
+      font-weight:700;
+      color:var(--yellow);
+      font-size:14px;
+      letter-spacing:1px;
+      margin-top:2px;
+    }
+    .mentor p.bio{
+      margin-top:14px;
+      font-weight:500;
+      font-size:15px;
+      color:#e8e8e8;
+      max-width:60ch;
+    }
+
+    /* ===== PRICING ===== */
+    .pricing{
+      padding:90px 0 100px;
+      background:var(--red);
+      background-image:radial-gradient(circle, rgba(0,0,0,.12) 1.6px, transparent 1.7px);
+      background-size:12px 12px;
+      text-align:center;
+      border-bottom:8px solid var(--ink);
+    }
+    .price-card{
+      max-width:480px;
+      margin:0 auto;
+      background:#fff;
+      border:6px solid var(--ink);
+      border-radius:16px;
+      box-shadow:12px 12px 0 var(--ink);
+      padding:40px 34px 36px;
+      position:relative;
+    }
+    .price-tag{
+      position:absolute;
+      top:-30px;
+      right:-26px;
+      width:120px;
+      height:120px;
+      background:var(--yellow);
+      clip-path:polygon(50% 0%,61% 34%,97% 30%,72% 55%,88% 89%,50% 68%,12% 89%,28% 55%,3% 30%,39% 34%);
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      font-family:'Bangers', sans-serif;
+      font-size:13px;
+      text-align:center;
+      line-height:1.1;
+      transform:rotate(8deg);
+      padding:6px;
+    }
+    .pricing h2{
+      color:#fff;
+      -webkit-text-stroke:2px var(--ink);
+      paint-order:stroke fill;
+      font-size:clamp(28px,4.2vw,44px);
+      margin-bottom:36px;
+    }
+    .price-card h3{
+      font-family:'Bangers', sans-serif;
+      font-size:22px;
+      color:var(--ink);
+    }
+    .price-value{
+      font-family:'Bangers', sans-serif;
+      font-size:clamp(38px,6vw,52px);
+      color:var(--red-dark);
+      margin:10px 0 4px;
+    }
+    .price-value small{
+      font-family:'Poppins', sans-serif;
+      font-size:14px;
+      color:#666;
+      font-weight:600;
+    }
+    .price-list{
+      list-style:none;
+      padding:0;
+      margin:22px 0 28px;
+      text-align:left;
+      display:flex;
+      flex-direction:column;
+      gap:10px;
+    }
+    .price-list li{
+      display:flex;
+      gap:10px;
+      align-items:flex-start;
+      font-weight:600;
+      font-size:14.5px;
+      color:#222;
+    }
+    .price-list li .check{width:24px;height:24px;flex-shrink:0;}
+    .price-list li .check svg{width:12px;height:12px;}
+
+    /* ===== FOOTER ===== */
+    .footer{
+      background:var(--ink);
+      color:#ccc;
+      padding:40px 0;
+      text-align:center;
+    }
+    .footer .comic-font{
+      color:var(--yellow);
+      font-size:22px;
+    }
+    .footer p{
+      margin-top:10px;
+      font-size:13px;
+      font-weight:500;
+    }
+    .footer .disclaimer{
+      margin-top:14px;
+      font-size:11.5px;
+      color:#888;
+      max-width:640px;
+      margin-left:auto;
+      margin-right:auto;
+    }
+
+    @media (max-width:820px){
+      .hero-inner{grid-template-columns:1fr;}
+      .hero-art{order:-1;min-height:220px;}
+      .ementa-list{grid-template-columns:1fr;}
+      .mentor-inner{grid-template-columns:1fr;text-align:center;justify-items:center;}
+      .mentor p.bio{max-width:100%;}
+      .ribbon{right:-90px;top:20px;}
+    }
+  </style>
+</helmet>
+
+<div class="page">
+
+  <!-- ===== HERO ===== -->
+  <header class="hero">
+    <div class="ribbon">VAGAS LIMITADAS</div>
+    <div class="frame hero-inner">
+      <div>
+        <span class="kicker">UMA NOVA ORIGEM COMEÇA AGORA</span>
+        <h1 style="margin-top:16px;">ARQUITETO DE<br>SOLUÇÕES: <span>A ORIGEM</span></h1>
+        <p class="hero-sub">O curso que transforma quem programa em quem projeta: sistemas enterprise resilientes, escaláveis e seguros o suficiente para enfrentar qualquer ameaça.</p>
+        <div class="hero-cta-row">
+          <a href="#inscricao" class="btn">
+            QUERO SER O HERÓI
+          </a>
+          <span class="hero-note">[X] vagas na primeira turma &bull; início em [DATA DE INÍCIO]</span>
+        </div>
+      </div>
+      <div class="hero-art">
+        <div class="burst" aria-hidden="true"></div>
+        <svg width="240" height="300" viewBox="0 0 240 300" style="position:relative;z-index:2;" aria-hidden="true">
+          <ellipse cx="120" cy="270" rx="70" ry="14" fill="rgba(0,0,0,.25)"></ellipse>
+          <rect x="70" y="150" width="100" height="110" rx="18" fill="#0B3D91" stroke="#121212" stroke-width="6"></rect>
+          <path d="M70 168 L20 210 L38 232 L92 196 Z" fill="#E4231C" stroke="#121212" stroke-width="6" stroke-linejoin="round"></path>
+          <path d="M170 168 L220 210 L202 232 L148 196 Z" fill="#E4231C" stroke="#121212" stroke-width="6" stroke-linejoin="round"></path>
+          <circle cx="120" cy="96" r="52" fill="#FFC400" stroke="#121212" stroke-width="6"></circle>
+          <path d="M120 44 L130 70 L158 70 L136 86 L144 112 L120 96 L96 112 L104 86 L82 70 L110 70 Z" fill="#E4231C" stroke="#121212" stroke-width="4" stroke-linejoin="round"></path>
+          <rect x="86" y="146" width="68" height="26" rx="6" fill="#FFC400" stroke="#121212" stroke-width="5"></rect>
+        </svg>
+        <div class="hero-badge-num">Nº<br>1</div>
+      </div>
+    </div>
+  </header>
+
+  <!-- ===== VILLAINS ===== -->
+  <section class="villains">
+    <div class="frame">
+      <div class="section-head">
+        <span class="badge">INIMIGOS CONHECIDOS</span>
+        <h2 style="margin-top:18px;">VOCÊ JÁ ENFRENTOU ALGUM DESSES VILÕES?</h2>
+        <p>Todo sistema enterprise, cedo ou tarde, é atacado por eles. Este curso te dá as armas para vencer.</p>
+      </div>
+
+      <div class="villain-grid">
+        <div class="panel villain-card">
+          <div class="villain-icon">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+              <rect x="4" y="4" width="16" height="16" rx="2" stroke="#FFC400" stroke-width="2"></rect>
+              <path d="M4 10h16M10 10v10" stroke="#FFC400" stroke-width="2"></path>
+              <path d="M4 4l16 16" stroke="#E4231C" stroke-width="2"></path>
+            </svg>
+          </div>
+          <h3>O MONÓLITO</h3>
+          <p>Um sistema gigante e acoplado que trava a empresa inteira sempre que alguém precisa mudar uma linha de código.</p>
+        </div>
+
+        <div class="panel villain-card">
+          <div class="villain-icon">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+              <circle cx="8" cy="8" r="4" stroke="#FFC400" stroke-width="2"></circle>
+              <circle cx="16" cy="16" r="4" stroke="#FFC400" stroke-width="2"></circle>
+              <path d="M11 11l2 2" stroke="#E4231C" stroke-width="2.4"></path>
+            </svg>
+          </div>
+          <h3>CAOS DE INTEGRAÇÃO</h3>
+          <p>Plataformas que não se falam, integrações frágeis e híbridas prontas para quebrar a qualquer momento.</p>
+        </div>
+
+        <div class="panel villain-card">
+          <div class="villain-icon">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+              <path d="M12 4v6l4 2" stroke="#FFC400" stroke-width="2" stroke-linecap="round"></path>
+              <circle cx="12" cy="12" r="8" stroke="#FFC400" stroke-width="2"></circle>
+              <path d="M4 4l16 16" stroke="#E4231C" stroke-width="2"></path>
+            </svg>
+          </div>
+          <h3>FALHA SILENCIOSA</h3>
+          <p>Sem observabilidade, o sistema cai e ninguém sabe por quê — até ser tarde demais para o negócio.</p>
+        </div>
+
+        <div class="panel villain-card">
+          <div class="villain-icon">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+              <path d="M12 3l7 3v6c0 4.5-3 7.5-7 9-4-1.5-7-4.5-7-9V6l7-3z" stroke="#FFC400" stroke-width="2" stroke-linejoin="round"></path>
+              <path d="M9.5 9.5l5 5M14.5 9.5l-5 5" stroke="#E4231C" stroke-width="2"></path>
+            </svg>
+          </div>
+          <h3>BRECHA DE SEGURANÇA</h3>
+          <p>Vulnerabilidades escondidas esperando o momento certo para vazar dados de uma aplicação enterprise.</p>
+        </div>
+      </div>
+
+      <p class="sfx">CHEGOU A HORA DE DERROTÁ-LOS!</p>
+    </div>
+  </section>
+
+  <!-- ===== EMENTA ===== -->
+  <section class="ementa">
+    <div class="frame">
+      <div class="issue-cover">
+        <span class="badge">EDIÇÃO Nº 1</span>
+        <h2 style="margin-top:14px;">FUNDAMENTOS DA ARQUITETURA DE SOLUÇÃO</h2>
+        <p>13 páginas que constroem a sua origem como arquiteto(a) de soluções</p>
+      </div>
+
+      <div class="ementa-panel">
+        <div class="ementa-list">
+          <div class="ementa-item"><div class="ementa-num">01</div><span>Enterprise Software Systems</span></div>
+          <div class="ementa-item"><div class="ementa-num">02</div><span>O que é Arquitetura de Solução</span></div>
+          <div class="ementa-item"><div class="ementa-num">03</div><span>Características de um software que todo arquiteto precisa saber</span></div>
+          <div class="ementa-item"><div class="ementa-num">04</div><span>Princípios do Design de Arquitetura de Solução</span></div>
+          <div class="ementa-item"><div class="ementa-num">05</div><span>O papel do arquiteto de solução</span></div>
+          <div class="ementa-item"><div class="ementa-num">06</div><span>Design patterns para arquitetura de soluções</span></div>
+          <div class="ementa-item"><div class="ementa-num">07</div><span>Integração híbrida entre plataformas</span></div>
+          <div class="ementa-item"><div class="ementa-num">08</div><span>Soluções Cloud-Native</span></div>
+          <div class="ementa-item"><div class="ementa-num">09</div><span>Microsserviços</span></div>
+          <div class="ementa-item"><div class="ementa-num">10</div><span>Event-driven Architecture</span></div>
+          <div class="ementa-item"><div class="ementa-num">11</div><span>Segurança em aplicações enterprise</span></div>
+          <div class="ementa-item"><div class="ementa-num">12</div><span>Observabilidade</span></div>
+          <div class="ementa-item" style="border-bottom:none;"><div class="ementa-num">13</div><span>SAD &ndash; Solution Architecture Document</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== FOR WHO ===== -->
+  <section class="for-who">
+    <div class="frame">
+      <div class="section-head">
+        <span class="badge" style="background:var(--blue);">ESTE CHAMADO É PRA VOCÊ SE...</span>
+        <h2 style="margin-top:18px;">SUA ORIGEM COMEÇA AQUI SE...</h2>
+      </div>
+
+      <div class="fw-grid">
+        <div class="fw-item">
+          <div class="check">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M4 12l6 6L20 6" stroke="#121212" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+          </div>
+          <p>Você é desenvolvedor(a) e quer dar o salto para decisões de arquitetura.</p>
+        </div>
+        <div class="fw-item">
+          <div class="check">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M4 12l6 6L20 6" stroke="#121212" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+          </div>
+          <p>Você já atua como arquiteto(a) mas quer estruturar melhor seu raciocínio e seus documentos (SAD).</p>
+        </div>
+        <div class="fw-item">
+          <div class="check">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M4 12l6 6L20 6" stroke="#121212" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+          </div>
+          <p>Você lidera times técnicos e precisa dialogar com arquitetura, segurança e cloud.</p>
+        </div>
+        <div class="fw-item">
+          <div class="check">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M4 12l6 6L20 6" stroke="#121212" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+          </div>
+          <p>Você quer entender microsserviços, eventos e cloud-native na prática, não só na teoria.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== MENTOR ===== -->
+  <section class="mentor">
+    <div class="frame mentor-inner">
+      <div class="mentor-avatar">
+        <svg width="90" height="110" viewBox="0 0 90 110" aria-hidden="true">
+          <circle cx="45" cy="34" r="24" fill="#121212"></circle>
+          <path d="M10 108c2-30 20-46 35-46s33 16 35 46z" fill="#121212"></path>
+        </svg>
+      </div>
+      <div>
+        <span class="kicker" style="background:var(--red);color:#fff;">SEU MENTOR NESTA JORNADA</span>
+        <h3 style="margin-top:14px;">[NOME DO INSTRUTOR]</h3>
+        <p class="role">[CARGO / EXPERIÊNCIA PRINCIPAL]</p>
+        <p class="bio">[Bio curta do instrutor: trajetória, empresas, projetos e certificações relevantes em arquitetura de soluções.]</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== PRICING ===== -->
+  <section class="pricing" id="inscricao">
+    <div class="frame">
+      <h2>GARANTA SEU LUGAR NESTA EDIÇÃO</h2>
+      <div class="price-card">
+        <div class="price-tag">OFERTA<br>DE<br>LANÇA-<br>MENTO</div>
+        <h3>FUNDAMENTOS DA ARQUITETURA DE SOLUÇÃO</h3>
+        <div class="price-value">[R$ XXX]<br><small>[condições de pagamento]</small></div>
+        <ul class="price-list">
+          <li><span class="check"><svg viewBox="0 0 24 24" fill="none"><path d="M4 12l6 6L20 6" stroke="#121212" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"></path></svg></span>[Carga horária / duração do curso]</li>
+          <li><span class="check"><svg viewBox="0 0 24 24" fill="none"><path d="M4 12l6 6L20 6" stroke="#121212" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"></path></svg></span>[Certificado de conclusão]</li>
+          <li><span class="check"><svg viewBox="0 0 24 24" fill="none"><path d="M4 12l6 6L20 6" stroke="#121212" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"></path></svg></span>[Acesso e suporte disponíveis]</li>
+        </ul>
+        <a href="#" class="btn" style="width:100%;justify-content:center;">QUERO ME INSCREVER</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== FOOTER ===== -->
+  <footer class="footer">
+    <div class="frame">
+      <div class="comic-font">ARQUITETO DE SOLUÇÕES: A ORIGEM</div>
+      <p>[Nome da escola/empresa] &bull; [e-mail de contato] &bull; [redes sociais]</p>
+      <p class="disclaimer">Estética inspirada em quadrinhos de super-heróis, produção original sem uso de marcas ou personagens registrados de terceiros.</p>
+    </div>
+  </footer>
+
+</div>
+</x-dc>
+</body>
+</html>
