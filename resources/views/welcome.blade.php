@@ -391,6 +391,7 @@
                 <div class="nav-links">
                     <a href="#ementa">Ementa</a>
                     <a href="#para-quem">Para quem é</a>
+                    <a href="{{ route('artigos.index') }}">Artigos</a>
                     <a href="#inscricao">Inscrição</a>
                 </div>
                 <a href="#inscricao" class="nav-cta">Garantir vaga</a>
@@ -554,6 +555,7 @@
                 <div class="footer-links">
                     <a href="#ementa">Ementa</a>
                     <a href="#para-quem">Para quem é</a>
+                    <a href="{{ route('artigos.index') }}">Artigos</a>
                     <a href="#inscricao">Inscrição</a>
                 </div>
             </div>

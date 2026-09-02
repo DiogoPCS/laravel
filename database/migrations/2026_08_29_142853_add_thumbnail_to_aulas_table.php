@@ -11,9 +11,8 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('testes', function (Blueprint $table) {
-            $table->id();
-            $table->timestamps();
+        Schema::table('aulas', function (Blueprint $table) {
+            $table->string('thumbnail')->nullable()->after('descricao');
         });
     }
 
@@ -22,6 +21,8 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('testes');
+        Schema::table('aulas', function (Blueprint $table) {
+            $table->dropColumn('thumbnail');
+        });
     }
 };
